@@ -1,0 +1,324 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use App\User;
+use App\Post;
+
+/** , 'posts', 'titles', 'people', 'magazine', 'companies', 'events' */
+
+use App\Title;
+use App\People;
+use App\Magazine;
+use App\Company;
+use App\Event;
+use App\Role;
+use Carbon\Carbon;
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+
+        $users = User::with('roles')->where('remember_token', '!=', NULL)->paginate();
+        //dd($roles);
+        //print_r($users);
+        return view('dashboard.users.home', compact('users'));
+    }
+
+    public function updateImage()
+    {
+        /* $users = User::all();
+        //dd($users);
+        foreach($users as $user) {
+
+            $path = 'https://coanime.net/images/profiles/' . $user['image'];
+
+            //dd($user);
+
+            $user['image'] = $path;
+
+            $user->save();
+        }
+        return 'Usuarios Actualizados'; */ }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    { }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+        $user = User::with('roles')->find($id);
+
+        return $user->pivot()->role_id;
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Request $request, $id)
+    {
+        $user = User::find($id);
+
+        return view('dashboard.users.create', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'nick'          => 'required|max:255',
+            'name'          => 'required|max:255',
+            'bio'           => 'required|max:255',
+            'facebook'      => 'max:255',
+            'instagram'     => 'max:255',
+            'twitter'       => 'max:255',
+            'googleplus'    => 'max:255',
+            'pinterest'     => 'max:255',
+            'tumblr'        => 'max:255',
+            'behance'       => 'max:255',
+            'deviantart'    => 'max:255',
+            'website'       => 'max:255',
+            'genre'         => 'required',
+            'birthday'      => 'date_format: "Y-m-d H:i:s"',
+            'image-client'  => 'max:2048|mimes:jpeg,gif,bmp,png',
+        ]);
+
+        $data = User::find($id);
+        $user = $request->all();
+        /*$currentUser = \Auth::user()->id;
+        $data['edited_by'] = $currentUser;
+        /*$data['user_id'] = $currentUser;*/
+        $user['slug'] = str_slug($user['name']);
+
+        if ($request->file('image-client')) :
+            $file = $request->file('image-client');
+            //Creamos una instancia de la libreria instalada
+            $image = \Image::make($request->file('image-client')->getRealPath());
+            //Ruta donde queremos guardar las imagenes
+            $originalPath = public_path() . '/images/profiles/';
+            //Ruta donde se guardaran los Thumbnails
+            $thumbnailPath = public_path() . '/images/profiles/';
+
+            $fileName = hash('sha256', $data['slug'] . strval(time()));
+
+            $image->save($originalPath . $fileName . '.jpg');
+            // Cambiar de tamaño Tomando en cuenta el radio para hacer un thumbnail
+            $image->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            // Guardar
+            $image->save($thumbnailPath . 'thumb-' . $fileName . '.jpg');
+
+            $data['image'] = 'https://coanime.net/images/profiles/' . $fileName . '.jpg';
+        endif;
+
+        //dd($data);
+        if ($data->update($user)) :
+            \Alert::success('Perfil Actualizado');
+            return redirect()->to('dashboard/users');
+        else :
+            \Alert::error('No se ha podido Actualizar el Perfil');
+            return back();
+        endif;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id, Request $request)
+    { }
+
+    /**
+     * Show the Profile page to Edit the profile user data
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile(Request $request, $slug = null, $id = null)
+    {
+        if (User::where('slug', 'like', $slug)->pluck('id')->count() > 0) :
+            $id = User::where('slug', 'like', $slug)->pluck('id');
+            $user = User::with('roles', 'posts', 'titles', 'people', 'magazine', 'companies', 'events')->find($id);
+            $carbon = new Carbon;
+            //$posts = Post::where('user_id',$id)->whereRaw('TIMESTAMP(postponed_to) <= NOW()')->orWhere('postponed_to', NULL)->where('approved','yes')->groupBy('user_id')->orderBy('id','desc')->get();
+
+            //dd($posts);
+
+            return view('users.details', compact('user', 'carbon'));
+        else :
+            return view('errors.404');
+        endif;
+    }
+
+    public function apiProfile(Request $request, $slug = null, $id = null)
+    {
+        if (User::where('slug', 'like', $slug)->pluck('id')->count() > 0) :
+            $id = User::where('slug', 'like', $slug)->pluck('id');
+            $user = User::with('roles')->find($id);
+            $carbon = new Carbon;
+            //$posts = Post::where('user_id',$id)->whereRaw('TIMESTAMP(postponed_to) <= NOW()')->orWhere('postponed_to', NULL)->where('approved','yes')->groupBy('user_id')->orderBy('id','desc')->get();
+
+            //dd($posts);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'data' => $user,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function postsProfile(Request $request, $id)
+    {
+
+        if (Post::where('user_id', $id)->count() > 0) :
+            $posts = Post::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $posts->count(),
+                'data' => $posts,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function titlesProfile(Request $request, $id)
+    {
+
+        if (Title::where('user_id', $id)->count() > 0) :
+            $titles = Title::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $titles->count(),
+                'data' => $titles,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function eventsProfile(Request $request, $id)
+    {
+
+        if (Event::where('user_id', $id)->count() > 0) :
+            $events = Event::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $events->count(),
+                'data' => $events
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function peopleProfile(Request $request, $id)
+    {
+
+        if (People::where('user_id', $id)->count() > 0) :
+            $people = People::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $people->count(),
+                'data' => $people,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function companiesProfile(Request $request, $id)
+    {
+
+        if (Company::where('user_id', $id)->count() > 0) :
+            $companies = Company::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $companies->count(),
+                'data' => $companies,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+
+    public function magazineProfile(Request $request, $id)
+    {
+
+        if (Magazine::where('user_id', $id)->count() > 0) :
+            $magazine = Magazine::where('user_id', $id)->paginate(10);
+
+            return response()->json(array(
+                'message' => 'OK',
+                'quantity' => $magazine->count(),
+                'data' => $magazine,
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Not Found!'
+            ), 404);
+        endif;
+    }
+}

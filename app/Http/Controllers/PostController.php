@@ -148,7 +148,6 @@ class PostController extends Controller
         if ($tag_id->count() > 0) :
             $query = Post::getByTitle($tag_id);
             if ($query->count() > 0) :
-
                 $posts = $query->get();
 
                 foreach ($posts as $post) :
@@ -240,13 +239,16 @@ class PostController extends Controller
         $data['slug'] = str_slug($data['title']);
         /* $data['content'] = Helper::removePTagsOnImages($data['content']); */
 
-        if (Post::where('slug', 'like', $data['slug'])->count() > 0) : $data['slug'] = str_slug($data['title']) . '1';
+        if (Post::where('slug', 'like', $data['slug'])->count() > 0) :
+            $data['slug'] = str_slug($data['title']) . '1';
         endif;
 
-        if ($request->postponed_to == "") : $data['postponed_to'] = Carbon::now()->format('Y-m-d H:i:s');
+        if ($request->postponed_to == "") :
+            $data['postponed_to'] = Carbon::now()->format('Y-m-d H:i:s');
         endif;
 
-        if ($request->file('image-client')) : $file = $request->file('image-client');
+        if ($request->file('image-client')) :
+            $file = $request->file('image-client');
 
             // Make the Library Instance
             $image = \Image::make($request->file('image-client')->getRealPath());
@@ -318,15 +320,19 @@ class PostController extends Controller
             $data['image'] = null;
         endif;
 
-        if ($data = Post::create($data)) : if (!empty($request['title_id'])) : $data->titles()->sync([$request['title_id']]);
+        if ($data = Post::create($data)) :
+            if (!empty($request['title_id'])) :
+                $data->titles()->sync([$request['title_id']]);
             endif;
 
-            if (!empty($request['tag_id'])) : $data->tags()->sync($request['tag_id']);
+            if (!empty($request['tag_id'])) :
+                $data->tags()->sync($request['tag_id']);
             endif;
 
             \Alert::success('Post Agregado o Programado');
             return redirect()->to('dashboard/posts');
-        else : \Alert::error('No se ha podido guardar la Informacion Suministrada');
+        else :
+            \Alert::error('No se ha podido guardar la Informacion Suministrada');
             return back();
         endif;
     }
@@ -373,7 +379,8 @@ class PostController extends Controller
 
         $postImage = '';
 
-        if ($request->file('file')) : try {
+        if ($request->file('file')) :
+            try {
                 $file = $request->file('file');
 
                 // Make the Library Instance
@@ -433,7 +440,9 @@ class PostController extends Controller
                 return response()->json(array('link' => $postImage), 200);
             } catch (Exception $e) {
                 http_response_code(404);
-            } else : echo 'No Image Sended';
+            }
+        else :
+            echo 'No Image Sended';
         endif;
     }
 
@@ -504,11 +513,13 @@ class PostController extends Controller
     {
 
         $id = Post::where('slug', 'like', $slug)->pluck('id');
-        if ($id->count() > 0) : $post = Post::with('users', 'categories', 'titles')->find($id);
+        if ($id->count() > 0) :
+            $post = Post::with('users', 'categories', 'titles')->find($id);
             $post->increment('view_counter');
 
             return view('pages.details', compact('post'));
-        else : return view('errors.404');
+        else :
+            return view('errors.404');
         endif;
     }
 
@@ -521,9 +532,7 @@ class PostController extends Controller
     public function show($slug)
     {
         if (Post::where('slug', 'like', $slug)->pluck('id')->count() > 0) {
-
-            $id = Post::where('slug', 'like', $slug)->pluck('id');
-            $post = Post::with('users', 'categories', 'titles', 'tags')->find($id);
+            $post = Post::with('users', 'categories', 'titles', 'tags')->whereSlug($slug)->firstOrFail();
 
             $keywords = array();
 
@@ -617,7 +626,6 @@ class PostController extends Controller
         $newArticles = [];
 
         if (Post::where('slug', '=', $slug)->pluck('id')->count() > 0) {
-
             $id = Post::where('slug', 'like', $slug)->pluck('id');
             $post = Post::with('users', 'categories', 'titles', 'tags')->find($id);
 
@@ -646,7 +654,6 @@ class PostController extends Controller
             }
 
             if ($post->titles->count() > 0) {
-
                 $tag_id = Tag::where('slug', '=', str_slug($post->titles[0]->name))->get()->pluck('id');
 
                 if ($tag_id->count() > 0) {
@@ -887,7 +894,8 @@ class PostController extends Controller
         if ($post->delete()) :
             \Alert::success('El Post se ha Eliminado satisfactoriamente');
             return back();
-        else : \Alert::error('El Post no se ha podido Eliminar');
+        else :
+            \Alert::error('El Post no se ha podido Eliminar');
             return back();
         endif;
     }

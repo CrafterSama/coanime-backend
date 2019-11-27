@@ -496,7 +496,7 @@ class PostController extends Controller
      */
     public function showAllTags()
     {
-        $tags = Tag::whereHas('posts', function ($q) {
+        $tags = Tag::withCount('posts')->whereHas('posts', function ($q) {
             $q->where('post_id', '!=', null);
         })->orderBy('name', 'asc')->simplePaginate(100);
         //dd($tags);

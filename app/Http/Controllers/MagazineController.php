@@ -130,19 +130,15 @@ class MagazineController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($slug)
     {
-        if (Magazine::where('slug', 'like', $slug)->count() > 0) :
-            $id = Magazine::where('slug', 'like', $slug)->pluck('id');
-            $mgz = Magazine::with('image', 'type', 'release')->find($id);
+        $mgz = Magazine::with('image', 'type', 'release')
+            ->whereSlug($slug)
+            ->firstOrFail();
 
-            return view('magazines.details', ['mgz' => $mgz]);
-        else :
-            return view('errors.404');
-        endif;
+        return view('magazines.details', compact('mgz'));
     }
 
     /**

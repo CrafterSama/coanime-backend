@@ -32,7 +32,7 @@ class CompanyController extends Controller
             $companies = $companies->paginate();
         } catch (Exception $e) {
             Alert::message($e->getMessage(), 'Message');
-            // return redirect()->back()->with('errors', 'Error Trying to obtein the Magazine Data');
+            return redirect()->back()->with('errors', 'Error Trying to obtein the Company Data');
         }
 
         // dd($companies);

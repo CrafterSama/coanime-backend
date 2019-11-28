@@ -1,5 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('people', 'PeopleController', ['except' => ['index', 'show']]);
 
         /*
-			GEOLOCALIZATION API
+        GEOLOCALIZATION API
          */
         Route::get('/geo/countries', function () {
             $countries = \App\Country::all();

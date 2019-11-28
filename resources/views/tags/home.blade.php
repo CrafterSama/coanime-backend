@@ -12,7 +12,7 @@
     <div class="genre-list orange">
         <ul>
             @foreach($tags as $t)
-            <li class="col-xs-6 col-sm-6 col-md-3 col-full-xs"><a class="orange" href="{{ route('tags') }}/{{ $t->slug }}">{{ $t->name }} ({{ $t->posts()->count() }})</a></li>
+            <li class="col-xs-6 col-sm-6 col-md-3 col-full-xs"><a class="orange" href="{{ route('tags') }}/{{ $t->slug }}">{{ $t->name }} ({{ $t->posts_count }})</a></li>
             @endforeach
         </ul>
         <div class="clearfix"></div>

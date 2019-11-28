@@ -168,26 +168,18 @@ class TitleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  str  $type
-     * @param  str  $slug
-     * @return \Illuminate\Http\Response
+     * @param  string  $type
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response|mixed
      */
     public function show($type, $slug)
     {
+        // TODO: Agregar/comprobar unicidad del campo slug
+        $title = Title::with('images', 'rating', 'type', 'generes')
+            ->whereSlug($slug)
+            ->firstOrFail();
 
-        $type_id = TitleType::where('slug', '=', $type)->pluck('id');
-
-        $title = Title::where('slug', '=', $slug)->where('type_id', $type_id);
-
-        if ($title->count() > 0) {
-            $id = $title->pluck('id');
-            $title = Title::with('images', 'rating', 'type', 'generes', 'users', 'posts')->find($id);
-
-
-            return view('titles.details', ['title' => $title]);
-        } else {
-            return view('errors.404');
-        }
+        return view('titles.details', compact('title'));
     }
 
     /**
@@ -294,7 +286,6 @@ class TitleController extends Controller
 
         //return $tag_id;
         if ($tag_id->count() > 0) :
-
             $query = Post::getByTitle($tag_id);
 
             if (!empty($tag_id) && $query->count() > 0) :
@@ -423,7 +414,6 @@ class TitleController extends Controller
         //dd($request);
 
         if ($data->update($request->all())) :
-
             if ($request->file('image-client')) :
                 if (TitleImage::where('title_id', $id)->count() > 0) :
                     $images = $data->images ?: TitleImage::where('title_id', $id);
@@ -471,7 +461,8 @@ class TitleController extends Controller
     }
 
     public function slugs()
-    { }
+    {
+    }
 
     public function showCalendar()
     {

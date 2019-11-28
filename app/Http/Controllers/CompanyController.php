@@ -131,14 +131,9 @@ class CompanyController extends Controller
      */
     public function show($slug)
     {
-        if (Company::where('slug', 'like', $slug)->count() > 0) :
-            $id = Company::where('slug', 'like', $slug)->pluck('id');
-            $company = Company::with('country')->find($id);
+        $company = Company::with('country')->whereSlug($slug)->firstOrFail();
 
-            return view('companies.details', ['company' => $company]);
-        else :
-            return view('errors.404');
-        endif;
+        return view('companies.details', compact('company'));
     }
 
     /**

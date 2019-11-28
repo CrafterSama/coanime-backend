@@ -2,36 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use Alert;
+use Exception;
+
 use App\Company;
 use App\Country;
+
 use Illuminate\Http\Request;
+
+use UxWeb\SweetAlert\SweetAlert as Alert;
 
 class CompanyController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|mixed
      */
     public function index(Request $request)
     {
-        if (Company::search($request->name)->orderBy('id', 'desc')->paginate()->count() > 0) :
-            try {
-                $companies = Company::search($request->name)->orderBy('id', 'desc')->paginate();
-            } catch (Exception $e) {
-                \Alert::message($e->getMessage(), 'Message');
-            }
-            return view('companies.home', compact('companies'));
-        else :
-            return redirect()->back()->with('errors', 'Error Trying to obtein the Magazine Data');
-        endif;
+        $name = trim($request->input('name', ''));
+        $companies = Company::orderBy('id', 'desc');
+
+        // TODO: Validate 'name'
+        if ($name) {
+            $companies = $companies->search($name);
+        }
+
+        try {
+            $companies = $companies->paginate();
+        } catch (Exception $e) {
+            Alert::message($e->getMessage(), 'Message');
+            // return redirect()->back()->with('errors', 'Error Trying to obtein the Magazine Data');
+        }
+
+        // dd($companies);
+
+
+        return view('companies.home', compact('companies'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|mixed
      */
     public function create()
     {

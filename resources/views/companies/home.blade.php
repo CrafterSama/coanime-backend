@@ -20,7 +20,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		@foreach($companies as $company)
+		@forelse ($companies as $company)
 			<tr>
 				<td>
 					<div class="col-xs-12 col-sm-12 col-md-9">
@@ -40,7 +40,20 @@
 					</div>
 				</td>
 			</tr>
-		@endforeach
+		@empty
+			{{-- TODO: Mensaje temporal. Agregar una mensaje más apropiado --}}
+			<tr>
+				<td>
+					<div class="col-xs-12">
+						<div class="text-center">
+							<em>No se encontraron coincidencias.</em>
+						</div>
+					</div>
+				</td>
+			</tr>
+		@endforelse
+
+
 		</tbody>
 	</table>
 	<div class="col-xs-12 col-sm-12 col-md-12 text-center">{{$companies->appends(request()->all())->links()}}</div>

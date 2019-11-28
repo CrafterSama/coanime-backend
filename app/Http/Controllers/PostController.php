@@ -440,8 +440,7 @@ class PostController extends Controller
                 return response()->json(array('link' => $postImage), 200);
             } catch (Exception $e) {
                 http_response_code(404);
-            }
-        else :
+            } else :
             echo 'No Image Sended';
         endif;
     }
@@ -629,9 +628,9 @@ class PostController extends Controller
             $id = Post::where('slug', 'like', $slug)->pluck('id');
             $post = Post::with('users', 'categories', 'titles', 'tags')->find($id);
 
-            foreach ($post->tags as $t) {
+            foreach ($post->tags as $t) :
                 $keywords[] = $t->name;
-            }
+            endforeach;
 
             $keywords = implode(',', $keywords);
 
@@ -643,7 +642,6 @@ class PostController extends Controller
                 ->where('view_counter', '>', '100')
                 ->orderBy('postponed_to', 'desc')
                 ->get();
-            //dd($otherArticles);
             if ($otherArticles->count() > 2) {
                 $otherArticles = $otherArticles->random(3);
                 if ($otherArticles->count > 0) :
@@ -662,7 +660,6 @@ class PostController extends Controller
                     foreach ($postByTags as $item) {
                         array_push($relateds, Post::select('id', 'title', 'slug', 'image')->find($item));
                     }
-                    //dd($relateds);
                     if (count($relateds) > 0) {
                         if (count($relateds) > 3) {
                             $relateds = array_slice($relateds, 3);
@@ -676,7 +673,6 @@ class PostController extends Controller
                 $relateds = [];
             }
 
-            //dd(Helper::getVideoLink($post->content));
             if (count(Helper::getVideoLink($post->content))  > 0) {
                 $videoLinks[] = Helper::getVideoLink($post->content);
             } else {
@@ -742,9 +738,7 @@ class PostController extends Controller
         $post = $request->all();
         $currentUser = \Auth::user()->id;
         $data['edited_by'] = $currentUser;
-        /*$data['user_id'] = $currentUser;*/
         $data['slug'] = str_slug($post['title']);
-        /* $data['content'] = Helper::removePTagsOnImages($post['content']); */
 
         if ($request->postponed_to == "") {
             $data['postponed_to'] = Carbon::now()->format('Y-m-d H:i:s');
@@ -808,7 +802,7 @@ class PostController extends Controller
 
             $image->save($originalPath . $fileName . '-480w.jpg');
 
-            // Cambiar de tamaÃƒÂ±o Tomando en cuenta el radio para hacer un thumbnail
+            // Cambiar de tamaño Tomando en cuenta el radio para hacer un thumbnail
             $image->resize(320, null, function ($constraint) {
                 $constraint->aspectRatio();
             });

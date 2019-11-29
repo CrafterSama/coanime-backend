@@ -205,8 +205,9 @@ class TitleController extends Controller
      */
     public function showAllGenre()
     {
-
-        $genre = Genere::orderBy('name', 'asc')->get();
+        // TODO: Convert to pagination
+        // TODO: Move to its own Controller
+        $genre = Genere::withCount('titles')->orderBy('name', 'asc')->get();
 
         return view('genres.home', compact('genre'));
     }

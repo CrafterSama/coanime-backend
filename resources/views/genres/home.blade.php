@@ -12,7 +12,7 @@
     <div class="genre-list orange">
         <ul>
             @foreach($genre as $g)
-            <li class="col-xs-6 col-sm-6 col-md-3 col-full-xs"><a class="orange" href="{{ route('genres') }}/{{ $g->slug }}">{{ $g->name }} ({{ $g->titles->count() }})</a></li>
+            <li class="col-xs-6 col-sm-6 col-md-3 col-full-xs"><a class="orange" href="{{ route('genres') }}/{{ $g->slug }}">{{ $g->name }} ({{ $g->titles_count }})</a></li>
             @endforeach
         </ul>
         <div class="clearfix"></div>

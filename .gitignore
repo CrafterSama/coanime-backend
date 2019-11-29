@@ -14,3 +14,6 @@ yarn-error.log
 # mysql-helper files
 *.sql
 *.sql.gz
+
+# IDE config
+.serenata/

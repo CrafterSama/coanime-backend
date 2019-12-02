@@ -1,0 +1,74 @@
+.textarea {
+    font-size: 16px;
+}
+
+.text-strong {
+    font-weight: bold;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.text-lowercase {
+    text-transform: lowercase;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+.text-muted {
+    color: #777;
+}
+
+.text-primary {
+    color: #337ab7;
+}
+
+fieldset.sinopsis {
+    padding: 15px;
+    background-color: #ededed;
+    font-style: italic;
+    border-radius: 5px;
+    border: none;
+}
+
+fieldset legend {
+    background-color: rgba(255, 255, 255, 1);
+    border: 2px solid #ededed;
+    display: block;
+    margin-left: 15px;
+    margin-bottom: -0.5px;
+    padding: 0 15px;
+    max-width: 130px;
+    border-radius: 5px;
+}

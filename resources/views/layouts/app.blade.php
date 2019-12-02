@@ -72,7 +72,7 @@
 	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.2/plyr.css" />
 	<link href="/css/flatfy.min.css" rel="stylesheet" />
 	<link href="/css/animate.css" rel="stylesheet" />
-	<link href="/css/style.css" rel="stylesheet">
+	{{-- <link href="/css/style.css" rel="stylesheet"> --}}
 
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="https://images.coanime.net/content/images/system/favicon_1.47974079578E+12_b1630e.png">
@@ -87,6 +87,30 @@
 
 	<!-- Feeds -->
 	{!!Feed::link(url('feed'), 'rss', 'Coanime.net Feeds', 'es')!!}
+
+
+	{{--
+	====================================================================
+	NUEVO SCAFOLDING: CSS
+	--------------------------------------------------------------------
+	--}}
+
+	{{-- Vendor --}}
+
+	<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+
+
+	{{-- App --}}
+    <link href="{{ mix('assets/css/style.css') }}" rel="stylesheet">
+
+	<link href="{{ mix('assets/css/app.css') }}" rel="stylesheet">
+
+	{{--
+	FIXME: Eliminar duplicados del anterior
+	====================================================================
+	--}}
+
+
 </head>
 <body>
     <div style="@yield('body')"></div>
@@ -172,6 +196,14 @@
     @else
     <div class="container">
     @endif
+        {{--
+		<!-- Espacio para prubas de vue -->
+		<div id="app">
+
+			<example-component></example-component>
+		</div>
+		--}}
+
         <main class="wrapper row">
             @yield('content')
         </main>
@@ -190,6 +222,24 @@
             </div>
         </div>
     </footer>
+
+	{{--
+	====================================================================
+	NUEVO SCAFOLDING: Scripts
+	--------------------------------------------------------------------
+	--}}
+	<!-- Vendor -->
+	<script src="{{ asset('assets/vendor/jquery/js/jquery.js') }}"></script>
+	<script src="{{ asset('assets/vendor/popper.js/js/popper.js') }}"></script>
+	<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+
+	<!-- App -->
+	<script src="{{ mix('assets/js/app.js') }}"></script>
+
+	{{--
+	FIXME: Eliminar duplicados
+	====================================================================
+	--}}
 
 	<!-- Scripts -->
 	<script defer>

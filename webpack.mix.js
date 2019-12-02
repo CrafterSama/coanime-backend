@@ -19,6 +19,8 @@ mix.js('resources/js/app.js', 'public/assets/js')
 // TODO: Mover CSS la carpeta flat a sass.
 mix.copy('resources/flat/css/*.css', 'public/assets/css')
 mix.copy('resources/flat/js/*.js', 'public/assets/js')
+mix.copy('resources/images/*.jpg', 'public/assets/images')
+mix.copy('resources/images/*.svg', 'public/assets/images')
 
 // Usar .extract al corregir el bug que lo impide y dejar de usar los js en distAssets
 

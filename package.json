@@ -26,7 +26,8 @@
         "vue-template-compiler": "^2.6.10"
     },
     "distAssets": {
-        "bootstrap": [{
+        "bootstrap": [
+            {
                 "src": "dist/css/*.css",
                 "target": "css"
             },
@@ -35,13 +36,17 @@
                 "target": "js"
             }
         ],
-        "jquery": [{
-            "src": "dist/*.js",
-            "target": "js"
-        }],
-        "popper.js": [{
-            "src": "dist/umd/*.js",
-            "target": "js"
-        }]
+        "jquery": [
+            {
+                "src": "dist/*.js",
+                "target": "js"
+            }
+        ],
+        "popper.js": [
+            {
+                "src": "dist/umd/*.js",
+                "target": "js"
+            }
+        ]
     }
 }

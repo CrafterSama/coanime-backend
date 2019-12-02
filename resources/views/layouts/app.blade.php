@@ -113,82 +113,81 @@
 
 </head>
 <body>
-    <div style="@yield('body')"></div>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-
-                <!-- Collapsed Hamburger -->
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                    <span class="sr-only">Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
+            <div class="boxed">
+                <a class="navbar-brand" href="/"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Branding Image -->
-            <a class="navbar-brand" href="http://coanime.net/"><img class="logo-ecma" src="{{ asset('images/home-tipo.svg') }}" alt="{{ config('app.name', 'Coanime') }}" /></a>
-            </div>
-
-            <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="/posts">Blog</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Enciclopedia <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="/ecma/titulos">Titulos</a></li>
-                            <li><a href="/ecma/personas">Personas</a></li>
-                            <li><a href="/ecma/revistas">Revistas</a></li>
-                            <li><a href="/ecma/empresas">Empresas</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="/ecma/generos">Generos</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/eventos">Eventos</a></li>
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Participa</a></li>
-                    @else
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                @if(empty(Auth::user()->slug))
-                                    <li><a href="{{route('profile', Auth::user()->id)}}"><i class="fas fa-user"></i> Perfil</a></li>
-                                @else
-                                    <li><a href="{{route('profile', Auth::user()->slug)}}"><i class="fas fa-user"></i> Perfil</a></li>
-                                @endif
-                                @if(Auth::user()->isAdmin() || Auth::user()->isMod())
-                                <li><a href="{{route('admin')}}"><i class="fas fa-tachometer-alt "></i> Dashboard</a></li>
-                                @endif
-                                @if(Auth::user()->isAdmin())
-                                <li><a href="{{route('config')}}"><i class="fas fa-cogs"></i> Configuración</a></li>
-                                @endif
-                                <li>
-                                    <a href="{{ url('/logout') }}"
-                                        onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt ut"></i> Salir
-                                    </a>
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/posts">Articulos <span class="sr-only">(current)</span></a>
                         </li>
-                    @endif
-                </ul>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Enciclopedia
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/ecma/titulos">Titulos</a>
+                            <a class="dropdown-item" href="/ecma/personas">Personas</a>
+                            <a class="dropdown-item" href="/ecma/revistas">Revistas</a>
+                            <a class="dropdown-item" href="/ecma/empresas">Empresas</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/ecma/generos">Generos</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/eventos">Eventos</a>
+                        </li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Authentication Links -->
+                        @if (Auth::guest())
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/login') }}">Participa</a>
+                            </li>
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    @if(empty(Auth::user()->slug))
+                                        <li class="nav-item"><a class="nav-link href="{{route('profile', Auth::user()->id)}}"><i class="fas fa-user"></i> Perfil</a></li>
+                                    @else
+                                        <li class="nav-item"><a class="nav-link href="{{route('profile', Auth::user()->slug)}}"><i class="fas fa-user"></i> Perfil</a></li>
+                                    @endif
+                                    @if(Auth::user()->isAdmin() || Auth::user()->isMod())
+                                        <li class="nav-item"><a class="nav-link href="{{route('admin')}}"><i class="fas fa-tachometer-alt "></i> Dashboard</a></li>
+                                    @endif
+                                    @if(Auth::user()->isAdmin())
+                                        <li class="nav-item"><a class="nav-link href="{{route('config')}}"><i class="fas fa-cogs"></i> Configuración</a></li>
+                                    @endif
+                                    <li class="nav-item">
+                                        <a class="nav-link href="{{ url('/logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            <i class="fas fa-sign-out-alt ut"></i> Salir
+                                        </a>
+                                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
     @if(Request::segment(1) == 'dashboard')
     <div class="container-fluid">
     @elseif(Request::segment(1) == 'posts')
@@ -244,12 +243,9 @@
 	<!-- Scripts -->
 	<script defer>
 		window.ECMA =  {!! json_encode(['csrfToken' => csrf_token()]) !!}
-	</script>
-	<script src="/vendor/jquery/js/jquery.min.js"></script>
-	<script defer src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    </script>
+    <script defer src="/vendor/moment/moment.min.js"></script>
 	<script defer src="/vendor/es6-promise/es6-promise.min.js"></script>
-	<script defer src="/vendor/timeago/jquery.timeago.js"></script>
-	<script defer src="/vendor/timeago/jquery.timeago.es.js"></script>
 	<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
 	<script defer>
 		//const player = new Plyr('#player');
@@ -257,7 +253,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
 	@if(Request::segment(1) == 'dashboard')
 		<script defer src="/vendor/bootstrap-validator/validator.min.js"></script>
-		<script defer src="/vendor/moment/moment.min.js"></script>
 		<script defer src="/vendor/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
         <script defer src="/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
         <script type="text/javascript" src="/vendor/selectize/selectize.js"></script>

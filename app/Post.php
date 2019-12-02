@@ -63,6 +63,16 @@ class Post extends Model
         return $this->belongsToMany('App\Title')->with('images', 'type', 'users', 'generes', 'posts');
     }
 
+    public function getVideoLinksAttribute(): array
+    {
+        $videoLinks = [];
+        if ($this->category_id === 13) {
+            $videoLinks = Helper::getVideoLink($this->content);
+        }
+
+        return $videoLinks;
+    }
+
     public static function getByTitle($id)
     {
         return \DB::table('posts')

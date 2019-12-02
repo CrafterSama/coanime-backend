@@ -14,7 +14,7 @@ const { distAssets } = require('./package.json') // TODO: Usar .min al terminar 
  */
 
 mix.js('resources/js/app.js', 'public/assets/js')
-  .sass('resources/sass/app.scss', 'public/assets/css');
+  .sass('resources/sass/coanime.scss', 'public/assets/css');
 
 // TODO: Mover CSS la carpeta flat a sass.
 mix.copy('resources/flat/css/*.css', 'public/assets/css')

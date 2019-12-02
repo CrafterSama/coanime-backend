@@ -1,19 +1,36 @@
-// Body
-$body-bg: #f8fafc;
-
-// Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
-
 // Colors
-$blue: #3490dc;
-$indigo: #6574cd;
-$purple: #9561e2;
-$pink: #f66d9b;
-$red: #e3342f;
-$orange: #f6993f;
-$yellow: #ffed4a;
-$green: #38c172;
-$teal: #4dc0b5;
-$cyan: #6cb2eb;
+$blue: #4284C1;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #E04300;
+$orange: #ed6a00;
+$light-orange: #FF9900;
+$yellow: #FFB800;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #3FB3D3;
+$white: #fff;
+$gray: #6E727B;
+$gray-dark: #4F4F5D;
+
+// Colors by gerarchy
+$primary: #00607A;
+$secondary: #6E727B;
+$success: #28a745;
+$info: #4284C1;
+$warning: #FF9900;
+$danger: #E04300;
+$light: #DEDEDE;
+$dark: #08081C;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1080px;
+$breakpoint-xl: 1366px;
+
+// Fonts Info
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Open Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

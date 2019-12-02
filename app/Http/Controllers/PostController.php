@@ -30,14 +30,43 @@ class PostController extends Controller
     public function index(Request $request)
     {
 
-        $carbon = new Carbon;
-        $titles = Title::orderBy('id', 'desc')->get();
-        $people = People::orderBy('id', 'desc')->get();
-        $magazine = Magazine::orderBy('id', 'desc')->get();
-        $companies = Company::orderBy('id', 'desc')->get();
+        $relevants = Post::search($request->name)
+            ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->with('categories', 'tags', 'users')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('view_counter', '>', 5)
+            ->whereRaw('TIMESTAMP(postponed_to) <= NOW() AND TIMESTAMP(postponed_to) >= DATE_SUB(NOW(), INTERVAL 180 DAY)')
+            ->orWhere('postponed_to', null)
+            ->orderBy('view_counter', 'desc')
+            ->take(3)
+            ->get();
+
+        $videos = Post::search($request->name)
+            ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->with('users', 'categories', 'titles', 'tags')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->where('category_id', 13)
+            ->where('postponed_to', '<=', Carbon::now())
+            ->orWhere('postponed_to', null)
+            ->orderBy('postponed_to', 'desc')
+            ->take(5)->get();
+
+        $news = Post::search($request->name)
+            ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->with('users', 'categories', 'titles', 'tags')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('postponed_to', '<=', Carbon::now())
+            ->orWhere('postponed_to', null)
+            ->orderBy('postponed_to', 'desc')
+            ->take(4)->get();
 
         $events = Event::with('users', 'city', 'country')
-            ->whereRaw('TIMESTAMP(date_start) > NOW()')
+            ->where('date_start', '>=', Carbon::now())
             ->orderBy('date_start', 'asc')
             ->get();
 
@@ -45,13 +74,12 @@ class PostController extends Controller
             ->with('users', 'categories', 'titles', 'tags')
             ->where('approved', 'yes')
             ->where('draft', '0')
-            ->where('category_id', '!=', 10)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW()')
+            ->whereNotIn('category_id', [10])
+            ->where('postponed_to', '<=', Carbon::now())
             ->orWhere('postponed_to', null)
-            ->orderBy('postponed_to', 'desc')
-            ->simplePaginate(15);
+            ->orderBy('postponed_to', 'desc')->simplePaginate();
 
-        $keywords = array();
+        $keywords = [];
         foreach ($posts as $p) {
             foreach ($p->tags as $tag) {
                 $keywords[] = $tag->name;
@@ -59,8 +87,11 @@ class PostController extends Controller
         }
         $keywords = implode(', ', $keywords);
 
+        $carbon = new Carbon;
 
-        return view('web.home', compact('posts', 'titles', 'people', 'companies', 'magazine', 'carbon', 'events', 'keywords'));
+        //return $posts;
+
+        return view('web.home', compact('relevants', 'news', 'videos', 'posts', 'events', 'keywords', 'carbon'));
     }
 
     public function posts(Request $request)

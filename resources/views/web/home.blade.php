@@ -20,8 +20,80 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="post-content col-xs-12 col-sm-12 col-md-12">
-	<div class="posts-wrapper col-md-12">
+{{-- Relavants Articles in Slide Carousel --}}
+<div class="relevants-box">
+    <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+            <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            @foreach($relevants as $r)
+                <div class="carousel-item @if ($loop->first) active @endif">
+                    <img src="{{ $r->image }}" class="d-block w-100" alt="{{ $r->title }}">
+                    <div class="item__overlayer"></div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2>{{ $r->title }}</h2>
+                        <p>{{ $r->excerpt }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+{{-- Recents Articles in Grid Layout --}}
+<div class="recent-box">
+    <div id="recentPost" class="container-lg">
+        <h3 class="section-title"><i class="material-icons orange-text">rss_feed</i> Lo más reciente</h3>
+        <div class="recentPost">
+            @foreach ($news as $n)
+                <div class="box">
+                    <div class="box__item">
+                        <a href="/posts/{{ $n->slug }}">
+                            <figure class="item__image">
+                                <img
+                                    class="animate-image"
+                                    srcSet="{{ str_replace('1920', '480', $n->image) }} 480w,
+                                    {{ str_replace('1920', '640', $n->image) }} 640w,
+                                    {{ str_replace('1920', '800', $n->image) }} 800w,
+                                    {{ str_replace('1920', '1200', $n->image) }} 1200w,
+                                    {{ str_replace('1920', '1600', $n->image) }} 1600w,
+                                    {{ $n->image }} 1920w"
+                                    src="{{ $n->image !== null ? $n->image : '' }}"
+                                    alt="{{ $n->title }}"
+                                />
+                            </figure>
+                            <div class="item__overlayer"></div>
+                            <div class="item__info bottom-attach">
+                                <div class="info__news-category">{{ $n->categories->name }}</div>
+                                <h2 class="info__news-title">
+                                    {{ $n->title }}
+                                </h2>
+                                <h4 class="info__news-sub-title">{{ $n->excerpt }}</h4>
+                                <p>
+                                    <i class="fas fa-user"></i> <span class="info__person">{{ $n->users->name }}</span>
+                                    <i class="fas fa-watch-o"></i> {{ $n->postponed_to }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+{{-- All Articles in Grid Layout with Infinite Scroll --}}
+<div class="posts-box">
+	<div class="container-lg">
 		<div class="grid">
 			@forelse($posts as $post)
 			<div class="grid-item">
@@ -29,14 +101,17 @@
 					<div class="post">
 						<div class="post-header">
 							<div class="post-top-image">
-								<a href="/posts/{{ $post->slug }}">
-									@if(!empty($post->image))
-										{{-- <img class="article-image" src="{!! str_replace('1920','320',asset('images/posts/thumbnails/thumb-' . $post->image)) !!}" alt="{{ $post->title }} - Coanime.net" /> --}}
-										<img class="article-image" src="{!! str_replace('1920','480', $post->image) !!}" alt="{{ $post->title }} - Coanime.net" />
-									@else
-										<img src="{{$helper->img_post($post->content)}}" alt="{{ $post->title }} - Coanime.net">
-									@endif
-								</a>
+								@if($post->categories->name === 'Videos')
+                                    <div id="player" class="plyrs" data-plyr-provider="youtube" data-plyr-embed-id="{{str_replace('https://www.youtube.com/embed/','', $post->videoLinks['url'])}}"></div>
+                                @else
+                                    <a href="/posts/{{ $post->slug }}">
+                                        @if(!empty($post->image))
+                                            <img class="article-image" src="{!! str_replace('1920','480', $post->image) !!}" alt="{{ $post->title }} - Coanime.net" />
+                                        @else
+                                            <img src="{{$helper->img_post($post->content)}}" alt="{{ $post->title }} - Coanime.net">
+                                        @endif
+                                    </a>
+                                @endif
 							</div>
 							<a href="/categorias/{{ $post->categories->slug }}"><span class="post-category {{ $post->categories->slug }}">{{ $post->categories->name }}</span></a>
 							<h2 class="post-title"><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h2>

@@ -427,6 +427,25 @@ div.posts-sidebar > div.search-box {
 
 .carousel-item {
   height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 150px;
+    left: 20%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: left;
+}
+
+.carousel-caption h2 {
+    font-size: calc(1em + 1.5vw);
 }
 
 /*  Recent Posts  */

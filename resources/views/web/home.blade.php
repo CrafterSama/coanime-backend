@@ -34,6 +34,7 @@
                     <img src="{{ $r->image }}" class="d-block w-100" alt="{{ $r->title }}">
                     <div class="item__overlayer"></div>
                     <div class="carousel-caption d-none d-md-block">
+                        <h3 class="section-title">Notas Destacadas</h3>
                         <h2>{{ $r->title }}</h2>
                         <p>{{ $r->excerpt }}</p>
                     </div>
@@ -53,7 +54,7 @@
 {{-- Recents Articles in Grid Layout --}}
 <div class="recent-box">
     <div id="recentPost" class="container-lg">
-        <h3 class="section-title"><i class="material-icons orange-text">rss_feed</i> Lo más reciente</h3>
+        <h3 class="section-title"><i class="fas fa-rss orange-text"></i> Lo más reciente</h3>
         <div class="recentPost">
             @foreach ($news as $n)
                 <div class="box">
@@ -68,7 +69,7 @@
                                     {{ str_replace('1920', '1200', $n->image) }} 1200w,
                                     {{ str_replace('1920', '1600', $n->image) }} 1600w,
                                     {{ $n->image }} 1920w"
-                                    src="{{ $n->image !== null ? $n->image : '' }}"
+                                    src="{{ $n->image !== null ? str_replace('1920', '800', $n->image) : '' }}"
                                     alt="{{ $n->title }}"
                                 />
                             </figure>
@@ -81,7 +82,7 @@
                                 <h4 class="info__news-sub-title">{{ $n->excerpt }}</h4>
                                 <p>
                                     <i class="fas fa-user"></i> <span class="info__person">{{ $n->users->name }}</span>
-                                    <i class="fas fa-watch-o"></i> {{ $n->postponed_to }}
+                                    <i class="fas fa-clock"></i> {{ $n->postponed_to }}
                                 </p>
                             </div>
                         </a>

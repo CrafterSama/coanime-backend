@@ -21,14 +21,14 @@ class PostVote extends Model
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
     protected $fillable = ['post_id', 'user_id', 'status'];
-    
-        public function posts()
-        {
-            return $this->hasOne('\App\Post');
-        }
-        
-        public function users()
-        {
-            return $this->hasOne('\App\User');
-        }
+
+    public function posts()
+    {
+        return $this->hasMany('\App\Post');
+    }
+
+    public function users()
+    {
+        return $this->hasOne('\App\User');
+    }
 }

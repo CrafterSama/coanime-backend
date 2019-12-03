@@ -562,7 +562,9 @@ class PostController extends Controller
     public function show($slug)
     {
         if (Post::where('slug', 'like', $slug)->pluck('id')->count() > 0) {
-            $post = Post::with('users', 'categories', 'titles', 'tags')->whereSlug($slug)->firstOrFail();
+            $post = Post::with('users', 'categories', 'titles', 'tags', 'votes')->whereSlug($slug)->firstOrFail();
+
+            //dd($post);
 
             $keywords = array();
 
@@ -580,16 +582,23 @@ class PostController extends Controller
 
             $post->increment('view_counter');
 
-            if (\Auth::guest()) {
+
+            if ($post->votes->count() === 0) {
                 $votes = '';
             } else {
-                $getVote = PostVote::where('post_id', $post->id)->where('user_id', \Auth::user()->id)->get();
-                if ($getVote->count() > 0) {
-                    $voteId = $getVote->pluck('id');
-                    $voteData = PostVote::find($voteId);
-                    $votes = $voteData->status;
-                } else {
+                if (\Auth::guest()) {
                     $votes = '';
+                } else {
+                    $postVotes = $post->votes;
+                    if ($post->votes->count() === 1) {
+                        $postVotes = $post->votes[0];
+                    }
+                    //dd($postVotes);
+                    if ($postVotes->user_id === \Auth::user()->id) {
+                        $votes = $postVotes->status;
+                    } else {
+                        $votes = '';
+                    }
                 }
             }
 

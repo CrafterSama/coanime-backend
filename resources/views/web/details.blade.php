@@ -86,7 +86,7 @@ no-repeat; background-size: cover; position: absolute; top: 0; left: 0;width: 10
                 {{-- $helper->getVideoLink($post->content)['fullsize'] --}}
             </div>
             <div class="post-vote {{ $votes }}">
-            <span class="post-vote-text"><span id="quantity">{{rand(80, 150)}}</span> usuarios indicaron que les gusta este articulo ¿Tu, que opinas?</span>
+                <span class="post-vote-text"><span id="quantity">{{rand(80, 150)}}</span> usuarios indicaron que les gusta este articulo ¿Tu, que opinas?</span>
                 &nbsp;&nbsp;
                 <a id="up-vote" data-post="{{$post->id}}" data-user="{{\Auth::user() ? \Auth::user()->id : ''}}" data-status="like" href="#up-vote" class="vote"><i class="fas fa-thumbs-up animated"></i></a>
                 &nbsp;&nbsp;

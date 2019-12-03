@@ -63,6 +63,11 @@ class Post extends Model
         return $this->belongsToMany('App\Title')->with('images', 'type', 'users', 'generes', 'posts');
     }
 
+    public function votes()
+    {
+        return $this->hasMany('App\PostVote');
+    }
+
     public function getVideoLinksAttribute(): array
     {
         $videoLinks = [];

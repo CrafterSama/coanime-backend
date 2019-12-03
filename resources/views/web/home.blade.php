@@ -116,7 +116,7 @@
                                 @else
                                     <a href="/posts/{{ $post->slug }}">
                                         @if(!empty($post->image))
-                                            <img class="article-image" src="{!! str_replace('1920','480', $r->image) !!}" alt="{{ $post->title }} - Coanime.net" />
+                                            <img class="article-image" src="{{ str_replace('1920','480', $post->image) }}" alt="{{ $post->title }} - Coanime.net" />
                                         @else
                                             <img src="{{$helper->img_post($post->content)}}" alt="{{ $post->title }} - Coanime.net">
                                         @endif

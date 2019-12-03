@@ -31,12 +31,16 @@
         <div class="carousel-inner">
             @foreach($relevants as $r)
                 <div class="carousel-item @if ($loop->first) active @endif">
-                    <img src="{{ $r->image }}" class="d-block w-100" alt="{{ $r->title }}">
+                    <figure class="carousel-image-box">
+                        <img src="{{ $r->image }}" class="d-block" alt="{{ $r->title }}">
+                    </figure>
                     <div class="item__overlayer"></div>
-                    <div class="carousel-caption d-none d-md-block">
+                    <div class="carousel-caption d-xs-block">
                         <h3 class="section-title">Notas Destacadas</h3>
-                        <h2>{{ $r->title }}</h2>
+                        <h2><a href="/posts/{{ $r->slug }}">{{ $r->title }}</a></h2>
                         <p>{{ $r->excerpt }}</p>
+                        <p><i class="fas fa-eye"></i>  {{ $r->view_counter }} Vistas</p>
+                    <p><i class="fas fa-user"></i>  {{ $r->users->name }} <i class="fas fa-clock"></i> <time-ago>{{ $r->postponed_to }}</time-ago></p>
                     </div>
                 </div>
             @endforeach
@@ -48,6 +52,11 @@
         <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="go-to-posts animated slower infinite floatingRocket">
+        <a href="#recentPost">
+            <i class="fas fa-angle-double-down"></i>
         </a>
     </div>
 </div>
@@ -82,7 +91,7 @@
                                 <h4 class="info__news-sub-title">{{ $n->excerpt }}</h4>
                                 <p>
                                     <i class="fas fa-user"></i> <span class="info__person">{{ $n->users->name }}</span>
-                                    <i class="fas fa-clock"></i> {{ $n->postponed_to }}
+                                    <i class="fas fa-clock"></i> <time-ago>{{ $n->postponed_to }}</time-ago>
                                 </p>
                             </div>
                         </a>
@@ -107,7 +116,7 @@
                                 @else
                                     <a href="/posts/{{ $post->slug }}">
                                         @if(!empty($post->image))
-                                            <img class="article-image" src="{!! str_replace('1920','480', $post->image) !!}" alt="{{ $post->title }} - Coanime.net" />
+                                            <img class="article-image" src="{!! str_replace('1920','480', $r->image) !!}" alt="{{ $post->title }} - Coanime.net" />
                                         @else
                                             <img src="{{$helper->img_post($post->content)}}" alt="{{ $post->title }} - Coanime.net">
                                         @endif
@@ -120,12 +129,12 @@
                                 <span class="post-author"><a href="{{ route('profile',$post->users->slug) }}">{{ $post->users->name }}</a></span>
                                 @if ($post->postponed_to == $post->created_at || is_null($post->postponed_to))
                                 @if (is_null($post->created_at))
-                                <time class="post-date timeago" datetime="{{$carbon->parse($post->post_created_at)->format('Y-m-d H:i:s')}}" title=""></time>
+                                    <time-ago>{{$post->post_crated_at}}</time-ago>
                                 @else
-                                <time class="post-date timeago" datetime="{{$carbon->parse($post->created_at)->format('Y-m-d H:i:s')}}" title=""></time>
+                                    <time-ago>{{$post->created_at}}</time-ago>
                                 @endif
                                 @else
-                                <time class="post-date timeago" datetime="{{$carbon->parse($post->postponed_to)->format('Y-m-d H:i:s')}}" title=""></time>
+                                    <time-ago>{{$post->postponed_to}}</time-ago>
                                 @endif
                             </div>
 							@if(Auth::guest() == false)

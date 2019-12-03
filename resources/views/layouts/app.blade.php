@@ -32,7 +32,8 @@
 	<meta content='all, index, follow' name='robots' />
 
 	<!-- CSRF Token -->
-	<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @stack('scripts')
 
 	<title>
 	    {{-- config('app.name', 'ECMA - ') --}}
@@ -183,17 +184,12 @@
         </div>
     </nav>
     <div class="content-box">
-        {{--
 		<!-- Espacio para prubas de vue -->
 		<div id="app">
-
-			<example-component></example-component>
+            <main class="wrapper">
+                @yield('content')
+            </main>
 		</div>
-		--}}
-
-        <main class="wrapper">
-            @yield('content')
-        </main>
     </div>
 	<!-- /div -->
 	<footer class="footer">

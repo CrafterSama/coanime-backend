@@ -1,0 +1,26 @@
+.footer {
+    background-color: #091329;
+    color: #fff;
+}
+
+.footer__content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto;
+    max-width: 1247px;
+    padding: 15px;
+
+    p.footer-links {
+        font-size: 14px;
+    }
+
+    a {
+        color: #fff;
+        text-decoration: none;
+
+        &:hover, &:focus, &:visited, &:active {
+        color: #fff;
+        text-decoration: none;
+        }
+    }
+}

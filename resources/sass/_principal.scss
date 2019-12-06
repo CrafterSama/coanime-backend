@@ -1,0 +1,256 @@
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Red Hat Text", sans-serif;
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+table a, .table a {
+    text-decoration: none;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin: 0;
+}
+
+h4, .h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+header {
+    margin-top: 75px;
+}
+
+.input-captcha {
+    border: 2px solid var(--light-gray);
+    border-radius: 4px;
+    margin-left: 15px;
+    padding: 0;
+    max-width: 345px;
+}
+
+.input-captcha-focus {
+    border: 2px solid #34495e;
+}
+
+.input-captcha input {
+    border: none;
+    padding: 5px 3px 7px 3px;
+    outline: none;
+    color: var(--text);
+
+    &:focus {
+        border: none;
+        padding: 5px 3px 7px 3px;
+        outline: none;
+        color: var(--text);
+    }
+}
+
+.overlay-body {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(255, 150, 0, 0.2);
+}
+
+
+.overlayer {
+    position: absolute;
+    background: linear-gradient(180deg, rgba(255, 143, 0, 0.4) 30%, rgba(0, 6, 119, 0.8) 70%);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.text-strong {
+    font-weight: 500;
+}
+
+.text-stronger {
+    font-weight: 700;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.pre {
+    font-family: monospace;
+    font-size: 12px;
+    padding: 3px 7px;
+    color: #821759;
+    border-radius: 5px;
+    border-color: #ccc;
+    background-color: #cecece;
+}
+
+.form {
+    padding: 15px;
+}
+
+.form-signin {
+    margin: 0 auto;
+}
+
+.form-control, input {
+    background-color: var(--light);
+    border-width: 0;
+}
+
+.container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+    width: 100%;
+    max-width: 1336px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1080px) {
+    .container {
+        max-width: 1020px;
+    }
+}
+
+@media (min-width: 1366px) {
+    .container {
+        max-width: 1336px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container, .container-sm {
+        max-width: 740px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container, .container-sm, .container-md {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1080px) {
+    .container, .container-sm, .container-md, .container-lg {
+        max-width: 1020px;
+    }
+}
+
+@media (min-width: 1366px) {
+    .container, .container-sm, .container-md, .container-lg, .container-xl {
+        max-width: 1336px;
+    }
+}
+
+.selectize-input {
+    border: 0;
+    padding: 10px 15px;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    min-height: 43px;
+    line-height: 23px;
+}
+
+.selectize-control {
+    &.multi .selectize-input.has-items {
+        padding: 10px 10px 3px;
+    }
+
+    &.plugin-remove_button [data-value] .remove {
+        top: 1px;
+    }
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.orange-background {
+    border: 1px solid var(--orange) !important;
+    background-color: var(--orange) !important;
+}
+
+.cyan {
+    color: var(--cyan);
+}
+
+.cyan-background {
+    border: 1px solid var(--cyan) !important;
+    background-color: var(--cyan) !important;
+}
+
+.green {
+    color: var(--green);
+}
+
+.red {
+    color: var(--red);
+}
+
+.purple {
+    color: var(--purple);
+}
+
+.purple-background {
+    border: 1px solid var(--purple) !important;
+    background-color: var(--purple) !important;
+}
+
+.gray {
+    color: var(--gray);
+}
+
+h3 > .svg-inline--fa {
+    color: var(--orange);
+}
+

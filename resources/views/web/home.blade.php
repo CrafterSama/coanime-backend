@@ -34,7 +34,7 @@
                     <figure class="carousel-image-box">
                         <img src="{{ $r->image }}" class="d-block" alt="{{ $r->title }}">
                     </figure>
-                    <div class="item__overlayer"></div>
+                    <div class="overlayer"></div>
                     <div class="carousel-caption d-xs-block">
                         <h3 class="section-title">Notas Destacadas</h3>
                         <h2><a href="/posts/{{ $r->slug }}">{{ $r->title }}</a></h2>

@@ -1,0 +1,29 @@
+.go-to-posts {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100%;
+    display: grid;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+.go-to-posts > a {
+    padding: 9px 10px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    display: block;
+    height: 65px;
+    width: 26px;
+    color: var(--light);
+}
+
+.go-to-posts > a > svg.svg-inline--fa {
+    position: relative;
+    top: 17px;
+    left: -2px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}

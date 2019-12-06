@@ -5,18 +5,22 @@
                 <div v-for="title in today" :key="title.mal_id">
                     <div className="box" data-id={index} key={index} style={{ width: 200 }}>
                         <figure className="item__title-box-image">
-                            <a className="title-link" :href="`/ecma/titulos/${this.strToSlug(title.type)}/${this.strToSlug(title.title)}`">
+                            <a className="title-link" :href="`/ecma/titulos/${strToSlug(title.type)}/${strToSlug(title.title)}`">
                                 <img className="item__title-image" src={title.image_url} alt={title.title} />
                             </a>
                         </figure>
                         <div className="item__title-info">
                             <h2 className="info__title-name">
-                                <a className="title-link" :href="`/ecma/titulos/${this.strToSlug(title.type)}/${this.strToSlug(title.title)}`">
+                                <a className="title-link" :href="`/ecma/titulos/${strToSlug(title.type)}/${strToSlug(title.title)}`">
                                     {{ title.title }}
                                 </a>
                             </h2>
                         </div>
                     </div>
+                </div>
+
+                <div v-if="!today">
+                  No hay nada hoy
                 </div>
             </vue-glide-slide>
             <template slot="control">

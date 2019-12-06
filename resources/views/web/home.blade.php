@@ -82,7 +82,7 @@
                                     alt="{{ $n->title }}"
                                 />
                             </figure>
-                            <div class="item__overlayer"></div>
+                            <div class="overlayer"></div>
                             <div class="item__info bottom-attach">
                                 <div class="info__news-category">{{ $n->categories->name }}</div>
                                 <h2 class="info__news-title">

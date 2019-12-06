@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import './plugins'
 import './bootstrap'
 import './components' // Componentes globales
 

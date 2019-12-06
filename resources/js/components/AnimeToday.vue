@@ -18,6 +18,10 @@
                         </div>
                     </div>
                 </div>
+
+                <div v-if="!today">
+                  No hay nada hoy
+                </div>
             </vue-glide-slide>
             <template slot="control">
                 <button data-glide-dir="<">prev</button>

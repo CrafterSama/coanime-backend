@@ -60,12 +60,12 @@ no-repeat; background-size: cover; position: absolute; top: 0; left: 0;width: 10
                 <span class="post-author"><a href="{{ route('profile',$post->users->slug) }}">{{ $post->users->name }}</a></span>
                 @if ($post->postponed_to == $post->created_at || is_null($post->postponed_to))
                     @if (is_null($post->created_at))
-                        <time class="post-date timeago" datetime="{{$carbon->parse($post->post_created_at)->format('Y-m-d H:i:s')}}" title=""></time>
+                        <time-ago>{{$post->post_crated_at}}</time-ago>
                     @else
-                        <time class="post-date timeago" datetime="{{$carbon->parse($post->created_at)->format('Y-m-d H:i:s')}}" title=""></time>
+                        <time-ago>{{$post->created_at}}</time-ago>
                     @endif
                 @else
-                    <time class="post-date timeago" datetime="{{$carbon->parse($post->postponed_to)->format('Y-m-d H:i:s')}}" title=""></time>
+                    <time-ago>{{$post->postponed_to}}</time-ago>
                 @endif
                 {{-- <div class="post-socialize">
                     <div class="sharethis-inline-share-buttons"></div>

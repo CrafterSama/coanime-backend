@@ -101,6 +101,14 @@
         </div>
     </div>
 </div>
+{{-- Anime Today Component --}}
+<div id="broadcasting">
+    <h3 className="section-title">
+        <i className="fas fa-chromecast"></i> En emisión hoy
+    </h3>
+    <anime-today></anime-today>
+</div>
+
 {{-- All Articles in Grid Layout with Infinite Scroll --}}
 <div class="posts-box">
 	<div class="container-lg">

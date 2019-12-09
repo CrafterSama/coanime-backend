@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "extends": [
+    "plugin:vue/recommended",
+    "standard"
+  ],
+  "rules": {
+    "no-console": 1,
+    "no-unused-vars": 1,
+    "sort-imports": 1,
+    "vue/max-attributes-per-line": [1, {
+      "singleline": 10,
+      "multiline": {
+        "max": 1,
+        "allowFirstLine": true
+      }
+    }]
+  }
+}

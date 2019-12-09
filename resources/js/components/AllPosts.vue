@@ -36,10 +36,10 @@
       </article>
     </div>
     <div class="more-button">
-      <div v-if="loading">
+      <div v-if="loading === true">
         <FacebookLoader :color="color" />
       </div>
-      <button :on-click="() => { getMorePosts(articles.next_page_url) }" type="button">
+      <button v-on:click="getMorePosts(articles.next_page_url, $event)" type="button">
         <i class="fas fa-plus"></i> Mas Posts
       </button>
     </div>
@@ -75,10 +75,12 @@ export default {
       return str.replace("1920", "480");
     },
     getPosts() {
+      this.loading = true;
       fetch(`https://coanime.net/api/v1/articles`)
         .then(res => res.json())
         .then(response => {
           this.articles = response;
+          this.loading = false;
         })
         .catch(error => console.log(error));
     },

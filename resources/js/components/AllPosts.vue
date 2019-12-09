@@ -36,10 +36,10 @@
       </article>
     </div>
     <div class="more-button">
-      <div v-if="loading === true">
+      <div v-if="loading">
         <FacebookLoader :color="color" />
       </div>
-      <button v-on:click="getMorePosts(articles.next_page_url, $event)" type="button">
+      <button v-on:click="getMorePosts(articles.next_page_url)" type="button" class="btn btn-info btn-block">
         <i class="fas fa-plus"></i> Mas Posts
       </button>
     </div>
@@ -89,7 +89,7 @@ export default {
       fetch(`${url}`)
         .then(res => res.json())
         .then(response => {
-          let items = articles.data;
+          let items = this.articles.data;
           items.push(...response.data);
           let data = { ...response, data: items };
           this.articles = data;

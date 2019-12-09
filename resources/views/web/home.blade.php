@@ -120,16 +120,14 @@
 
 
 {{-- All Articles in Grid Layout with Infinite Scroll --}}
-<div class="boxed-container">
-    <div id="news" >
-        <h3 class="section-title orange-border-bottom">
-            <i class="fas fa-plus"></i>
-            Articulos
-            <span class="put-to-right">
-                <i class="fas fa-list"></i>
-            </span>
-        </h3>
-        <all-posts></all-posts>
-    </div>
+<div id="news" class="boxed-container">
+    <h3 class="section-title orange-border-bottom">
+        <i class="fas fa-plus"></i>
+        Articulos
+        <span class="put-to-right">
+            <i class="fas fa-list"></i>
+        </span>
+    </h3>
+    <all-posts></all-posts>
 </div>
 @endsection

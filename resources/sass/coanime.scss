@@ -4,7 +4,9 @@
 @import "_login-register.scss";
 @import "_carousel.scss";
 @import "_goto-recents.scss";
+@import "_titles-today.scss";
 @import "_recents.scss";
+@import "_all-posts.scss";
 @import "_footer.scss";
 
 .items__others-links {
@@ -20,6 +22,7 @@
   > span > iframe {
     border-radius: 5px;
   }
+
 }
 
 .fb-like.fb_iframe_widget {
@@ -37,8 +40,6 @@
 
 .wrapper {
   border-radius: 5px;
-
-  /* margin-bottom:15px; */
   min-height: 100vh;
 }
 
@@ -52,162 +53,6 @@ div.posts-sidebar > div.search-box {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-
-@keyframes floatingRocket {
-    0% {
-        bottom: 10px;
-    }
-    50% {
-        bottom: 15px;
-    }
-    100% {
-        bottom: 10px;
-    }
-}
-
-.floatingRocket {
-    animation: floatingRocket;
-    animation-duration: 0.3s;
-}
-
-.animated {
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
-  }
-
-.animated.infinite {
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-}
-
-.animated.slower {
-	-webkit-animation-duration: 2s;
-	animation-duration: 2s;
-}
-
-#broadcasting {
-    margin: 0px auto;
-    width: 95%;
-	padding: 10px 0px;
-    max-width: 993px;
-}
-
-.broadcastTitles {
-	position: relative;
-}
-
-.broadcastTitles .slick-control {
-    position: absolute;
-    top: 43%;
-    /*width: 40px;
-    height: 45px;*/
-	z-index: 50;
-	box-shadow: -1px 1px 6px rgba(0, 0, 0, 0.3);
-}
-
-.broadcastTitles .slick-control.prev {
-	left: -15px;
-}
-
-.broadcastTitles .slick-control.next {
-	right: -15px;
-}
-
-.broadcastTitles .material-icons {
-    /*top: 3px;*/
-}
-
-.broadcastTitles .slick-button {
-    /*width: 40px;
-	height: 45px;*/
-	padding: 5px;
-    display: flex;
-	justify-content: center;
-	border: none;
-	background: #fff;
-	cursor: pointer;
-}
-
-.broadcastTitles button i {
-    font-size: 30px;
-}
-
-.broadcastTitles .slick-slide {
-    margin: 2.5px;
-}
-
-.broadcastTitles .box {
-    overflow: hidden;
-	margin-right: 4px;
-	border-radius: 3px;
-	box-shadow: 0px 3px 3px	rgba(0, 0, 0, 0.3);
-	margin-bottom: 5px;
-	height: 99%;
-	position: relative;
-	left: 1px;
-}
-
-.item__title-box-image {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    height: 280px;
-    width: 200px;
-}
-
-.item__title-image {
-    width: 200px;
-    border-radius: 3px;
-    object-fit: cover;
-    object-position: center;
-}
-
-.item__title-info {
-    position: absolute;
-    bottom: 0;
-    background: rgba(255,255,255,0.9);
-    padding: 10px;
-    width: 100%;
-}
-
-.info__title-name {
-	margin: 0;
-	text-align: center;
-    line-height: normal;
-    font-size: 14px;
-    font-weight: 400;
-	color: var(--dark-blue);
-}
-
-.more-titles {
-    height: 280px;
-    background-color: var(--light-gray);
-    display: flex !important;
-    justify-content: center;
-	align-items: center;
-	cursor: pointer;
-}
-
-.title-link {
-    display: block;
-    position: relative;
-}
-
-@media(min-width: 320px) and (max-width:768px) {
-	.broadcastTitles .slick-control.prev {
-		left: 0px;
-		/*display: none;*/
-	}
-
-	.broadcastTitles .slick-control.next {
-		right: 0px;
-		/*display: none;*/
-	}
-}
-
 
 thead {
   background-color: var(--orange);
@@ -2088,7 +1933,7 @@ img._1ci.img {
   text-decoration: none;
   border: none;
 
-  i.fa {
+  i.fas {
     font-size: 24px;
   }
 }
@@ -2284,27 +2129,7 @@ img._1ci.img {
 
 /** Responsive Area **/
 
-@media (min-width: 1366px) {
-  .boxed, .boxed-posts {
-    width: 1336px;
-    display: flex;
-    margin: 0 auto;
-  }
-}
-
 @media (max-width: 1366px) {
-  .boxed {
-    max-width: 100%;
-    display: flex;
-    margin: 0 auto;
-  }
-
-  .boxed-posts {
-    width: 100%;
-    display: flex;
-    margin: 0 auto;
-  }
-
   .grid-item {
     width: 350px !important;
   }
@@ -2342,10 +2167,6 @@ img._1ci.img {
   .grid {
     margin-right: -14px;
     margin-top: 70px;
-  }
-
-  .posts-wrapper {
-    /* padding-left: 15px; */
   }
 
   .post-body, .post-vote, .post-author-related {

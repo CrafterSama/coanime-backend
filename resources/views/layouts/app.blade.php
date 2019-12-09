@@ -59,7 +59,6 @@
 		<!— End Facebook Pixel Code —>
 	@endif
 	<!--  Vendor Styles  -->
-	<link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	@if(Request::segment(1) == 'dashboard')
     <link rel="stylesheet" href="/vendor/bootstrap-select/css/bootstrap-select.min.css" />
     <link rel="stylesheet" type="text/css" href="/vendor/selectize/selectize.css" />
@@ -129,7 +128,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
-        <div class="boxed">
+        <div class="container-lg">
             <a class="navbar-brand" href="/"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -230,7 +229,8 @@
 	<!-- Vendor -->
 	<script src="{{ asset('assets/vendor/jquery/js/jquery.js') }}"></script>
 	<script src="{{ asset('assets/vendor/popper.js/js/popper.js') }}"></script>
-	<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="https://kit.fontawesome.com/ec6f045846.js" crossorigin="anonymous"></script>
 
 	<!-- App -->
 	<script src="{{ mix('assets/js/app.js') }}"></script>
@@ -244,8 +244,6 @@
 	<script defer>
 		window.ECMA =  {!! json_encode(['csrfToken' => csrf_token()]) !!}
     </script>
-    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
-    <script defer src="/vendor/moment/moment.min.js"></script>
 	<script defer src="/vendor/es6-promise/es6-promise.min.js"></script>
 	<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
 	<script defer>
@@ -266,23 +264,18 @@
 	@endif
 	@if(Request::segment(1) == 'dashboard' || Request::segment(1) == 'register')
 		@include('dashboard.partials.scripts')
+        <script defer src='https://www.google.com/recaptcha/api.js'></script>
 	@endif
-	<script defer src='https://www.google.com/recaptcha/api.js'></script>
 	@php
 		$d = new DateTime();
 	@endphp
 	@if($d->format('m-d') >= '12-01' && $d->format('m-d') <= '12-31')
 		<script src="/js/nevada.min.js"></script>
 	@endif
-	<script src="/js/jquery.slides.min.js"></script>
-	<script src="/js/imagesloaded.pkgd.js"></script>
-	<script src="/js/masonry.pkgd.js"></script>
-	<!-- script src="/js/jaliswall.js"></script -->
-	<script src="/js/scripts.js"></script>
 	@if(Request::segment(2) == 'titulos')
 		@include('partials.scripts')
 	@endif
-@if(Request::segment(1) != 'dashboard')
+    @if(Request::segment(1) != 'dashboard')
 	<!-- Facebook SDK -->
 	<div id="fb-root"></div>
 	<script defer async>
@@ -326,27 +319,6 @@
 		}(document, "script", "twitter-wjs"));
 	</script>
     <!-- / End Twitter Widget -->
-    <!-- Default Statcounter code for Coanime.net
-    http://coanime.net -->
-    <script type="text/javascript">
-        var sc_project=9208621;
-        var sc_invisible=0;
-        var sc_security="953d137a";
-        var scJsHost = "https://";
-        document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
-    </script>
-    <noscript>
-        <div class="statcounter">
-            <a title="site stats"
-            href="https://statcounter.com/" target="_blank"><img
-            class="statcounter"
-            src="https://c.statcounter.com/9208621/0/953d137a/0/"
-            alt="site stats"></a>
-        </div>
-    </noscript>
-    <!-- End of Statcounter Code -->
-    <script
-		id="mcjs">!function (c, h, i, m, p) { m = c.createElement(h), p = c.getElementsByTagName(h)[0], m.async = 1, m.src = i, p.parentNode.insertBefore(m, p) }(document, "script", "https://chimpstatic.com/mcjs-connected/js/users/c7f6b94a11f43f6650745bb08/e3e2888f36c70b6ee038ad07d.js");</script>
 @endif
 </body>
 </html>

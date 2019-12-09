@@ -3,7 +3,7 @@
 
 {{-- Head Info --}}
 
-@section('title', $post->categories->name.' - '.$post->title)
+@section('title', 'Articulos - ' . $post->categories->name . ' - ' . $post->title)
 
 @section('description', $helper->excerpt($helper->textWithoutImage(strip_tags($post->content))) . '...')
 
@@ -11,7 +11,7 @@
     <meta property="og:type" content="article" />
 @endsection
 
-@section('twitter-image', 'https://coanime.net/images/posts/'. $post->image)
+@section('twitter-image', $post->image)
 
 @section('tags')
     <meta property="article:publisher" content="http://www.facebook.com/Coanime">
@@ -34,8 +34,6 @@
 
 {{-- /End Head Info --}}
 
-@section('body', 'background-image: linear-gradient(rgba(255, 255, 255,0) 64%, rgba(255, 255, 255,100) 96%),url(https://coanime.net/images/posts/' . $post->image . '); height: 60vh; background-position: center; background-repeat:
-no-repeat; background-size: cover; position: absolute; top: 0; left: 0;width: 100%; filter: blur(8px); opacity: .95; -webkit-transform: scale(1.05); transform: scale(1.05);')
 @extends('layouts.app')
 @section('content')
 <div class="post-content col-md-12" id="post-article" data-id="{{ $post->id }}">

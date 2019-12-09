@@ -101,6 +101,12 @@ header {
     font-style: italic;
 }
 
+.text-shadow {
+
+    text-shadow: 2px 2px 4px var(--dark);
+
+}
+
 .pre {
     font-family: monospace;
     font-size: 12px;
@@ -131,6 +137,13 @@ header {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.boxed-container {
+    margin: 0px auto;
+    width: 95%;
+	padding: 10px 0px;
+    max-width: 993px;
 }
 
 @media (min-width: 768px) {

@@ -35,7 +35,7 @@
                         <img src="{{ $r->image }}" class="d-block" alt="{{ $r->title }}">
                     </figure>
                     <div class="overlayer"></div>
-                    <div class="carousel-caption d-xs-block">
+                    <div class="carousel-caption text-shadow d-xs-block">
                         <h3 class="section-title">Notas Destacadas</h3>
                         <h2><a href="/posts/{{ $r->slug }}">{{ $r->title }}</a></h2>
                         <p>{{ $r->excerpt }}</p>
@@ -60,6 +60,7 @@
         </a>
     </div>
 </div>
+
 {{-- Recents Articles in Grid Layout --}}
 <div class="recent-box">
     <div id="recentPost" class="container-lg">
@@ -83,7 +84,7 @@
                                 />
                             </figure>
                             <div class="overlayer"></div>
-                            <div class="item__info bottom-attach">
+                            <div class="item__info text-shadow bottom-attach">
                                 <div class="info__news-category">{{ $n->categories->name }}</div>
                                 <h2 class="info__news-title">
                                     {{ $n->title }}
@@ -101,75 +102,34 @@
         </div>
     </div>
 </div>
+
+{{-- Videos Posts --}}
+
+
+
 {{-- Anime Today Component --}}
-<div id="broadcasting">
-    <h3 className="section-title">
-        <i className="fas fa-chromecast"></i> En emisión hoy
+<div class="boxed-container">
+    <h3 class="section-title">
+        <i class="fab fa-chromecast"></i>
+        En emisión hoy
     </h3>
     <anime-today></anime-today>
 </div>
 
+{{-- Hispanic Events and Expos --}}
+
+
 {{-- All Articles in Grid Layout with Infinite Scroll --}}
-<div class="posts-box">
-	<div class="container-lg">
-		<div class="grid">
-			@forelse($posts as $post)
-			<div class="grid-item">
-				<!-- div class="row before-box" -->
-					<div class="post">
-						<div class="post-header">
-							<div class="post-top-image">
-								@if($post->categories->name === 'Videos')
-                                    <div id="player" class="plyrs" data-plyr-provider="youtube" data-plyr-embed-id="{{str_replace('https://www.youtube.com/embed/','', $post->videoLinks['url'])}}"></div>
-                                @else
-                                    <a href="/posts/{{ $post->slug }}">
-                                        @if(!empty($post->image))
-                                            <img class="article-image" src="{{ str_replace('1920','480', $post->image) }}" alt="{{ $post->title }} - Coanime.net" />
-                                        @else
-                                            <img src="{{$helper->img_post($post->content)}}" alt="{{ $post->title }} - Coanime.net">
-                                        @endif
-                                    </a>
-                                @endif
-							</div>
-							<a href="/categorias/{{ $post->categories->slug }}"><span class="post-category {{ $post->categories->slug }}">{{ $post->categories->name }}</span></a>
-							<h2 class="post-title"><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h2>
-                            <div class="post-header-details">
-                                <span class="post-author"><a href="{{ route('profile',$post->users->slug) }}">{{ $post->users->name }}</a></span>
-                                @if ($post->postponed_to == $post->created_at || is_null($post->postponed_to))
-                                @if (is_null($post->created_at))
-                                    <time-ago>{{$post->post_crated_at}}</time-ago>
-                                @else
-                                    <time-ago>{{$post->created_at}}</time-ago>
-                                @endif
-                                @else
-                                    <time-ago>{{$post->postponed_to}}</time-ago>
-                                @endif
-                            </div>
-							@if(Auth::guest() == false)
-								@if(Auth::user()->isAdmin() || Auth::user()->isMod())
-								<span class="post-edit-button">
-									<a href="/dashboard/posts/{{$post->id}}/edit" class="btn btn-info btn-sm" data-container="body" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pen"></i></a>
-								</span>
-								@endif
-							@endif
-						</div>
-						<div class="post-body text-justify">
-							{!! str_limit(strip_tags($post->content, 300)) !!} <a href="{{route('blog')}}/{{$post->slug}}">Leer Mas</a>
-						</div>
-					</div>
-				<!-- /div -->
-            </div>
-			@empty
-			<div class="grid-item">
-                <div class="post">
-                    <p>Sin Resultados</p>
-				</div>
-			</div>
-            @endforelse
-		</div>
-	</div>
-	<div class="pagination col-md-12 text-center">
-		{{ $posts->appends(request()->all())->links() }}
-	</div>
+<div class="boxed-container">
+    <div id="news" >
+        <h3 class="section-title orange-border-bottom">
+            <i class="fas fa-plus"></i>
+            Articulos
+            <span class="put-to-right">
+                <i class="fas fa-list"></i>
+            </span>
+        </h3>
+        <all-posts></all-posts>
+    </div>
 </div>
 @endsection

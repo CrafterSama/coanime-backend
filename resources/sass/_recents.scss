@@ -1,8 +1,6 @@
 #recentPost {
     margin: 0px auto;
-    width: 95%;
     padding: 20px 0px;
-    max-width: 1336px;
 
     > h2 {
         /*text-transform: uppercase;*/
@@ -73,8 +71,8 @@
     }
 
     .info__news-category {
-        font-size: 16px;
-        font-weight: 400;
+        font-size: 18px;
+        font-weight: 500;
     }
 
     h2.info__news-title {
@@ -120,6 +118,7 @@
     h2.info__news-title, h4.info__news-sub-title {
         /*margin: 0;*/
         color: var(--primary);
+        text-shadow: none;
     }
 
     .info__news-title a {
@@ -130,6 +129,7 @@
     .item__info p {
         margin-top: 5px;
         color: var(--dark);
+        text-shadow: none;
     }
 }
 

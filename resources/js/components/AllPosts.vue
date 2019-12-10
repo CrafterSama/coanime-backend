@@ -18,7 +18,7 @@
           <h2 class="news-title">
             <a :href="url('posts', article.slug)">{{ article.title }}</a>
           </h2>
-          <div class="news-subtitle">{{article.excerpt}}</div>
+          <div class="news-subtitle">{{ article.excerpt }}</div>
           <small class="small">
             <i class="fas fa-user"></i>
             <span>
@@ -39,9 +39,15 @@
       <div v-if="loading">
         <FacebookLoader :color="color" />
       </div>
-      <button v-on:click="getMorePosts(articles.next_page_url)" type="button" class="btn btn-info btn-block">
-        <i class="fas fa-plus"></i> Mas Posts
-      </button>
+      <div v-else>
+        <button
+          v-on:click="getMorePosts(articles.next_page_url)"
+          type="button"
+          class="btn btn-info btn-block"
+        >
+          <i class="fas fa-plus"></i> Mas Posts
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,0 +1,36 @@
+.error {
+    position: absolute;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+.error-404 {
+    text-align: center;
+    margin-top: 50px;
+
+    img {
+        max-width: 550px;
+    }
+
+    h1 {
+        font-size: 200px;
+        color: $gray;
+        font-weight: 400;
+        margin-bottom: 50px;
+    }
+
+    h3 {
+        font-weight: lighter;
+    }
+
+    p {
+        font-weight: lighter;
+    }
+
+    a {
+        color: $orange;
+    }
+}

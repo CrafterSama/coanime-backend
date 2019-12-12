@@ -10,10 +10,7 @@
         "standard"
     ],
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
+        "indent": ["error", 4],
         "no-console": 1,
         "no-unused-vars": 1,
         "sort-imports": 1,

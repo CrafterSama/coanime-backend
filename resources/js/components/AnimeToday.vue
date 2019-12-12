@@ -79,9 +79,9 @@ export default {
                 weekday: 'long', //, year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
                 hour12: false
             }
-            let current_date = new Date() // .toLocaleTimeString('en-us', options)
-            let weekday_value = current_date.getDay()
-            let today = days[weekday_value]
+            let currentDate = new Date() // .toLocaleTimeString('en-us', options)
+            let weekdayValue = currentDate.getDay()
+            let today = days[weekdayValue]
 
             return today
         },

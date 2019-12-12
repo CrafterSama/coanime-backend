@@ -1,4 +1,9 @@
 <template>
+<div class="boxed-container">
+    <h3 class="section-title">
+        <i class="fab fa-chromecast"></i>
+        En emisión hoy
+    </h3>
   <div class="broadcastTitles">
     <div v-if="titles && titles.length">
       <vue-glide :perView="5" :gap="5" :bound="true">
@@ -28,8 +33,10 @@
     </div>
     <div v-else>...Cargando</div>
   </div>
+</div>
 </template>
 <script>
+import { VueAgile } from "vue-agile";
 import { Glide, GlideSlide } from "vue-glide-js";
 
 export default {

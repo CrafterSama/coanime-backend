@@ -69,8 +69,8 @@
             @foreach ($news as $n)
                 <div class="box">
                     <div class="box__item">
-                        <a href="/posts/{{ $n->slug }}">
-                            <figure class="item__image">
+                        <figure class="item__image">
+                            <a href="/posts/{{ $n->slug }}">
                                 <img
                                     class="animate-image"
                                     srcSet="{{ str_replace('1920', '480', $n->image) }} 480w,
@@ -82,20 +82,20 @@
                                     src="{{ $n->image !== null ? str_replace('1920', '800', $n->image) : '' }}"
                                     alt="{{ $n->title }}"
                                 />
-                            </figure>
-                            <div class="overlayer"></div>
-                            <div class="item__info text-shadow bottom-attach">
-                                <div class="info__news-category">{{ $n->categories->name }}</div>
-                                <h2 class="info__news-title">
-                                    {{ $n->title }}
-                                </h2>
-                                <h4 class="info__news-sub-title">{{ $n->excerpt }}</h4>
-                                <p>
-                                    <i class="fas fa-user"></i> <span class="info__person">{{ $n->users->name }}</span>
-                                    <i class="fas fa-clock"></i> <time-ago>{{ $n->postponed_to }}</time-ago>
-                                </p>
-                            </div>
-                        </a>
+                            </a>
+                        </figure>
+                        <div class="overlayer"></div>
+                        <div class="item__info text-shadow bottom-attach">
+                        <div class="info__news-category"><a href="/categorias/{{ $n->categories->slug }}">{{ $n->categories->name }}</a></div>
+                            <h2 class="info__news-title">
+                                <a href="/posts/{{ $n->slug }}">{{ $n->title }}</a>
+                            </h2>
+                            <h4 class="info__news-sub-title">{{ $n->excerpt }}</h4>
+                            <p>
+                            <i class="fas fa-user"></i> <span class="info__person"><a href="/users/profile/{{ $n->users->slug }}">{{ $n->users->name }}</a></span>
+                                <i class="fas fa-clock"></i> <time-ago>{{ $n->postponed_to }}</time-ago>
+                            </p>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -108,26 +108,13 @@
 
 
 {{-- Anime Today Component --}}
-<div class="boxed-container">
-    <h3 class="section-title">
-        <i class="fab fa-chromecast"></i>
-        En emisión hoy
-    </h3>
-    <anime-today></anime-today>
-</div>
+<anime-today></anime-today>
+
 
 {{-- Hispanic Events and Expos --}}
 
 
 {{-- All Articles in Grid Layout with Infinite Scroll --}}
-<div id="news" class="boxed-container">
-    <h3 class="section-title orange-border-bottom">
-        <i class="fas fa-plus"></i>
-        Articulos
-        <span class="put-to-right">
-            <i class="fas fa-list"></i>
-        </span>
-    </h3>
-    <all-posts></all-posts>
-</div>
+<all-posts></all-posts>
+
 @endsection

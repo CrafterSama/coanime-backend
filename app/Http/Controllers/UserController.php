@@ -179,13 +179,13 @@ class UserController extends Controller
      */
     public function profile(Request $request, $slug = null, $id = null)
     {
-        if (User::where('slug', 'like', $slug)->pluck('id')->count() > 0) :
-            $id = User::where('slug', 'like', $slug)->pluck('id');
+        if (User::where('slug', '=', $slug)->pluck('id')->count() > 0) :
+            $id = User::whereSlug($slug)->pluck('id')->first();
             $user = User::with('roles', 'posts', 'titles', 'people', 'magazine', 'companies', 'events')->find($id);
             $carbon = new Carbon;
             //$posts = Post::where('user_id',$id)->whereRaw('TIMESTAMP(postponed_to) <= NOW()')->orWhere('postponed_to', NULL)->where('approved','yes')->groupBy('user_id')->orderBy('id','desc')->get();
 
-            //dd($posts);
+            //dd($id);
 
             return view('users.details', compact('user', 'carbon'));
         else :
@@ -195,8 +195,8 @@ class UserController extends Controller
 
     public function apiProfile(Request $request, $slug = null, $id = null)
     {
-        if (User::where('slug', 'like', $slug)->pluck('id')->count() > 0) :
-            $id = User::where('slug', 'like', $slug)->pluck('id');
+        if (User::where('slug', '=', $slug)->pluck('id')->count() > 0) :
+            $id = User::whereSlug($slug)->pluck('id')->first();
             $user = User::with('roles')->find($id);
             $carbon = new Carbon;
             //$posts = Post::where('user_id',$id)->whereRaw('TIMESTAMP(postponed_to) <= NOW()')->orWhere('postponed_to', NULL)->where('approved','yes')->groupBy('user_id')->orderBy('id','desc')->get();

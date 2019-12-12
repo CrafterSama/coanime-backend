@@ -1,66 +1,74 @@
 
 <template>
-  <div class="posts-box">
-    <div :class="{ boxes: boxes, lists: !boxes }">
-      <article v-for="article in articles.data" :key="article.id" class="news">
-        <figure class="news-image">
-          <a :href="url('posts', article.slug)">
-            <img :src="postImage(article.image)" :alt="article.title" />
-          </a>
-        </figure>
-        <header class="news-header-box">
-          <div class="news-category">
-            <a
-              class="dark-gray-text"
-              :href="url('category', article.categories.slug)"
-            >{{ article.categories.name }}</a>
-          </div>
-          <h2 class="news-title">
-            <a :href="url('posts', article.slug)">{{ article.title }}</a>
-          </h2>
-          <div class="news-subtitle">{{ article.excerpt }}</div>
-          <small class="small">
-            <i class="fas fa-user"></i>
-            <span>
-              <a
-                class="orange-text"
-                :href="url('user', article.users.slug)"
-              >{{ article.users.name }}</a>
-            </span>
-            <i class="fas fa-clock"></i>
-            <span>
+  <div id="news" class="boxed-container">
+    <h3 class="section-title orange-border-bottom">
+      <i class="fas fa-plus"></i>
+      Articulos
+      <span class="put-to-right">
+        <i class="fas fa-list"></i>
+      </span>
+    </h3>
+    <div class="posts-box">
+      <div :class="{ 'card-columns': boxes, lists: !boxes }">
+        <article v-for="article in articles.data" :key="article.id" class="card">
+          <figure class="card-img-top">
+            <a :href="url('posts', article.slug)">
+              <img :src="postImage(article.image)" :alt="article.title" />
+            </a>
+          </figure>
+          <header class="card-body">
+            <div class="card-category">
+              <a :href="url('category', article.categories.slug)">{{ article.categories.name }}</a>
+            </div>
+            <h3 class="card-title">
+              <a :href="url('posts', article.slug)">{{ article.title }}</a>
+            </h3>
+            <div class="card-text">
+              <span class="card-subtitle">{{ article.excerpt }}</span>
+            </div>
+            <small class="card-text">
+              <i class="fas fa-user"></i>
+              <span class="card-author">
+                <a :href="url('user', article.users.slug)">{{ article.users.name }}</a>
+              </span>
+              <i class="fas fa-clock"></i>
               <time-ago>{{ article.postponed_to }}</time-ago>
-            </span>
-          </small>
-        </header>
-      </article>
-    </div>
-    <div class="more-button">
-      <div v-if="loading">
-        <FacebookLoader :color="color" />
+            </small>
+          </header>
+        </article>
       </div>
-      <div v-else>
-        <button
-          v-on:click="getMorePosts(articles.next_page_url)"
-          type="button"
-          class="btn btn-info btn-block"
-        >
-          <i class="fas fa-plus"></i> Mas Posts
-        </button>
+      <div class="button-spinner-section">
+        <div v-if="loading">
+          <div class="loading">
+            <div class="fa-3x">
+              <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="more-section">
+            <button
+              v-on:click="getMorePosts(articles.next_page_url)"
+              type="button"
+              class="btn-block"
+            >
+              <i class="fas fa-sync-alt"></i> Mas Posts
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import TimeAgo from "./TimeAgo";
-import { FacebookLoader } from "vue-spinners-css";
 
 export default {
   name: "all-posts",
   data: function() {
     return {
       articles: "Without Articles",
-      boxes: false,
+      boxes: true,
       loading: false,
       color: "#ED6A00"
     };
@@ -108,8 +116,7 @@ export default {
     this.getPosts();
   },
   components: {
-    [TimeAgo.name]: TimeAgo,
-    [FacebookLoader.name]: FacebookLoader
+    [TimeAgo.name]: TimeAgo
   }
 };
 </script>

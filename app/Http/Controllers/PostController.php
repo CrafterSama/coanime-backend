@@ -70,17 +70,8 @@ class PostController extends Controller
             ->orderBy('date_start', 'asc')
             ->get();
 
-        $posts = Post::search($request->name)
-            ->with('users', 'categories', 'titles', 'tags')
-            ->where('approved', 'yes')
-            ->where('draft', '0')
-            ->whereNotIn('category_id', [10])
-            ->where('postponed_to', '<=', Carbon::now())
-            ->orWhere('postponed_to', null)
-            ->orderBy('postponed_to', 'desc')->simplePaginate();
-
         $keywords = [];
-        foreach ($posts as $p) {
+        foreach ($news as $p) {
             foreach ($p->tags as $tag) {
                 $keywords[] = $tag->name;
             }
@@ -488,13 +479,35 @@ class PostController extends Controller
 
         $category_id = Category::where('slug', '=', $category)->pluck('id');
 
-        $posts = Post::where('category_id', $category_id)->with('users', 'categories', 'titles', 'tags')->orderBy('postponed_to', 'desc')->simplePaginate(12);
+        $relevants = Post::select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->with('categories', 'tags', 'users')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('view_counter', '>', 50)
+            ->where('category_id', $category_id)
+            ->whereRaw('TIMESTAMP(postponed_to) <= NOW() AND TIMESTAMP(postponed_to) >= DATE_SUB(NOW(), INTERVAL 180 DAY)')
+            ->orWhere('postponed_to', null)
+            ->orderBy('view_counter', 'desc')
+            ->take(3)
+            ->get();
+
+        $news = Post::select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->with('users', 'categories', 'titles', 'tags')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('category_id', $category_id)
+            ->where('postponed_to', '<=', Carbon::now())
+            ->orWhere('postponed_to', null)
+            ->orderBy('postponed_to', 'desc')
+            ->take(4)->get();
 
         $category = Category::orderBy('name', 'asc')->get();
 
         $tags = Tag::orderBy('name', 'asc')->get();
 
-        return view('web.home', compact('posts', 'tags', 'categories', 'carbon'));
+        return view('web.home', compact('relevants', 'news', 'tags', 'categories', 'carbon'));
     }
 
     /**

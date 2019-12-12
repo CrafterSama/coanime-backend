@@ -18,7 +18,8 @@ html {
 
 body {
     font-family: "Red Hat Text", sans-serif;
-    background-color: #ffffff;
+    background-color: $white;
+    color: $dark;
     overflow-x: hidden;
 }
 
@@ -28,6 +29,10 @@ table a, .table a {
 
 h1, .h1, h2, .h2, h3, .h3 {
     margin: 0;
+}
+
+h3, .h3 {
+    font-size: 1.45rem;
 }
 
 h4, .h4 {
@@ -78,7 +83,7 @@ header {
 
 .overlayer {
     position: absolute;
-    background: linear-gradient(180deg, rgba(255, 143, 0, 0.4) 30%, rgba(0, 6, 119, 0.8) 70%);
+    background: linear-gradient(180deg, rgba(255, 143, 0, 0.4) 30%, rgba(0, 6, 119, 0.65) 70%);
     top: 0;
     right: 0;
     bottom: 0;

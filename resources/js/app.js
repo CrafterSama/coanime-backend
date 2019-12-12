@@ -1,7 +1,8 @@
-import Vue from 'vue'
 import './plugins'
 import './bootstrap'
 import './components' // Componentes globales
+
+import Vue from 'vue'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -9,6 +10,7 @@ import './components' // Componentes globales
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+/* eslint-disable no-unused-vars */
 const app = new Vue({
-  el: '#app',
-});
+    el: '#app'
+})

@@ -53,5 +53,5 @@ export default {
     get,
     post,
     put,
-    delete: del,
+    delete: del
 }

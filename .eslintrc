@@ -29,6 +29,7 @@
                     "allowFirstLine": true
                 }
             }
-        ]
+        ],
+        "vue/html-indent": ["error", 4]
     }
 }

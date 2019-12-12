@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   php:
-    name: Laravel App 
+    name: Laravel App
     runs-on: ubuntu-latest
     timeout-minutes: 5
     
@@ -27,3 +27,35 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
+  
+  
+  laravel-mix:
+    name: Laravel Mix
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install
+      run: npm install
+    
+    - name: ESLint
+      run: npm run cs:lint
+      
+    - name: Build (production)
+      run: npm run production
+      
+    - name: Build (development)
+      run: npm run development
+      
+    
+      
+

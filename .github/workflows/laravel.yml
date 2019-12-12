@@ -7,21 +7,44 @@ jobs:
     name: Laravel App
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.2', '7.3', '7.4']
     
     steps:
     - uses: actions/checkout@v1
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      
+    - name: Setup PHP, with composer and extensions
+      uses: shivammathur/setup-php@v1 #https://github.com/shivammathur/setup-php
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extensions: mbstring, dom
+        
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+    - name: Cache composer dependencies
+      uses: actions/cache@v1
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+    
     - name: Install Dependencies
       run: composer install --no-ansi --no-interaction --no-suggest --prefer-dist
-    - name: Generate key
-      run: php artisan key:generate
-    - name: Cache config
-      run: php artisan config:cache
+      
+    - name: Prepare the application
+      run: |
+        php -r "file_exists('.env') || copy('.env.example', '.env');"
+        php artisan key:generate
+        php artisan config:cache
+    
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
+    
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
         DB_CONNECTION: sqlite

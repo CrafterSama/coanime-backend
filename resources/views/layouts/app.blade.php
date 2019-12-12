@@ -116,8 +116,6 @@
 
 
 	{{-- App --}}
-    <link href="{{ mix('assets/css/main-colors.css') }}" rel="stylesheet">
-
 	<link href="{{ mix('assets/css/coanime.css') }}" rel="stylesheet">
 
 

@@ -82,7 +82,7 @@ class PostController extends Controller
 
         //return $posts;
 
-        return view('web.home', compact('relevants', 'news', 'videos', 'posts', 'events', 'keywords', 'carbon'));
+        return view('web.home', compact('relevants', 'news', 'videos', 'events', 'keywords', 'carbon'));
     }
 
     public function posts(Request $request)
@@ -462,8 +462,9 @@ class PostController extends Controller
                 return response()->json(array('link' => $postImage), 200);
             } catch (Exception $e) {
                 http_response_code(404);
-            } else :
-            echo 'No Image Sended';
+            }
+        else :
+                echo 'No Image Sended';
         endif;
     }
 

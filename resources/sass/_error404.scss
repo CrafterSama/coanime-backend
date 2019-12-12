@@ -17,7 +17,7 @@
 
     h1 {
         font-size: 200px;
-        color: $gray;
+        color: var(--gray);
         font-weight: 400;
         margin-bottom: 50px;
     }
@@ -31,6 +31,6 @@
     }
 
     a {
-        color: $orange;
+        color: var(--orange);
     }
 }

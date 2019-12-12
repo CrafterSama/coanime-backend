@@ -68,3 +68,7 @@
 .carousel-caption h2 > a:visited {
     color: var(--white);
 }
+
+.carousel-caption, .carousel-control-prev, .carousel-control-next, .carousel-indicators {
+    z-index: 10;
+}

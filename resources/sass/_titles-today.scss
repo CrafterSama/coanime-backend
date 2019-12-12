@@ -93,14 +93,14 @@
 }
 
 .title-link {
-    color: $primary;
+    color: var(--primary);
     display: block;
     position: relative;
     transition: all .2s linear;
 }
 
 .title-link:hover {
-    color: $orange;
+    color: var(--orange);
 }
 
 div[data-glide-el="controls"] {

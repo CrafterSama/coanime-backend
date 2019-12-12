@@ -30,17 +30,19 @@
         </ol>
         <div class="carousel-inner">
             @foreach($relevants as $r)
-                <div class="carousel-item @if ($loop->first) active @endif">
+            <div class="carousel-item @if ($loop->first) active @endif">
                     <figure class="carousel-image-box">
                         <img src="{{ $r->image }}" class="d-block" alt="{{ $r->title }}">
+                        <particles></particles>
                     </figure>
                     <div class="overlayer"></div>
+
                     <div class="carousel-caption text-shadow d-xs-block">
                         <h3 class="section-title">Notas Destacadas</h3>
                         <h2><a href="/posts/{{ $r->slug }}">{{ $r->title }}</a></h2>
                         <p>{{ $r->excerpt }}</p>
                         <p><i class="fas fa-eye"></i>  {{ $r->view_counter }} Vistas</p>
-                    <p><i class="fas fa-user"></i>  {{ $r->users->name }} <i class="fas fa-clock"></i> <time-ago>{{ $r->postponed_to }}</time-ago></p>
+                        <p><i class="fas fa-user"></i>  {{ $r->users->name }} <i class="fas fa-clock"></i> <time-ago>{{ $r->postponed_to }}</time-ago></p>
                     </div>
                 </div>
             @endforeach

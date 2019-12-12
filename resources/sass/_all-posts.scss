@@ -41,10 +41,10 @@
 }
 
 .more-section {
-    border: 2px solid $orange;
+    border: 2px solid var(--orange);
     border-radius: 4px;
     margin-top: 10px;
-    box-shadow: 0px 1px 2px $orange;
+    box-shadow: 0px 1px 2px var(--orange);
 }
 
 .more-section > button {
@@ -53,7 +53,7 @@
     background:
     transparent;
     cursor: pointer;
-	color: $orange;
+	color: var(--orange);
     line-height: 32px;
     border: none;
 }
@@ -77,7 +77,7 @@ article > header {
 	grid-template-columns: 320px auto;
 	height: 180px;
 	margin: 10px 0 0;
-	box-shadow: 0px 1px 3px $light;
+	box-shadow: 0px 1px 3px var(--light);
 	border-radius: 3px;
 }
 
@@ -98,17 +98,17 @@ article > header {
 .lists .news-title > a:focus,
 .lists .news-title > a:visited {
 	font-size: calc(0.5em + 0.5vw);
-    color: $primary;
+    color: var(--primary);
     transition: all .2s linear;
 }
 
 .lists .news-title > a:hover {
-    color: $orange;
+    color: var(--orange);
 }
 
 .lists .news-details {
     font-weight: 500;
-    color: $dark;
+    color: var(--dark);
 }
 
 .lists .news-header-box {
@@ -163,16 +163,16 @@ article > header {
     font-size: 20px;
 
     > a {
-        color: $primary;
+        color: var(--primary);
         transition: all .2s linear;
     }
     > a:hover {
-        color: $orange;
+        color: var(--orange);
     }
 }
 
 .card-subtitle {
-    color: $gray;
+    color: var(--gray);
     font-weight: 500;
 }
 
@@ -181,12 +181,12 @@ article > header {
 }
 
 .card-author > a {
-    color: $dark;
+    color: var(--dark);
     transition: all .2s linear;
 }
 
 .card-author > a:hover {
-    color: $orange;
+    color: var(--orange);
 }
 
 @media (max-width: 992px) {

@@ -18,8 +18,8 @@ html {
 
 body {
     font-family: "Red Hat Text", sans-serif;
-    background-color: $white;
-    color: $dark;
+    background-color: var(--white);
+    color: var(--dark);
     overflow-x: hidden;
 }
 

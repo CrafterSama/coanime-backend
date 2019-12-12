@@ -1,6 +1,6 @@
 .footer {
-    background-color: #091329;
-    color: #fff;
+    background-color: var(--dark);
+    color: var(--white);
 }
 
 .footer__content {
@@ -15,11 +15,11 @@
     }
 
     a {
-        color: #fff;
+        color: var(--white);
         text-decoration: none;
 
         &:hover, &:focus, &:visited, &:active {
-        color: #fff;
+        color: var(--white);
         text-decoration: none;
         }
     }

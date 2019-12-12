@@ -1,39 +1,38 @@
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Red+Hat+Text:400,400i,500,500i,700,700i&display=swap');
+:root {
+    // Colors
+    --blue: #4284C1;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #E04300;
+    --orange: #ed6a00;
+    --light-orange: #FF9900;
+    --yellow: #FFB800;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #3FB3D3;
+    --white: #fff;
+    --gray: #6E727B;
+    --gray-dark: #4F4F5D;
+    --primary: #00607A;
+    --secondary: #6E727B;
+    --success: #28a745;
+    --info: #4284C1;
+    --warning: #FF9900;
+    --danger: #E04300;
+    --light: #DEDEDE;
+    --dark: #08081C;
 
-// Colors
-$blue: #4284C1;
-$indigo: #6610f2;
-$purple: #6f42c1;
-$pink: #e83e8c;
-$red: #E04300;
-$orange: #ed6a00;
-$light-orange: #FF9900;
-$yellow: #FFB800;
-$green: #28a745;
-$teal: #20c997;
-$cyan: #3FB3D3;
-$white: #fff;
-$gray: #6E727B;
-$gray-dark: #4F4F5D;
+    // Breakpoints
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 768px;
+    --breakpoint-md: 992px;
+    --breakpoint-lg: 1080px;
+    --breakpoint-xl: 1366px;
 
-// Colors by gerarchy
-$primary: #00607A;
-$secondary: #6E727B;
-$success: #28a745;
-$info: #4284C1;
-$warning: #FF9900;
-$danger: #E04300;
-$light: #DEDEDE;
-$dark: #132846;
-
-// Breakpoints
-$breakpoint-xs: 0;
-$breakpoint-sm: 768px;
-$breakpoint-md: 992px;
-$breakpoint-lg: 1080px;
-$breakpoint-xl: 1366px;
-
-// Fonts Info
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Red Hat Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    // Fonts
+    --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Red Hat Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}

@@ -17,14 +17,14 @@ a.navbar-brand {
     mask: url(/assets/images/logo-horizontal-white.svg) no-repeat 50% 50%;
     mask-size: auto;
     -webkit-mask-size: auto;
-    background-color: #ED6A00;
+    background-color: var(--orange);
     transition: all .5s ease;
 }
 
 .navbar-default {
     .navbar-brand {
         &:hover, &:focus {
-        background-color: #ED6A00;
+        background-color: var(--orange);
         }
     }
 

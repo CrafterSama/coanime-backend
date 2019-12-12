@@ -61,7 +61,7 @@
     }
 
     .info__news-category, .info__news-title {
-        color: $white;
+        color: var(--white);
     }
 
     .info__news-title a {
@@ -98,35 +98,35 @@
     }
 
     h2.info__news-title > a {
-        color: $white;
+        color: var(--white);
         transition: all .2s linear;
     }
 
     h2.info__news-title > a:hover {
-        color: $white;
+        color: var(--white);
     }
 
     h4.info__news-sub-title {
         font-weight: 500;
-        color: $white;
+        color: var(--white);
         font-size: 18px;
     }
 
     .item__info {
         p {
             margin-bottom: 0;
-            color: $white;
+            color: var(--white);
             font-weight: 500;
 
             .info__person {
                 margin-right: 10px;
 
                 > a {
-                    color: $white;
+                    color: var(--white);
                     transition: all .2s linear;
                 }
                 > a:hover {
-                    color: $white;
+                    color: var(--white);
                 }
             }
         }
@@ -139,8 +139,8 @@
     }
 
     &:nth-child(3) .item__info {
-        color: $dark;
-        background-color: $white;
+        color: var(--dark);
+        background-color: var(--white);
     }
 }
 
@@ -150,46 +150,46 @@
     margin-bottom: 5px;
 
     > a {
-        color: $white;
+        color: var(--white);
         transition: all .2s linear;
     }
     > a:hover {
-        color: $white;
+        color: var(--white);
     }
 }
 
 .recentPost .box:nth-child(3) {
     h2.info__news-title, h4.info__news-sub-title {
         /*margin: 0;*/
-        color: $primary;
+        color: var(--primary);
         text-shadow: none;
     }
 
     h2.info__news-title > a {
-        color: $primary;
+        color: var(--primary);
         font-weight: 500;
         transition: all .2s linear;
         text-shadow: none;
     }
 
     h2.info__news-title > a:hover {
-        color: $orange;
+        color: var(--orange);
     }
 
     .item__info p {
         margin-top: 5px;
-        color: $dark;
+        color: var(--dark);
         text-shadow: none;
 
         .info__person {
                 margin-right: 10px;
 
                 > a {
-                    color: $dark;
+                    color: var(--dark);
                     transition: all .2s linear;
                 }
                 > a:hover {
-                    color: $orange;
+                    color: var(--orange);
                 }
             }
     }
@@ -270,12 +270,12 @@
     .recentPost .box {
         .info__news-title a {
         font-size: 18px;
-        color: $white;
+        color: var(--white);
         }
 
         .info__news-category {
         font-size: 14px;
-        color: $white;
+        color: var(--white);
         font-weight: bold;
         }
 
@@ -291,12 +291,12 @@
 
         &:nth-child(3) {
         .item__info {
-            color: $white;
+            color: var(--white);
             background: transparent;
         }
 
         h2.info__news-title, .info__news-title a, h4.info__news-sub-title, .item__info p {
-            color: $white;
+            color: var(--white);
         }
         }
     }

@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require('laravel-mix')
 
 const { distAssets } = require('./package.json') // TODO: Usar .min al terminar etapa de pruebas
 
@@ -14,7 +14,7 @@ const { distAssets } = require('./package.json') // TODO: Usar .min al terminar 
  */
 
 mix.js('resources/js/app.js', 'public/assets/js')
-  .sass('resources/sass/coanime.scss', 'public/assets/css');
+  .sass('resources/sass/coanime.scss', 'public/assets/css')
 
 // TODO: Mover CSS la carpeta flat a sass.
 mix.copy('resources/flat/css/*.css', 'public/assets/css')
@@ -24,7 +24,6 @@ mix.copy('resources/images/*.gif', 'public/assets/images')
 mix.copy('resources/images/*.svg', 'public/assets/images')
 
 // Usar .extract al corregir el bug que lo impide y dejar de usar los js en distAssets
-
 
 /*
  |--------------------------------------------------------------------------

@@ -6,11 +6,11 @@ import TimeAgo from './TimeAgo'
 import Particles from './Particles'
 
 [
-    TimeAgo,
-    AnimeToday,
-    AllPosts,
-    Error404,
-    Particles
+  TimeAgo,
+  AnimeToday,
+  AllPosts,
+  Error404,
+  Particles
 ].forEach(c => {
-    Vue.component(c.name, c)
+  Vue.component(c.name, c)
 })

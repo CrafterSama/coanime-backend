@@ -3,15 +3,15 @@
 </template>
 
 <script>
-import moment from "moment";
-import "moment/locale/es";
+import moment from 'moment'
+import 'moment/locale/es'
 
 export default {
-  name: "TimeAgo",
+  name: 'TimeAgo',
   computed: {
     date() {
-      return moment(this.$slots.default[0].text).fromNow();
+      return moment(this.$slots.default[0].text).fromNow()
     }
   }
-};
+}
 </script>

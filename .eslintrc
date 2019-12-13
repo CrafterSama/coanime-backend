@@ -37,7 +37,7 @@
         ],
         "vue/html-indent": [
             "error",
-            4
+            2
         ]
     }
 }

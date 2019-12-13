@@ -1,27 +1,27 @@
 <template>
   <div class="particles">
-    <div id="particles-js"></div>
+    <div id="particles-js" />
   </div>
 </template>
 
 <script>
-import "particles.js";
+import 'particles.js'
 export default {
-  name: "particles",
+  name: 'Particles',
   mounted() {
-    this.initParticles();
+    this.initParticles()
   },
   methods: {
     initParticles() {
-      window.particlesJS("particles-js", {
+      window.particlesJS('particles-js', {
         particles: {
           number: { value: 50, density: { enable: false, value_area: 10000 } },
-          color: { value: "#ed6a00" },
+          color: { value: '#ed6a00' },
           shape: {
-            type: "circle",
-            stroke: { width: 0, color: "#000000" },
+            type: 'circle',
+            stroke: { width: 0, color: '#000000' },
             polygon: { nb_sides: 5 },
-            image: { src: "img/github.svg", width: 100, height: 100 }
+            image: { src: 'img/github.svg', width: 100, height: 100 }
           },
           opacity: {
             value: 0.3,
@@ -36,26 +36,26 @@ export default {
           line_linked: {
             enable: false,
             distance: 150,
-            color: "#ed6a00",
+            color: '#ed6a00',
             opacity: 0.4,
             width: 1
           },
           move: {
             enable: true,
             speed: 3,
-            direction: "none",
+            direction: 'none',
             random: false,
             straight: false,
-            out_mode: "out",
+            out_mode: 'out',
             bounce: false,
             attract: { enable: false, rotateX: 600, rotateY: 1200 }
           }
         },
         interactivity: {
-          detect_on: "canvas",
+          detect_on: 'canvas',
           events: {
-            onhover: { enable: true, mode: "repulse" },
-            onclick: { enable: true, mode: "push" },
+            onhover: { enable: true, mode: 'repulse' },
+            onclick: { enable: true, mode: 'push' },
             resize: true
           },
           modes: {
@@ -73,10 +73,10 @@ export default {
           }
         },
         retina_detect: true
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>

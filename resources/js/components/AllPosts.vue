@@ -13,7 +13,7 @@
         <article v-for="article in articles.data" :key="article.id" class="card">
           <figure class="card-img-top">
             <a :href="url('posts', article.slug)">
-              <img :src="postImage(article.image)" :alt="article.title" />
+              <img :src="postImage(article.image)" :alt="article.title">
             </a>
           </figure>
           <header class="card-body">
@@ -57,62 +57,62 @@
   </div>
 </template>
 <script>
-import TimeAgo from "./TimeAgo";
+import TimeAgo from './TimeAgo'
 
 export default {
-  name: "AllPosts",
+  name: 'AllPosts',
   components: {
     [TimeAgo.name]: TimeAgo
   },
-  data: function() {
+  data: function () {
     return {
-      articles: "Without Articles",
+      articles: 'Without Articles',
       boxes: true,
       loading: false,
-      color: "#ED6A00"
-    };
+      color: '#ED6A00'
+    }
   },
   mounted() {
-    this.getPosts();
+    this.getPosts()
   },
   methods: {
     url(type, slug) {
-      if (type === "posts") {
-        return `/posts/${slug}`;
+      if (type === 'posts') {
+        return `/posts/${slug}`
       }
-      if (type === "category") {
-        return `/categorias/${slug}`;
+      if (type === 'category') {
+        return `/categorias/${slug}`
       }
-      if (type === "user") {
-        return `/users/profile/${slug}`;
+      if (type === 'user') {
+        return `/users/profile/${slug}`
       }
     },
     postImage(str) {
-      return str.replace("1920", "480");
+      return str.replace('1920', '480')
     },
     getPosts() {
-      this.loading = true;
+      this.loading = true
       fetch(`https://coanime.net/api/v1/articles`)
         .then(res => res.json())
         .then(response => {
-          this.articles = response;
-          this.loading = false;
+          this.articles = response
+          this.loading = false
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
     },
     getMorePosts(url) {
-      this.loading = true;
+      this.loading = true
       fetch(`${url}`)
         .then(res => res.json())
         .then(response => {
-          let items = this.articles.data;
-          items.push(...response.data);
-          let data = { ...response, data: items };
-          this.articles = data;
-          this.loading = false;
+          let items = this.articles.data
+          items.push(...response.data)
+          let data = { ...response, data: items }
+          this.articles = data
+          this.loading = false
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
     }
   }
-};
+}
 </script>

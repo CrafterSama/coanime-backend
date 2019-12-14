@@ -5,7 +5,7 @@
 
 #news h3.section-title {
 	display: grid;
-	grid-template-columns: 30px auto 35px;
+	grid-template-columns: 30px auto 24px;
 	align-items: center;
 }
 
@@ -16,7 +16,21 @@
 }
 
 #news h3.section-title > .put-to-right {
-	cursor: pointer;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    overflow: hidden;
+    justify-content: flex-start;
+    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#news h3.section-title > .put-to-right.boxes {
+    justify-content: flex-end;
+}
+
+.put-to-right > .svg-inline--fa {
+    color: var(--orange);
 }
 
 .orange-border-bottom {
@@ -72,52 +86,13 @@ article > header {
 	grid-template-columns: 1fr;
 }
 
-.lists .news {
+.lists .card {
 	display: grid;
 	grid-template-columns: 320px auto;
 	height: 180px;
 	margin: 10px 0 0;
 	box-shadow: 0px 1px 3px var(--light);
 	border-radius: 3px;
-}
-
-.lists .news-image {
-	margin: 0;
-    max-height: 180px;
-    position: relative;
-}
-
-.lists .news-image img {
-    height: 180px;
-    object-fit: cover;
-    object-position: center;
-    width: 320px;
-}
-
-.lists .news-title > a,
-.lists .news-title > a:focus,
-.lists .news-title > a:visited {
-	font-size: calc(0.5em + 0.5vw);
-    color: var(--primary);
-    transition: all .2s linear;
-}
-
-.lists .news-title > a:hover {
-    color: var(--orange);
-}
-
-.lists .news-details {
-    font-weight: 500;
-    color: var(--dark);
-}
-
-.lists .news-header-box {
-	padding: 10px 15px 10px 10px;
-}
-
-.lists .news-header-box .material-icons {
-    position: relative;
-    top: 7px;
 }
 
 .card {
@@ -192,5 +167,33 @@ article > header {
 @media (max-width: 992px) {
 	#news h3.section-title > .put-to-right {
 		display: none;
-	}
+    }
+
+    .lists {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+        -webkit-column-gap: 1.25rem;
+        -moz-column-gap: 1.25rem;
+        column-gap: 1.25rem;
+        orphans: 1;
+        widows: 1;
+        display: unset;
+        grid-template-columns: unset;
+    }
+
+    .lists .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.25rem;
+        height: unset;
+    }
 }

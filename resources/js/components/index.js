@@ -1,16 +1,22 @@
 import Vue from 'vue'
 import AllPosts from './AllPosts'
 import AnimeToday from './AnimeToday'
+import EcmaTitle from './EcmaTitle'
 import Error404 from './Error404'
-import TimeAgo from './TimeAgo'
 import Particles from './Particles'
+import Post from './Post'
+import TimeAgo from './TimeAgo'
+import VueMoment from './VueMoment'
 
 [
-    TimeAgo,
     AnimeToday,
     AllPosts,
+    EcmaTitle,
     Error404,
-    Particles
+    Post,
+    Particles,
+    TimeAgo,
+    VueMoment
 ].forEach(c => {
     Vue.component(c.name, c)
 })

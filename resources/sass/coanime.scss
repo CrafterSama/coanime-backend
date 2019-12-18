@@ -7,7 +7,10 @@
 @import "_carousel.scss";
 @import "_goto-recents.scss";
 @import "_titles-today.scss";
+@import "_title.scss";
 @import "_recents.scss";
+@import "_post.scss";
+@import "_loading-kawaii.scss";
 @import "_all-posts.scss";
 @import "_footer.scss";
 
@@ -51,7 +54,7 @@ div.posts-sidebar > div.search-box {
 
 .search-box {
   padding: 15px 15px;
-  background-color: var(--negative-text);
+  background-color: var(--white);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -62,7 +65,7 @@ thead {
 }
 
 .lists.col-md-12 {
-  background-color: var(--negative-text);
+  background-color: var(--white);
   border-radius: 5px;
   padding: 0px;
 }
@@ -118,7 +121,7 @@ thead {
 h3 {
   &.titles-name {
     background-color: var(--green);
-    color: var(--negative-text);
+    color: var(--white);
     border: 1px solid var(--green);
     padding: 5px;
     margin: 0;
@@ -130,7 +133,7 @@ h3 {
 
   &.title-name {
     background-color: var(--green);
-    color: var(--negative-text);
+    color: var(--white);
     border: 1px solid var(--green);
     padding: 5px;
     margin: 0;
@@ -139,7 +142,7 @@ h3 {
     border-top-right-radius: 5px;
 
     &:hover {
-      color: var(--negative-text);
+      color: var(--white);
     }
   }
 }
@@ -184,7 +187,7 @@ h3 {
   padding: 4px 12px;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  color: var(--negative-text);
+  color: var(--white);
   text-transform: uppercase;
   font-size: 14px;
   font-weight: bold;
@@ -285,7 +288,7 @@ h3 {
 }
 
 .title-details.col-md-12 {
-  background-color: var(--negative-text);
+  background-color: var(--white);
   padding: 0px;
   border-radius: 5px;
 }
@@ -434,12 +437,12 @@ body::after {
 
 .new-layout {
   .post-content {
-    background-color: var(--negative-text);
+    background-color: var(--white);
     padding: 0;
   }
 
   .post, .post-inside {
-    background-color: var(--negative-text);
+    background-color: var(--white);
     box-shadow: none;
     margin: 0 auto;
     overflow: hidden;
@@ -462,7 +465,7 @@ body::after {
   }
 
   .post-details {
-    background: var(--negative-text);
+    background: var(--white);
     color: #555;
     font-size: 1.7rem;
     padding: 10px 10px 21px 260px;
@@ -544,9 +547,9 @@ h2.post-subtitle {
 }
 
 .post, .post-inside {
-  background-color: var(--negative-text);
+  background-color: var(--white);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  margin: 0 auto 15px;
+  margin: 0 auto 0px;
   overflow: hidden;
   transition: box-shadow 0.5s ease-in-out;
   width: 100%;
@@ -558,23 +561,16 @@ h2.post-subtitle {
 fieldset {
   &.sinopsis {
     padding: 15px;
-    background-color: #fff;
-    font-style: italic;
-    border-top: 2px solid #ededed;
-    margin-top: 20px;
-    border-bottom: 2px solid #ededed;
+    margin-top: 10px;
   }
 
   legend {
-    background-color: rgba(255, 255, 255, 1);
-    border-left: 2px solid #ededed;
     display: block;
     margin-left: 15px;
     margin-bottom: -0.5px;
     padding: 0 15px;
     max-width: 130px;
     border-radius: 5px;
-    border-right: 2px solid #ededed;
     font-size: 18px;
     text-align: center;
   }
@@ -669,7 +665,7 @@ fieldset {
 
 .post-body {
   padding: 25px;
-  background-color: var(--negative-text);
+  background-color: var(--white);
   max-width: 700px;
   margin-left: 100px;
 
@@ -719,7 +715,7 @@ h2 {
 }
 
 .post-footer, .post-details {
-  background: var(--negative-text);
+  background: var(--white);
   border-top: 1px dotted rgba(215, 215, 215, 0.9);
   color: #555;
   font-size: 1.7rem;
@@ -728,7 +724,7 @@ h2 {
 
 .post-author {
   a {
-    color: var(--negative-text);
+    color: var(--white);
     font-weight: bold;
   }
 
@@ -760,7 +756,7 @@ h2 {
   margin: 20px 0 0 0;
   border-radius: 4px;
   position: relative;
-  background-color: var(--negative-text);
+  background-color: var(--white);
   min-height: 240px;
   max-width: 700px;
   margin-left: 100px;
@@ -962,7 +958,7 @@ blockquote.twitter-tweet {
 }
 
 .home-encyclopedia {
-  background-color: var(--negative-text);
+  background-color: var(--white);
   border-radius: 5px;
 }
 
@@ -1021,7 +1017,7 @@ blockquote.twitter-tweet {
 
   .titles-body {
     background-color: rgba(0, 0, 0, 0.5);
-    color: var(--negative-text);
+    color: var(--white);
   }
 
   .title-caption {
@@ -1029,12 +1025,12 @@ blockquote.twitter-tweet {
   }
 
   .title-type {
-    color: var(--negative-text);
+    color: var(--white);
   }
 }
 
 .title-box {
-  background: var(--negative-text);
+  background: var(--white);
   box-shadow: 0 1px 2.5px rgba(0, 0, 0, 0.12);
   margin: 15px 0px;
   border-radius: 6px;
@@ -1052,7 +1048,7 @@ blockquote.twitter-tweet {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--negative-text);
+    background-color: var(--white);
   }
 
   .img-responsive {
@@ -1078,7 +1074,7 @@ blockquote.twitter-tweet {
   margin-bottom: 15px;
   position: relative;
   background-color: var(--green);
-  color: var(--negative-text);
+  color: var(--white);
   border: 1px solid var(--green);
 
   .pull-right {
@@ -1088,7 +1084,7 @@ blockquote.twitter-tweet {
 
   h4 {
     margin: 0;
-    color: var(--negative-text);
+    color: var(--white);
   }
 }
 
@@ -1175,7 +1171,7 @@ blockquote.twitter-tweet {
 
 h3.titles-name {
   background-color: var(--green);
-  color: var(--negative-text);
+  color: var(--white);
   border: 1px solid var(--green);
   padding: 5px;
   margin: 0;
@@ -1183,10 +1179,10 @@ h3.titles-name {
   overflow: hidden;
 
   a {
-    color: var(--negative-text);
+    color: var(--white);
 
     &:hover {
-      color: var(--negative-text);
+      color: var(--white);
     }
   }
 }
@@ -1205,7 +1201,7 @@ h3.other-info-title.col-md-12 {
   -moz-box-shadow: 0px 0px 2px var(--text);
   -webkit-box-shadow: 0px 0px 2px var(--text);
   box-shadow: 0px 0px 2px var(--text);
-  background-color: var(--negative-text);
+  background-color: var(--white);
 }
 
 .lists h3.other-info-title.col-md-12 {
@@ -1294,14 +1290,14 @@ div {
     filter: alpha(opacity = 0);
     opacity: 0;
     outline: none;
-    background: var(--negative-text);
+    background: var(--white);
     cursor: inherit;
     display: block;
   }
 }
 
 .btn-select {
-  background-color: var(--negative-text) !important;
+  background-color: var(--white) !important;
   color: var(--dark-blue) !important;
   border: 2px solid var(--light-gray) !important;
 }
@@ -1461,7 +1457,7 @@ div {
 
   span {
     padding: 8px;
-    background: var(--negative-text);
+    background: var(--white);
     box-shadow: -1px 3px 4px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
   }
@@ -1490,7 +1486,7 @@ div {
   .active > {
     a, span, a:hover, span:hover, a:focus, span:focus {
       z-index: 2;
-      color: var(--negative-text);
+      color: var(--white);
       background-color: var(--orange);
       border-color: transparent;
       cursor: default;
@@ -1530,7 +1526,7 @@ div {
 
   li > {
     a:hover, span:hover, a:focus, span:focus {
-      color: var(--negative-text);
+      color: var(--white);
       background-color: var(--brown);
       border-color: transparent;
     }
@@ -1582,7 +1578,7 @@ div {
       height: 0;
       border-top: 17px solid transparent;
       border-bottom: 17px solid transparent;
-      border-left: 10px solid var(--negative-text);
+      border-left: 10px solid var(--white);
       position: absolute;
       top: 50%;
       margin-top: -17px;
@@ -1663,12 +1659,12 @@ div {
 }
 
 .btn-success {
-  color: var(--negative-text);
+  color: var(--white);
   background-color: var(--green);
   border-color: var(--green);
 
   &:hover {
-    color: var(--negative-text);
+    color: var(--white);
     background-color: #87b340;
     border-color: #87b340;
   }
@@ -1762,26 +1758,26 @@ div {
 
 h4 > a {
   &.btn-warning, &.btn-info, &.btn-danger, &.btn-default, &.btn, &.btn-warning:hover, &.btn-info:hover, &.btn-danger:hover, &.btn-default:hover, &.btn:hover {
-    color: var(--negative-text);
+    color: var(--white);
   }
 }
 
 .btn-warning, .open .dropdown-toggle.btn-warning {
-  color: var(--negative-text);
+  color: var(--white);
   background-color: var(--orange);
   border-color: var(--orange);
 }
 
 .btn-warning {
   &:hover, &:focus, &:active, &.active {
-    color: var(--negative-text);
+    color: var(--white);
     background-color: var(--orange);
     border-color: var(--orange);
   }
 }
 
 .open .dropdown-toggle.btn-warning {
-  color: var(--negative-text);
+  color: var(--white);
   background-color: var(--orange);
   border-color: var(--orange);
 }
@@ -1794,7 +1790,7 @@ div {
 
 .mce-stack-layout {
   border: none !important;
-  background-color: var(--negative-text);
+  background-color: var(--white);
   border-radius: 5px;
 }
 
@@ -1901,7 +1897,7 @@ div.mce-edit-area {
 }
 
 .btn-danger {
-  color: var(--negative-text);
+  color: var(--white);
   background-color: var(--red);
   border-color: var(--red);
   font-weight: 700;

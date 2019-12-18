@@ -91,7 +91,7 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     Route::get('profile/{id}/magazine', 'UserController@magazineProfile');
     Route::get('profile/{id}/people', 'UserController@peopleProfile');
     Route::get('profile/{id}/events', 'UserController@eventsProfile');
-    Route::get('ramdon-image', 'PostController@getRandomPostImage');
+    Route::get('random-image', 'PostController@getRandomPostImage');
     Route::get('random-image-title/{slug}', 'PostController@getRandomPostImageByTitle');
 
     /** Posts Endpoints */

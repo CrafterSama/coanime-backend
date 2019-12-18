@@ -93,7 +93,7 @@ class PostController extends Controller
             ->where('approved', 'yes')
             ->where('draft', '0')
             ->where('category_id', '!=', 10)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW()')
+            ->where('postponed_to' <= Carbon::now())
             ->orWhere('postponed_to', null)
             ->orderBy('postponed_to', 'desc')
             ->simplePaginate(8);
@@ -462,9 +462,8 @@ class PostController extends Controller
                 return response()->json(array('link' => $postImage), 200);
             } catch (Exception $e) {
                 http_response_code(404);
-            }
-        else :
-                echo 'No Image Sended';
+            } else :
+            echo 'No Image Sended';
         endif;
     }
 
@@ -679,7 +678,7 @@ class PostController extends Controller
         $newArticles = [];
 
         if (Post::where('slug', '=', $slug)->pluck('id')->count() > 0) {
-            $id = Post::where('slug', 'like', $slug)->pluck('id');
+            $id = Post::where('slug', '=', $slug)->pluck('id');
             $post = Post::with('users', 'categories', 'titles', 'tags')->find($id);
 
             foreach ($post->tags as $t) :
@@ -712,7 +711,7 @@ class PostController extends Controller
                     $postByTags = \DB::table('post_tag')->where('tag_id', $tag_id)->whereNotIn('post_id', [$post->id])->orderBy('post_id', 'desc')->get()->pluck('post_id');
 
                     foreach ($postByTags as $item) {
-                        array_push($relateds, Post::select('id', 'title', 'slug', 'image')->find($item));
+                        array_push($relateds, Post::select('id', 'category_id', 'title', 'slug', 'image')->with('categories')->find($item));
                     }
                     if (count($relateds) > 0) {
                         if (count($relateds) > 3) {

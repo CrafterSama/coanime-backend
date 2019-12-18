@@ -22,7 +22,13 @@
         "timeago.js": "^4.0.1",
         "vue": "^2.6.10",
         "vue-agile": "^1.0.11",
+        "vue-content-loader": "^0.2.2",
+        "vue-content-placeholders": "^0.2.1",
+        "vue-element-loading": "^1.1.5",
         "vue-glide-js": "^1.3.14",
+        "vue-mailchimp-subscribe": "^1.1.0",
+        "vue-parallaxy": "^1.1.1",
+        "vue-responsive-components": "^0.2.3",
         "vue-spinners-css": "^1.1.3"
     },
     "devDependencies": {

@@ -20,6 +20,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 {{-- Relavants Articles in Slide Carousel --}}
 <div class="relevants-box">
     <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-ride="carousel">
@@ -105,7 +106,7 @@
     </div>
 </div>
 
-{{-- Videos Posts --}}
+{{-- TODO: Videos Posts --}}
 
 
 
@@ -113,7 +114,7 @@
 <anime-today></anime-today>
 
 
-{{-- Hispanic Events and Expos --}}
+{{-- TODO: Hispanic Events and Expos --}}
 
 
 {{-- All Articles in Grid Layout with Infinite Scroll --}}

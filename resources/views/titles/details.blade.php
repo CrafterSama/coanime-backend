@@ -6,13 +6,14 @@
 @if(empty($title->images->name))
     @section('twitter-image', 'https://coanime.net//images/no_image.jpg')
 @else
-    @section('twitter-image', 'https://coanime.net/images/encyclopedia/titles/' . $title->images->name)
+    @section('twitter-image', $title->images->name)
 @endif
 
 @extends('layouts.app')
 
 @section('content')
-<div class="title-details col-md-12">
+<ecma-title slug="{{ $title->slug }}" type="{{ $title->type->slug }}"></ecma-title>
+{{-- <div class="title-details col-md-12">
     <h3 class="title-name text-center">
         <a href="/ecma/titulos" class="btn btn-warning btn-sm pull-left"><i class="fa fa-chevron-left"></i> Volver</a>
         <span id="title-name">{{$title->name}}</span>
@@ -142,14 +143,14 @@
                     @if(empty($title->trailer_url))
                         <div id="title-trailer" class="embed-responsive embed-responsive-16by9"></div>
                     @else
-                        {{-- <div class="embed-responsive embed-responsive-16by9">
+                        <div class="embed-responsive embed-responsive-16by9">
                             <iframe src="{{str_replace('https://www.youtube.com/watch?v=','https://www.youtube.com/embed/', $title->trailer_url)}}" frameborder="0" allowfullscreen></iframe>
-                        </div> --}}
+                        </div>
                         <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="{{str_replace('https://www.youtube.com/watch?v=','', $title->trailer_url)}}"></div>
                     @endif
                 </div>
             </div>
         @endif
     </div>
-</div>
+</div> --}}
 @endsection

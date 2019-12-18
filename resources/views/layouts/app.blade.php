@@ -31,16 +31,15 @@
 	<meta property="fb:pages" content="127729317274121" />
 	<meta content='all, index, follow' name='robots' />
 
-	<!-- CSRF Token -->
+	{{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @stack('scripts')
 
 	<title>
 	    {{-- config('app.name', 'ECMA - ') --}}
 	    Coanime - @yield('title')
 	</title>
 	@if(Request::segment(1) != 'dashboard')
-		<!— Facebook Pixel Code —>
+		{{-- Facebook Pixel Code --}}
 		<script>
 		!function(f,b,e,v,n,t,s)
 		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -56,9 +55,9 @@
 		<noscript><img height="1" width="1" style="display:none"
 		src="https://www.facebook.com/tr?id=135099553998569&ev=PageView&noscript=1"
 		/></noscript>
-		<!— End Facebook Pixel Code —>
+		{{-- End Facebook Pixel Code --}}
 	@endif
-	<!--  Vendor Styles  -->
+	{{--  Vendor Styles  --}}
 	@if(Request::segment(1) == 'dashboard')
     <link rel="stylesheet" href="/vendor/bootstrap-select/css/bootstrap-select.min.css" />
     <link rel="stylesheet" type="text/css" href="/vendor/selectize/selectize.css" />
@@ -67,13 +66,8 @@
 	@if(Request::segment(1) == 'dashboard' ||  Request::segment(1) == 'posts')
 	<link rel="stylesheet" href="/vendor/sweetalert2/sweetalert2.min.css" />
 	@endif
-	<!-- Styles -->
-	<link defer href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdn.plyr.io/3.5.2/plyr.css" />
-	<link href="/css/animate.css" rel="stylesheet" />
-	{{-- <link href="/css/style.css" rel="stylesheet"> --}}
 
-	<!-- Favicons, for every posible device -->
+	{{-- Favicons, for every posible device --}}
 	<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
@@ -92,21 +86,15 @@
 	<meta name="theme-color" content="#ffffff">
 
 
+    @stack('scripts')
 
-	<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-beta.2/lazyload.js"></script>
-	<script src="https://cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-	<script>
-		let images = document.querySelectorAll(".article-image");
-		lazyload(images);
-	</script>
-
-	<!-- Feeds -->
-	{!!Feed::link(url('feed'), 'rss', 'Coanime.net Feeds', 'es')!!}
+	{{-- REVIEW: Feeds --}}
+	{!! Feed::link(url('feed'), 'rss', 'Coanime.net Feeds', 'es') !!}
 
 
 	{{--
 	====================================================================
-	NUEVO SCAFOLDING: CSS
+	NEW SCAFOLDING: CSS
 	--------------------------------------------------------------------
 	--}}
 
@@ -120,106 +108,24 @@
 
 
 	{{--
-	FIXME: Eliminar duplicados del anterior
+	FIX ME: delete duplicates from the before layout
 	====================================================================
 	--}}
 
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow fixed-top">
-        <div class="container-lg">
-            <a class="navbar-brand" href="/"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    @include('common.navbar')
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/posts">Articulos <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Enciclopedia
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/ecma/titulos">Titulos</a>
-                            <a class="dropdown-item" href="/ecma/personas">Personas</a>
-                            <a class="dropdown-item" href="/ecma/revistas">Revistas</a>
-                            <a class="dropdown-item" href="/ecma/empresas">Empresas</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/ecma/generos">Generos</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/eventos">Eventos</a>
-                    </li>
-                </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/login') }}">Participa</a>
-                        </li>
-                    @else
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                @if(empty(Auth::user()->slug))
-                                    <a class="dropdown-item" href="{{route('profile', Auth::user()->id)}}"><i class="fas fa-user"></i> Perfil</a>
-                                @else
-                                    <a class="dropdown-item" href="{{route('profile', Auth::user()->slug)}}"><i class="fas fa-user"></i> Perfil</a>
-                                @endif
-                                @if(Auth::user()->isAdmin() || Auth::user()->isMod())
-                                    <a class="dropdown-item" href="{{route('admin')}}"><i class="fas fa-tachometer-alt "></i> Dashboard</a>
-                                @endif
-                                @if(Auth::user()->isAdmin())
-                                    <a class="dropdown-item" href="{{route('config')}}"><i class="fas fa-cogs"></i> Configuración</a>
-                                @endif
-                                <a class="dropdown-item" href="{{ url('/logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt ut"></i> Salir
-                                </a>
-                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </ul>
-                        </li>
-                    @endif
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div class="content-box">
-		<!-- Espacio para prubas de vue -->
 		<div id="app">
             <main class="wrapper">
                 @yield('content')
             </main>
 		</div>
     </div>
-	<!-- /div -->
-	<footer class="footer">
-        <div class="footer__content">
-            <div class="content__items">
-                <div class="items__others-links">
-                    <p>Síguenos <a href="https://www.facebook.com/Coanime/"><img src="{!! asset('images/facebook-white.svg') !!}" class="" alt="" /></a> <a href="https://twitter.com/coanime/"><img src="{!! asset('images/twitter-white.svg') !!}" class="" alt="" /></a> <a href="https://www.instagram.com/coanimenet/"><img src="{!! asset('images/instagram-white.svg') !!}" class="" alt="" /></a></p>
-                </div>
-                <div class="items__copyright">
-                    <p>&copy; <script>new Date().getFullYear()</script> Coanime. Todos los derechos reservados</p>
-                    <p class="footer-links"><a href="/page/terminos-de-uso-y-aviso-legal">Términos de uso y Aviso Legal</a> | <a href="/page/politica-de-privacidad">Politica de Privacidad</a></p>
-                </div>
-            </div>
-        </div>
-    </footer>
+
+    @include('common.footer')
 
 	{{--
 	====================================================================
@@ -249,33 +155,12 @@
 	<script defer>
 		//const player = new Plyr('#player');
 	</script>
-	@if(Request::segment(1) == 'dashboard')
-		<script defer src="/vendor/bootstrap-validator/validator.min.js"></script>
-		<script defer src="/vendor/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
-        <script defer src="/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-        <script type="text/javascript" src="/vendor/selectize/selectize.js"></script>
-		<script defer src="/vendor/tinymce/tinymce.min.js"></script>
-	@endif
-	@if( Request::segment(1) == 'posts' ||  Request::segment(1) == 'dashboard')
-		<script src="/vendor/sweetalert2/sweetalert2.js"></script>
-
-		@include('sweet::alert')
-		@include('dashboard.partials.tinymce')
-	@endif
-	@if(Request::segment(1) == 'dashboard' || Request::segment(1) == 'register')
-		@include('dashboard.partials.scripts')
-        <script defer src='https://www.google.com/recaptcha/api.js'></script>
-	@endif
 	@php
 		$d = new DateTime();
 	@endphp
 	@if($d->format('m-d') >= '12-01' && $d->format('m-d') <= '12-31')
 		<script src="/js/nevada.min.js"></script>
 	@endif
-	@if(Request::segment(2) == 'titulos')
-		@include('partials.scripts')
-	@endif
-    @if(Request::segment(1) != 'dashboard')
 	<!-- Facebook SDK -->
 	<div id="fb-root"></div>
 	<script defer async>
@@ -319,6 +204,5 @@
 		}(document, "script", "twitter-wjs"));
 	</script>
     <!-- / End Twitter Widget -->
-@endif
 </body>
 </html>

@@ -105,22 +105,6 @@ class Helper extends Model
         else :
             return 'https://coanime.net/images/no_post_image.jpg';
         endif;
-
-        /*$dom = new \DOMDocument('1.0','UTF-8');
-
-		$dom->loadHTML($string, LIBXML_COMPACT | LIBXML_HTML_NOIMPLIED | LIBXML_NONET | LIBXML_HTML_NODEFDTD);
-
-		if ($dom->validate()) {
-			if ($dom->getElementByTagName('img')) {
-				//Obtener todas las imágenes
-				$img_nodelist = $dom->getElementsByTagName('img');
-
-				//Obtener la primera Imagen
-				return $img_nodelist[0]->getAttribute('src');
-			} else {
-				return 'https://coanime.net/images/no_post_image.jpg';
-			}
-		}*/
     }
 
     public static function excerpt($value, $words = 20, $end = '...')

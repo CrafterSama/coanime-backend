@@ -36,7 +36,8 @@
 
 @extends('layouts.app')
 @section('content')
-<div class="post-content col-md-12" id="post-article" data-id="{{ $post->id }}">
+<post post-slug="{{ $post->slug }}"></post>
+{{-- <div class="post-content col-md-12" id="post-article" data-id="{{ $post->id }}">
     <div class="posts-wrapper col-md-12">
         <div class="post-inside">
             <div class="post-top-image">
@@ -65,12 +66,9 @@
                 @else
                     <time-ago>{{$post->postponed_to}}</time-ago>
                 @endif
-                {{-- <div class="post-socialize">
-                    <div class="sharethis-inline-share-buttons"></div>
-                </div> --}}
             </div>
             <div class="post-body">
-                {!! $post->content !!} {{--$post->titles->count()--}}
+                {!! $post->content !!}
                 <p class="title-tags">
                     <span><i class="fas fa-hashtag orange"></i></span>
                     @forelse($post->tags as $t)
@@ -81,7 +79,6 @@
                 </p>
             </div>
             <div>
-                {{-- $helper->getVideoLink($post->content)['fullsize'] --}}
             </div>
             <div class="post-vote {{ $votes }}">
                 <span class="post-vote-text"><span id="quantity">{{rand(80, 150)}}</span> usuarios indicaron que les gusta este articulo ¿Tu, que opinas?</span>
@@ -162,9 +159,6 @@
                 @endforeach
             @endif
             <div class="post-footer col-md-12">
-                {{-- <div class="row options-toolbar col-md-12 text-left">
-                    <a href="" onclick="history.back()" class="btn btn-warning"><i class="fas fa-chevron-left"></i> Volver</a>
-                </div> --}}
                 @if(count($relateds) > 0)
                     <div class="post-relateds col-md-12 row">
                         <h3>Relacionados al Titulo</h3>
@@ -211,38 +205,8 @@
                 </div>
             </div>
             <div class="post-comments">
-                <div id='vuukle-emote'></div>
-                {{-- <div id="fb-root"></div>
-                <script async defer src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.2&appId=439547086253998&autoLogAppEvents=1"></script>
-                <div class="fb-comments" data-href="https://coanime.net/posts/{{$post->slug}}" data-width="100%" data-numposts="10"></div> --}}
-                <script>
-                    var VUUKLE_CONFIG = {
-                        apiKey: "eb185a7d-b521-441f-a6dd-b74a797be9ad",
-                        articleId: {{$post->id}},
-                    };
-                    // ⛔️ DON'T EDIT BELOW THIS LINE
-                    (function() {
-                        var d = document,
-                            s = d.createElement('script');
-                    s.src = 'https://cdn.vuukle.com/platform.js';
-                    (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                {{-- <div class="disqus-comments">
-                    <div id="disqus_thread"></div>
-                    <script>
-						(function() {
-							var d = document, s = d.createElement('script');
-							s.src = 'https://coanimenet.disqus.com/embed.js';
-							s.setAttribute('data-timestamp', +new Date());
-							(d.head || d.body).appendChild(s);
-						})();
-                    </script>
-                </div> --}}
-
-
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

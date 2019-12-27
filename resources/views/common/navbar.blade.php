@@ -6,31 +6,33 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/posts">Articulos <span class="sr-only">(current)</span></a>
+            <ul class="navbar-nav m-auto d-flex justify-content-around">
+                <li class="nav-item pr-4 mr-5 active">
+                    <a class="nav-link" href="/posts">Articulos</a>
+                </li>
+                <li class="nav-item pr-4 mr-5">
+                    <a class="nav-link" href="/eventos">Eventos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link {{-- dropdown-toggle --}}" href="/ecma/titulos" {{-- id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" --}}>
                     Enciclopedia
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/ecma/titulos">Titulos</a>
                         <a class="dropdown-item" href="/ecma/personas">Personas</a>
                         <a class="dropdown-item" href="/ecma/revistas">Revistas</a>
                         <a class="dropdown-item" href="/ecma/empresas">Empresas</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/ecma/generos">Generos</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/eventos">Eventos</a>
+                    </div> --}}
                 </li>
             </ul>
+            @if(Request::segment(1) == '')
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
             </form>
+            @endif
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
@@ -42,7 +44,7 @@
                         <a class="nav-link" dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ Auth::user()->name }}
                         </a>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-menu shadow" role="menu">
                             @if(empty(Auth::user()->slug))
                                 <a class="dropdown-item" href="{{route('profile', Auth::user()->id)}}"><i class="fas fa-user"></i> Perfil</a>
                             @else

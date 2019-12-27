@@ -24,7 +24,13 @@
                             </div>
                             <ul class="title-info-details overlap-banner">
                                 <li>
-                                    <i class="fas fa-shapes" /> <span><span class="text-strong">Tipo:</span> {{ title.type.name }}</span>
+                                    <i class="fas fa-shapes" />
+                                    <span>
+                                        <span class="text-strong">Tipo:</span>
+                                        <span class="info-details-type">
+                                            <a :href="routes('type', title.type.slug)">{{ title.type.name }}</a>
+                                        </span>
+                                    </span>
                                 </li>
                                 <li>
                                     <i class="fas fa-language" /> <span><span class="text-strong">Otros Títulos:</span> {{ title.other_titles }}</span>
@@ -40,8 +46,13 @@
                                     </span>
                                 </li>
                                 <li>
-                                    <i class="fas fa-tags" /> <span><span class="text-strong">Generos:</span>
-                                        <span v-for="genre in title.generes" :key="genre.id" class="genre-tag">{{ genre.name }}</span></span>
+                                    <i class="fas fa-tags" />
+                                    <span>
+                                        <span class="text-strong">Generos:</span>
+                                        <span v-for="genre in title.generes" :key="genre.id" class="genre-tag">
+                                            <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
+                                        </span>
+                                    </span>
                                 </li>
                                 <li>
                                     <i class="fas fa-list" />
@@ -69,6 +80,7 @@
 import LoadingArticles from './Common/LoadingArticles/LoadingArticles'
 import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
+import { routes } from '../mixins'
 
 export default {
     name: 'EcmaTitle',
@@ -77,6 +89,7 @@ export default {
         [VueMoment.name]: VueMoment,
         [LoadingArticles.name]: LoadingArticles
     },
+    mixins: [routes],
     props: ['type', 'slug'],
     data: function () {
         return {
@@ -93,20 +106,6 @@ export default {
         this.getTitlePosts()
     },
     methods: {
-        url(type, slug) {
-            if (type === 'posts') {
-                return `/posts/${slug}`
-            }
-            if (type === 'category') {
-                return `/categorias/${slug}`
-            }
-            if (type === 'user') {
-                return `/users/profile/${slug}`
-            }
-            if (type === 'genre') {
-                return `/generos/${slug}`
-            }
-        },
         postImage(str) {
             return str.replace('1920', '480')
         },

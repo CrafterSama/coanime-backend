@@ -1,4 +1,5 @@
 import './plugins'
+// import './mixins'
 import './bootstrap'
 import './components' // Componentes globales
 

@@ -27,7 +27,7 @@
                             <time-ago>{{ article.postponed_to }}</time-ago>por
                             <a
                                 class="user-author"
-                                :href="url('user', article.users.slug)"
+                                :href="routes('user', article.users.slug)"
                             >{{ article.users.name }}</a>
                         </p>
                     </div>
@@ -77,7 +77,7 @@
                                                 </p>
                                                 <a
                                                     :href="
-                                                        url(
+                                                        routes(
                                                             'title',
                                                             title.slug,
                                                             title.type.slug
@@ -121,11 +121,11 @@
                                             :key="feature.id"
                                             class="info__relateds"
                                         >
-                                            <a :href="url('posts', feature.slug)">
+                                            <a :href="routes('posts', feature.slug)">
                                                 <div class="info__relateds-image">
                                                     <img
                                                         :src="
-                                                            getPostImage(
+                                                            getPostImageThumb(
                                                                 String(
                                                                     feature.image
                                                                 )
@@ -149,7 +149,7 @@
                                     <i class="fas fa-hashtag" />
                                     <li v-for="tag in article.tags" :key="tag.id">
                                         <a
-                                            :href="url('tag', tag.slug)"
+                                            :href="routes('tag', tag.slug)"
                                             class="tag"
                                         >{{ tag.name }}</a>
                                     </li>
@@ -167,7 +167,7 @@
                                 <div class="info__author">
                                     <p class="info__author-name">
                                         <a
-                                            :href="url('user', article.users.slug)"
+                                            :href="routes('user', article.users.slug)"
                                         >{{ article.users.name }}</a>
                                     </p>
                                     <p class="info__author-ocupation">
@@ -208,7 +208,7 @@
                                             </p>
                                             <a
                                                 :href="
-                                                    url(
+                                                    routes(
                                                         'title',
                                                         title.slug,
                                                         title.type.slug
@@ -252,11 +252,11 @@
                                         :key="feature.id"
                                         class="info__relateds"
                                     >
-                                        <a :href="url('posts', feature.slug)">
+                                        <a :href="routes('posts', feature.slug)">
                                             <div class="info__relateds-image">
                                                 <img
                                                     :src="
-                                                        getPostImage(
+                                                        getPostImageThumb(
                                                             String(feature.image)
                                                         )
                                                     "
@@ -286,10 +286,10 @@
                                     class="info__features-box"
                                 >
                                     <div class="info__features-image">
-                                        <a :href="url('posts', related.slug)">
+                                        <a :href="routes('posts', related.slug)">
                                             <img
                                                 :src="
-                                                    getPostImage(
+                                                    getPostImageThumb(
                                                         String(related.image)
                                                     )
                                                 "
@@ -298,10 +298,10 @@
                                         </a>
                                     </div>
                                     <p class="info__features-category">
-                                        <a :href="url('category', related.categories.slug)">{{ related.categories.name }}</a>
+                                        <a :href="routes('category', related.categories.slug)">{{ related.categories.name }}</a>
                                     </p>
                                     <h3 class="info__features-title">
-                                        <a :href="url('posts', related.slug)">
+                                        <a :href="routes('posts', related.slug)">
                                             {{ related.title }}
                                         </a>
                                     </h3>
@@ -365,6 +365,7 @@ import MailchimpSubscribe from 'vue-mailchimp-subscribe'
 import LoadingArticles from './Common/LoadingArticles/LoadingArticles'
 import Parallax from 'vue-parallaxy'
 import { ResponsiveDirective } from 'vue-responsive-components'
+import { routes } from '../mixins'
 import TimeAgo from './TimeAgo'
 
 export default {
@@ -378,6 +379,7 @@ export default {
     directives: {
         responsive: ResponsiveDirective
     },
+    mixins: [routes],
     props: ['postSlug'],
     data: function () {
         return {
@@ -396,27 +398,10 @@ export default {
         }
     },
     methods: {
-        url(type, slug, titleType = null) {
-            if (type === 'posts') {
-                return `/posts/${slug}`
-            }
-            if (type === 'category') {
-                return `/categorias/${slug}`
-            }
-            if (type === 'user') {
-                return `/users/profile/${slug}`
-            }
-            if (type === 'title') {
-                return `/ecma/titulos/${titleType}/${slug}`
-            }
-            if (type === 'tag') {
-                return `/tags/${slug}`
-            }
-        },
         getTitleImage(str) {
             return str
         },
-        getPostImage(str) {
+        getPostImageThumbThumb(str) {
             return str.replace('1920', '480')
         },
         getPostInfo() {

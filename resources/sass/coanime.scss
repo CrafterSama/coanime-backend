@@ -3,11 +3,13 @@
 @import "_animation.scss";
 @import "_error404.scss";
 @import "_navbar.scss";
+@import "_nav-ecma.scss";
 @import "_login-register.scss";
 @import "_carousel.scss";
 @import "_goto-recents.scss";
-@import "_titles-today.scss";
 @import "_title.scss";
+@import "_titles-today.scss";
+@import "_titles.scss";
 @import "_recents.scss";
 @import "_post.scss";
 @import "_loading-kawaii.scss";
@@ -116,41 +118,6 @@ thead {
 
 .home-encyclopedia {
   padding: 0;
-}
-
-h3 {
-  &.titles-name {
-    background-color: var(--green);
-    color: var(--white);
-    border: 1px solid var(--green);
-    padding: 5px;
-    margin: 0;
-    height: 40px;
-    overflow: hidden;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
-  &.title-name {
-    background-color: var(--green);
-    color: var(--white);
-    border: 1px solid var(--green);
-    padding: 5px;
-    margin: 0;
-    overflow: hidden;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-
-    &:hover {
-      color: var(--white);
-    }
-  }
-}
-
-.title-type {
-  color: #999;
-  font-style: italic;
-  font-size: 0.9em;
 }
 
 .japanese-name {

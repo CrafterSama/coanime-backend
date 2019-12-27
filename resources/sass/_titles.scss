@@ -1,0 +1,132 @@
+.titles-box {
+    margin-top: 80px;
+}
+
+.titles-box-title {
+    font-weight: 400;
+}
+
+.search-box {
+    margin-top: 50px;
+}
+
+.search-form {
+
+    > .form-group {
+        margin-bottom: 0.5rem;
+
+        > .form-control-lg {
+            padding: 2rem 1rem;
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.all-types-links {
+    text-align: center;
+
+    > .title-type {
+        color: var(--gray);
+        font-weight: 500;
+
+        &.active {
+            color: var(--orange);
+        }
+        &::after {
+            content: " \2022  ";
+            color: var(--gray);
+        }
+        &:last-child::after {
+            content: "";
+        }
+        &:hover {
+            color: var(--orange);
+        }
+    }
+}
+
+.grid-titles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 300px));
+    grid-template-rows: repeat(auto-fit, minmax(315px, 400px));
+    grid-gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+
+    .title-item {
+        min-width: 215px;
+        min-height: 300px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+
+        .title-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-height: 400px;
+            overflow: hidden;
+            > img {
+                width: 100%;
+            }
+            .overlayer {
+                background: linear-gradient(180deg, rgba(249, 141, 2, 0.40) 30%, rgba(1, 6, 98, 0.81) 80%);
+            }
+        }
+
+        .title-info {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .title-type {
+        position: absolute;
+        right: 15px;
+        > a {
+            color: var(--white);
+            font-weight: 500;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            background: var(--light-orange);
+            padding: 2px 8px;
+            border-radius: 15px;
+            box-shadow: none;
+            border-bottom-left-radius: 0px;
+            text-shadow: none;
+            box-shadow: 1px 2px 3px var(--gray);
+        }
+
+        > a:hover {
+            box-shadow: 1px 2px 3px var(--gray);
+        }
+    }
+
+    h3 {
+
+        &.titles-name {
+            color: var(--white);
+        }
+
+        &.title-name {
+            font-size: 18px;
+            position: absolute;
+            bottom: 30px;
+            text-align: center;
+            > a {
+                color: var(--white);
+                &:hover {
+                    color: var(--white);
+                }
+            }
+        }
+    }
+}

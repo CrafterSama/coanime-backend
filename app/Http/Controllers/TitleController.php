@@ -190,13 +190,33 @@ class TitleController extends Controller
      */
     public function showAllByType($type)
     {
-        $type_id = TitleType::where('slug', 'like', $type)->pluck('id');
+        $type_id = TitleType::where('slug', '=', $type)->pluck('id');
+        $type_name = TitleType::where('slug', '=', $type)->pluck('name');
         $id = Title::where('type_id', $type_id)->pluck('id');
-        $titles = Title::where('type_id', $type_id)->with('images', 'rating', 'type', 'generes')->orderBy('name', 'asc')->simplePaginate(12);
+        $titles = Title::where('type_id', $type_id)->with('images', 'rating', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
         $types = TitleType::orderBy('name', 'asc')->get();
         $genres = Genere::orderBy('name', 'asc')->get();
 
-        return view('titles.home', compact('titles', 'types', 'genres'));
+        return view('titles.home', compact('titles', 'types', 'genres', 'type_name'));
+    }
+
+    public function apiTitlesByType($type)
+    {
+        $type_id = TitleType::where('slug', '=', $type)->pluck('id');
+        $type_name = TitleType::where('slug', '=', $type)->pluck('name');
+        $id = Title::where('type_id', $type_id)->pluck('id');
+        $titles = Title::where('type_id', $type_id)->with('images', 'rating', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
+        $types = TitleType::orderBy('name', 'asc')->get();
+        $genres = Genere::orderBy('name', 'asc')->get();
+
+        return response()->json(array(
+            'title' => 'Coanime.net - Titulos - ' . $type_name,
+            'descripcion' => 'Títulos de la Enciclopedia en el aparatado de ' . $type_name,
+            'path_image_url' => 'https://coanime.net/images/encyclopedia/titles/',
+            'result' => $titles,
+            'types' => $types,
+            'genres' => $genres
+        ), 200);
     }
 
     /**
@@ -250,13 +270,17 @@ class TitleController extends Controller
     public function apiTitles(Request $request)
     {
 
-        $titles = \App\Title::search($request->name)->with('images', 'rating', 'type', 'generes', 'users', 'posts')->orderBy('name', 'asc')->paginate(10);
+        $titles = \App\Title::search($request->name)->with('images', 'rating', 'type', 'generes', 'users', 'posts')->orderBy('name', 'asc')->paginate(30);
+        $types = TitleType::orderBy('name', 'asc')->get();
+        $genres = Genere::orderBy('name', 'asc')->get();
 
         return response()->json(array(
             'title' => 'Coanime.net - Titulos',
             'descripcion' => 'Títulos de la Enciclopedia, estos estan compuestos por títulos de TV, Mangas, Peliculas, Lives Actions, Doramas, Video Juegos, entre otros',
             'path_image_url' => 'https://coanime.net/images/encyclopedia/titles/',
-            'result' => $titles
+            'result' => $titles,
+            'types' => $types,
+            'genres' => $genres
         ), 200);
     }
 

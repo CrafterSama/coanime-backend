@@ -90,10 +90,20 @@
 	position: relative;
 }
 
-.title-top-box .title-info-details .genre-tag {
-    color: var(--orange);
+.title-top-box .title-info-details .info-details-type {
     font-weight: 500;
     font-style: italic;
+    > a {
+        color: var(--orange);
+    }
+}
+
+.title-top-box .title-info-details .genre-tag {
+    font-weight: 500;
+    font-style: italic;
+    > a {
+        color: var(--orange);
+    }
 }
 
 .title-top-box .title-info-details .genre-tag::after {

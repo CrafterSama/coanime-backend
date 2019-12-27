@@ -75,15 +75,23 @@ Route::group(['prefix' => 'ecma'], function () {
 Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     /** Get Endpoints */
     Route::get('home', 'PostController@apiPosts');
+
     Route::get('article/{slug}', 'PostController@showApi');
     Route::get('articles', 'PostController@posts');
     Route::get('articles/{category}', 'PostController@postsByCategory');
     Route::get('articles/{tag}', 'PostController@postsByTag');
+
     Route::get('ecma', 'EncyclopediaController@api');
+
     Route::get('titles', 'TitleController@apiTitles');
     Route::get('titles/{type}', 'TitleController@apiTitlesByType');
     Route::get('titles/{type}/{slug}', 'TitleController@apiShowTitle');
     Route::get('titles/{type}/{slug}/posts', 'TitleController@postsTitle');
+    Route::get('titles/{name}', function ($name) {
+        $titles = \App\Title::titles($name)->select('id', 'name', 'type_id', 'other_titles')->with('images', 'type')->orderBy('name', 'asc')->get();
+        return $titles;
+    });
+
     Route::get('profile/{slug}', 'UserController@apiProfile');
     Route::get('profile/{id}/posts', 'UserController@postsProfile');
     Route::get('profile/{id}/titles', 'UserController@titlesProfile');
@@ -91,6 +99,7 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     Route::get('profile/{id}/magazine', 'UserController@magazineProfile');
     Route::get('profile/{id}/people', 'UserController@peopleProfile');
     Route::get('profile/{id}/events', 'UserController@eventsProfile');
+
     Route::get('random-image', 'PostController@getRandomPostImage');
     Route::get('random-image-title/{slug}', 'PostController@getRandomPostImageByTitle');
 

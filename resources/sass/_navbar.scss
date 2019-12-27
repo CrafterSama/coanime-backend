@@ -40,30 +40,26 @@ a.navbar-brand {
     border-bottom: 1px solid var(--light-gray-90);
     box-shadow: 0 1px 4px #ccc;
 
-    .navbar-nav > {
-        .nav-item {
-            font-weight: 500;
-        }
+    .navbar-nav {
 
-        li > a {
-        color: var(--background);
-        font-size: 17px;
+        li.nav-item > a.nav-link {
+            color: var(--background);
+            font-size: 17px;
+            font-weight: 500;
+
+            &:hover, &:focus {
+                color: var(--background);
+            }
         }
 
         .open > a {
-        background-color: var(--light-gray);
-        color: var(--background);
-
-        &:hover, &:focus {
             background-color: var(--light-gray);
             color: var(--background);
-        }
-        }
 
-        li > a {
-        &:hover, &:focus {
-            color: var(--background);
-        }
+            &:hover, &:focus {
+                background-color: var(--light-gray);
+                color: var(--background);
+            }
         }
     }
 }

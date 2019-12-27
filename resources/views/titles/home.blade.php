@@ -3,12 +3,15 @@
 @extends('layouts.app')
 
 @section('title', 'Coanime.net - Titulos')
-@section('description', 'SecciÃ³n general de la enciclopedia, puedes encontrar tÃ­tulos de Tv, Manga, Ovas, Novelas ligeras, Live Action, Video juegos, Doramas y mÃ¡s.')
+@section('description', 'Sección general de la enciclopedia, puedes encontrar tÃ­tulos de Tv, Manga, Ovas, Novelas ligeras, Live Action, Video juegos, Doramas y más.')
 @section('twitter-image', 'https://coanime.net/images/ecma-logo.png')
 
 
 @section('content')
-<div class="lists col-xs-12 col-sm-12 col-md-12">
+
+<ecma-titles type-slug="{{ Request::segment(3) }}"></ecma-titles>
+
+{{-- <div class="lists col-xs-12 col-sm-12 col-md-12">
 @include('partials.searchbox')
 <div class="clearfix"></div>
 	<div class="hidden-xs hidden-sm col-md-2">
@@ -183,5 +186,5 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 text-center">
 		{{$titles->appends(request()->all())->links()}}
 	</div>
-</div>
+</div> --}}
 @endsection

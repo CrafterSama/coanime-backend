@@ -29,7 +29,6 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-
         $relevants = Post::search($request->name)
             ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
             ->with('categories', 'tags', 'users')
@@ -37,7 +36,7 @@ class PostController extends Controller
             ->where('draft', '0')
             ->whereNotIn('category_id', [10])
             ->where('view_counter', '>', 5)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW() AND TIMESTAMP(postponed_to) >= DATE_SUB(NOW(), INTERVAL 180 DAY)')
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(6), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)
@@ -87,13 +86,14 @@ class PostController extends Controller
 
     public function posts(Request $request)
     {
+        $carbon = new Carbon;
 
         $posts = Post::search($request->name)
             ->with('users', 'categories', 'titles', 'tags')
             ->where('approved', 'yes')
             ->where('draft', '0')
             ->where('category_id', '!=', 10)
-            ->where('postponed_to' <= Carbon::now())
+            ->where('postponed_to', '<=', $carbon->now())
             ->orWhere('postponed_to', null)
             ->orderBy('postponed_to', 'desc')
             ->simplePaginate(8);
@@ -114,7 +114,7 @@ class PostController extends Controller
             ->where('draft', '0')
             ->where('category_id', '!=', 10)
             ->where('view_counter', '>', 5)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW() AND TIMESTAMP(postponed_to) >= DATE_SUB(NOW(), INTERVAL 180 DAY)')
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(6), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)
@@ -126,13 +126,13 @@ class PostController extends Controller
             ->where('approved', 'yes')
             ->where('draft', '0')
             ->where('category_id', '!=', 10)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW()')
+            ->where('postponed_to', '<=', Carbon::now())
             ->orWhere('postponed_to', null)
             ->orderBy('postponed_to', 'desc')
             ->paginate(4);
 
         $events = Event::select('city_id', 'country_code', 'created_at', 'date_start', 'id', 'slug', 'image', 'name', 'user_id')->with('users', 'city', 'country')
-            ->whereRaw('TIMESTAMP(date_start) > NOW()')
+            ->where('date_start', '>',  Carbon::now())
             ->orderBy('date_start', 'asc')
             ->take(20)
             ->get();
@@ -677,15 +677,25 @@ class PostController extends Controller
         $relateds = [];
         $newArticles = [];
 
+
+
         if (Post::where('slug', '=', $slug)->pluck('id')->count() > 0) {
-            $id = Post::where('slug', '=', $slug)->pluck('id');
-            $post = Post::with('users', 'categories', 'titles', 'tags')->find($id);
+            $post = Post::with('users', 'categories', 'titles', 'tags')->whereSlug($slug)->firstOrFail();
 
-            foreach ($post->tags as $t) :
-                $keywords[] = $t->name;
-            endforeach;
+            if ($post->tags->count() > 0) :
+                foreach ($post->tags as $t) :
+                    $keywords[] = $t->name;
+                endforeach;
 
-            $keywords = implode(',', $keywords);
+                $keywords = implode(',', $keywords);
+            else :
+                $string = $post->slug;
+                $postTags = explode("-", $string);
+                $excludedWords = array('la', 'el', 'lo', 'un', 'los', 'las', 'una', 'sus', 'su', 'de', 'del', 'a', 'ha', 'con', 'unos', 'unas', 'y', 'para', 'pero', 'le', 'cual', 'ellos', 'ellas', 'por', 'este', 'esta', 'han', 'ah', 'se', 'al', 'mas', 'nos', 'como', 'que', 'es', 'esto', 'asi', 'te', 'ya', 'en');
+                $keywords = array_diff($postTags, $excludedWords);
+                $keywords = implode(',', $keywords);
+            endif;
+
 
             $post->increment('view_counter');
 
@@ -697,7 +707,7 @@ class PostController extends Controller
                 ->get();
             if ($otherArticles->count() > 2) {
                 $otherArticles = $otherArticles->random(3);
-                if ($otherArticles->count > 0) :
+                if ($otherArticles->count() > 0) :
                     foreach ($otherArticles as $index) :
                         array_push($newArticles, $index);
                     endforeach;

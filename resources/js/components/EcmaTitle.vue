@@ -5,23 +5,30 @@
         <div v-else id="title">
             <div class="title-header">
                 <figure class="title-header-image">
-                    <img v-if="!randomImage" :src="title.images.name" :alt="title.name">
+                    <img v-if="!randomImage && title.images" :src="title.images.name" :alt="title.name">
+                    <img v-if="!randomImage && !title.images" src="/assets/images/no_post_image.jpg" :alt="title.name">
                     <img v-else :src="randomImage" :alt="title.name">
                 </figure>
                 <div class="overlayer" />
+                <div class="boxed-header-info">
+                    <div class="boxed-container">
+                        <div class="title-name-box">
+                            <div class="before-title-box" />
+                            <h1 class="title-name">
+                                {{ title.name }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="title-content">
                 <div class="title-info container">
                     <div class="title-top-box overlap-banner">
                         <figure class="title-image overlap-banner">
-                            <img :src="title.images.name" :alt="title.name">
+                            <img v-if="title.images" :src="title.images.name" :alt="title.name">
+                            <img v-else src="/assets/images/no_image.jpg" :alt="title.name">
                         </figure>
                         <div class="title-info-box">
-                            <div class="title-name-box overlap-banner">
-                                <h1 class="title-name">
-                                    {{ title.name }}
-                                </h1>
-                            </div>
                             <ul class="title-info-details overlap-banner">
                                 <li>
                                     <i class="fas fa-shapes" />
@@ -77,7 +84,7 @@
     </div>
 </template>
 <script>
-import LoadingArticles from './Common/LoadingArticles/LoadingArticles'
+import LoadingArticles from './Common/Loading/LoadingArticles'
 import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
 import { routes } from '../mixins'
@@ -111,7 +118,7 @@ export default {
         },
         getTitle() {
             this.loading = true
-            fetch(`https://coanime.net/api/v1/titles/${this.type}/${this.slug}`)
+            fetch(`/api/v1/titles/${this.type}/${this.slug}`)
                 .then(res => res.json())
                 .then(response => {
                     this.title = response.data
@@ -120,7 +127,7 @@ export default {
                 .catch(error => console.log(error))
         },
         getRandomTitleImage() {
-            fetch(`https://coanime.net/api/v1/random-image-title/${this.slug}`)
+            fetch(`/api/v1/random-image-title/${this.slug}`)
                 .then(res => res.json())
                 .then(response => {
                     if (response.message === 'OK') {
@@ -134,7 +141,7 @@ export default {
         },
         getTitlePosts() {
             this.loading = true
-            fetch(`https://coanime.net/api/v1/titles/${this.type}/${this.slug}/posts`)
+            fetch(`/api/v1/titles/${this.type}/${this.slug}/posts`)
                 .then(res => res.json())
                 .then(response => {
                     this.posts = response

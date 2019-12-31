@@ -1,6 +1,6 @@
 <template>
     <div class="content-wrapper">
-        <loading-articles v-if="loading" />
+        <loading-articles v-if="loading && article === 'No Info'" />
         <div v-else class="article-container">
             <div class="article-main-header">
                 <parallax
@@ -14,7 +14,7 @@
                 </parallax>
                 <div class="full-header-title-bg">
                     <div class="article__info-top">
-                        <div class="info__article-category">
+                        <div v-if="article.categories" class="info__article-category">
                             {{ article.categories.name }}
                         </div>
                         <h1 class="info__article-title">
@@ -25,9 +25,9 @@
                         </h2>
                         <p>
                             <time-ago>{{ article.postponed_to }}</time-ago>por
-                            <a
-                                class="user-author"
-                                :href="routes('user', article.users.slug)"
+                            <a v-if="article.users"
+                               class="user-author"
+                               :href="routes('user', article.users.slug)"
                             >{{ article.users.name }}</a>
                         </p>
                     </div>
@@ -157,7 +157,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="author" class>
+                    <div v-if="article.users" id="author" class>
                         <div class="author">
                             <div class="info__article-author">
                                 <img
@@ -362,7 +362,7 @@
 
 <script>
 import MailchimpSubscribe from 'vue-mailchimp-subscribe'
-import LoadingArticles from './Common/LoadingArticles/LoadingArticles'
+import LoadingArticles from './Common/Loading/LoadingArticles'
 import Parallax from 'vue-parallaxy'
 import { ResponsiveDirective } from 'vue-responsive-components'
 import { routes } from '../mixins'
@@ -401,12 +401,12 @@ export default {
         getTitleImage(str) {
             return str
         },
-        getPostImageThumbThumb(str) {
+        getPostImageThumb(str) {
             return str.replace('1920', '480')
         },
         getPostInfo() {
             this.loading = true
-            fetch(`https://coanime.net/api/v1/article/${this.postSlug}`)
+            fetch(`/api/v1/article/${this.postSlug}`)
                 .then(res => res.json())
                 .then(response => {
                     this.article = response.result
@@ -415,6 +415,12 @@ export default {
                     this.loading = false
                 })
                 .catch(error => console.log(error))
+        },
+        onError() {
+
+        },
+        onSuccess() {
+
         }
     }
 }

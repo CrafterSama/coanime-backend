@@ -15,7 +15,7 @@ export default {
         initParticles() {
             window.particlesJS('particles-js', {
                 particles: {
-                    number: { value: 50, density: { enable: false, value_area: 10000 } },
+                    number: { value: 80, density: { enable: false, value_area: 10000 } },
                     color: { value: '#ed6a00' },
                     shape: {
                         type: 'circle',

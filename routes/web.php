@@ -54,7 +54,7 @@ Route::group(['prefix' => 'ecma'], function () {
     Route::get('titulos/{type}/{slug}', 'TitleController@show');
     Route::get('titulos/{type}', 'TitleController@showAllByType');
 
-    Route::get('generos', 'TitleController@showAllGenre')->name('genres');
+    Route::get('generos', 'TitleController@index')->name('genres');
     Route::get('generos/{slug}', 'TitleController@showAllByGenre');
 
     Route::get('calendario', 'TitleController@showCalendar')->name('calendar');
@@ -87,10 +87,13 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     Route::get('titles/{type}', 'TitleController@apiTitlesByType');
     Route::get('titles/{type}/{slug}', 'TitleController@apiShowTitle');
     Route::get('titles/{type}/{slug}/posts', 'TitleController@postsTitle');
-    Route::get('titles/{name}', function ($name) {
+
+    Route::get('search/titles/{name}', 'TitleController@apiSearchTitles'/* function ($name) {
         $titles = \App\Title::titles($name)->select('id', 'name', 'type_id', 'other_titles')->with('images', 'type')->orderBy('name', 'asc')->get();
         return $titles;
-    });
+    } */);
+
+    Route::get('genres/{slug}', 'TitleController@apiAllByGenre');
 
     Route::get('profile/{slug}', 'UserController@apiProfile');
     Route::get('profile/{id}/posts', 'UserController@postsProfile');

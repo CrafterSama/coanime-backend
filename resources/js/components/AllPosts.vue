@@ -96,7 +96,7 @@ export default {
         },
         getPosts() {
             this.loading = true
-            fetch(`https://coanime.net/api/v1/articles`)
+            fetch(`/api/v1/articles`)
                 .then(res => res.json())
                 .then(response => {
                     this.articles = response

@@ -103,6 +103,10 @@
     color: var(--orange);
 }
 
+.glide__slide {
+    width: 200px;
+}
+
 div[data-glide-el="controls"] {
     position: absolute;
     top: 44%;
@@ -116,6 +120,7 @@ button[data-glide-dir=">"], button[data-glide-dir="<"] {
     border: none;
     padding: 5px 10px 4px;
     border-radius: 4px;
+    box-shadow: 0 1px 2px #999;
 }
 
 button[data-glide-dir="<"] {}

@@ -88,12 +88,21 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     Route::get('titles/{type}/{slug}', 'TitleController@apiShowTitle');
     Route::get('titles/{type}/{slug}/posts', 'TitleController@postsTitle');
 
-    Route::get('search/titles/{name}', 'TitleController@apiSearchTitles'/* function ($name) {
-        $titles = \App\Title::titles($name)->select('id', 'name', 'type_id', 'other_titles')->with('images', 'type')->orderBy('name', 'asc')->get();
-        return $titles;
-    } */);
+    Route::get('search/titles/{name}', 'TitleController@apiSearchTitles');
+    Route::get('search/people/{name}', 'PeopleController@apiIndex');
+    Route::get('search/magazine/{name}', 'MagazineController@apiIndex');
+    Route::get('search/companies/{name}', 'CompanyController@apiIndex');
 
     Route::get('genres/{slug}', 'TitleController@apiAllByGenre');
+
+    Route::get('people', 'PeopleController@apiIndex');
+    Route::get('people/{slug}', 'PeopleController@apiShow');
+
+    Route::get('magazine', 'MagazineController@apiIndex');
+    Route::get('magazine/{slug}', 'MagazineController@apiShow');
+
+    Route::get('companies', 'CompanyController@apiIndex');
+    Route::get('companies/{slug}', 'CompanyController@apiShow');
 
     Route::get('profile/{slug}', 'UserController@apiProfile');
     Route::get('profile/{id}/posts', 'UserController@postsProfile');

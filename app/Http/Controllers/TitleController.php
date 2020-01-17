@@ -50,7 +50,7 @@ class TitleController extends Controller
     {
         $types = TitleType::orderBy('name', 'asc')->get();
         $genres = Genere::orderBy('name', 'asc')->get();
-        $titles = Title::titles($request->name)->select('id', 'name', 'type_id', 'other_titles', 'slug')->with('images', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
+        $titles = Title::titles($request->name)->with('images', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
 
         return response()->json(array(
             'title' => 'Coanime.net - Titulos',
@@ -189,12 +189,16 @@ class TitleController extends Controller
      */
     public function show($type, $slug)
     {
-        // TODO: Agregar/comprobar unicidad del campo slug
-        $title = Title::with('images', 'rating', 'type', 'generes')
-            ->whereSlug($slug)
-            ->firstOrFail();
+        if (!empty($type) || !empty($slug)):
+            // TODO: Agregar/comprobar unicidad del campo slug
+            $title = Title::with('images', 'rating', 'type', 'generes')
+                ->whereSlug($slug)
+                ->firstOrFail();
 
-        return view('titles.details', compact('title'));
+            return view('titles.details', compact('title'));
+        else:
+            return view('errors.404');
+        endif;
     }
 
     /**
@@ -205,14 +209,18 @@ class TitleController extends Controller
      */
     public function showAllByType($type)
     {
-        $type_id = TitleType::where('slug', '=', $type)->pluck('id');
-        $type_name = TitleType::where('slug', '=', $type)->pluck('name');
-        $id = Title::where('type_id', $type_id)->pluck('id');
-        $titles = Title::where('type_id', $type_id)->with('images', 'rating', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
-        $types = TitleType::orderBy('name', 'asc')->get();
-        $genres = Genere::orderBy('name', 'asc')->get();
+        $type_id = TitleType::whereSlug($type)->pluck('id');
+        if ($type_id->count() > 0):
+            $type_name = TitleType::where('slug', '=', $type)->pluck('name');
+            $id = Title::where('type_id', $type_id)->pluck('id');
+            $titles = Title::where('type_id', $type_id)->with('images', 'rating', 'type', 'generes')->orderBy('name', 'asc')->paginate(30);
+            $types = TitleType::orderBy('name', 'asc')->get();
+            $genres = Genere::orderBy('name', 'asc')->get();
 
-        return view('titles.home', compact('titles', 'types', 'genres', 'type_name'));
+            return view('titles.home', compact('titles', 'types', 'genres', 'type_name'));
+        else:
+            return view('errors.404');
+        endif;
     }
 
     /**

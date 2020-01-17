@@ -14,7 +14,7 @@
             </h3>
             <div class="broadcastTitles">
                 <div v-if="titles && titles.length">
-                    <vue-glide :per-view="5" :gap="5" :bound="true">
+                    <vue-glide :per-view="5" :gap="5" :bound="true" :swipe-threshold="200" :breakpoints="breakpoints">
                         <vue-glide-slide v-for="title in titles" :key="title.mal_id" :style="{width: '200px'}">
                             <div class="box">
                                 <figure class="item__title-box-image">
@@ -67,7 +67,7 @@ export default {
             }
         }
     },
-    mounted() {
+    created() {
         this.getTodaySchedule()
     },
     methods: {

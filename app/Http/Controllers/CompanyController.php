@@ -20,25 +20,36 @@ class CompanyController extends Controller
      */
     public function index(Request $request)
     {
-        $name = trim($request->input('name', ''));
-        $companies = Company::orderBy('id', 'desc');
-
-        // TODO: Validate 'name'
-        if ($name) {
-            $companies = $companies->search($name);
-        }
-
-        try {
-            $companies = $companies->paginate();
-        } catch (Exception $e) {
-            Alert::message($e->getMessage(), 'Message');
-            return redirect()->back()->with('errors', 'Error Trying to obtein the Company Data');
-        }
-
-        // dd($companies);
+        $companies = Company::search($request->name)->orderBy('name', 'asc')->paginate(30);
+        if ($companies->count() > 0) :
+            return view('companies.home', compact('companies'));
+        else :
+            return view('errors.404');
+        endif;
 
 
-        return view('companies.home', compact('companies'));
+    }
+
+    /**
+     * Display a listing of the resource in JSON format.
+     *
+     * @return \Illuminate\Http\Response|mixed
+     */
+    public function apiIndex(Request $request)
+    {
+        $companies = Company::search($request->name)->orderBy('name', 'asc')->paginate(30);
+
+        if ($companies->count() > 0) :
+            return response()->json(array(
+                'message' => 'Resource found',
+                'companies' => $companies
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'companies' => []
+            ), 404);
+        endif;
     }
 
     /**
@@ -132,7 +143,33 @@ class CompanyController extends Controller
     {
         $company = Company::with('country')->whereSlug($slug)->firstOrFail();
 
-        return view('companies.details', compact('company'));
+        if ($company->count() > 0):
+            return view('companies.details', compact('company'));
+        else:
+            return view('errors.404');
+        endif;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response|mixed
+     */
+    public function apiShow($slug)
+    {
+        $company = Company::with('country')->whereSlug($slug)->firstOrFail();
+
+        if ($company->count() > 0) :
+            return response()->json(array(
+                'message' => 'Resource found',
+                'company' => $company
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'company' => []
+            ), 404);
+        endif;
     }
 
     /**

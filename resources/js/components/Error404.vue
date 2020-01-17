@@ -18,7 +18,7 @@ export default {
     name: 'Error404',
     data: function () {
         return {
-            opps: '/assets/images/opps.gif'
+            opps: '/assets/images/error-404.svg'
         }
     }
 }

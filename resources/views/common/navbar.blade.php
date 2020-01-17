@@ -14,17 +14,7 @@
                     <a class="nav-link" href="/eventos">Eventos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link {{-- dropdown-toggle --}}" href="/ecma/titulos" {{-- id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" --}}>
-                    Enciclopedia
-                    </a>
-                    {{-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/ecma/titulos">Titulos</a>
-                        <a class="dropdown-item" href="/ecma/personas">Personas</a>
-                        <a class="dropdown-item" href="/ecma/revistas">Revistas</a>
-                        <a class="dropdown-item" href="/ecma/empresas">Empresas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/ecma/generos">Generos</a>
-                    </div> --}}
+                    <a class="nav-link" href="/ecma/titulos">Enciclopedia</a>
                 </li>
             </ul>
             @if(Request::segment(1) == '')
@@ -71,3 +61,31 @@
         </div>
     </div>
 </nav>
+@if(Request::segment(2) === 'titulos' || Request::segment(2) === 'personas' || Request::segment(2) === 'revistas' || Request::segment(2) === 'empresas')
+    <div class="ecma-navigation">
+        <div class="container">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="{{ Request::segment(2) === 'titulos' ? 'nav-link active' : 'nav-link' }}" href="/ecma/titulos">
+                        Titulos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="{{ Request::segment(2) === 'personas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/personas">
+                        Personas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="{{ Request::segment(2) === 'revistas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/revistas">
+                        Revistas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="{{ Request::segment(2) === 'empresas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/empresas">
+                        Empresas
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+@endif

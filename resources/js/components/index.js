@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import AllPosts from './AllPosts'
 import AnimeToday from './AnimeToday'
+import EcmaMagazine from './EcmaMagazine'
+import EcmaMagazines from './EcmaMagazines'
+import EcmaPeople from './EcmaPeople'
+import EcmaPerson from './EcmaPerson'
 import EcmaTitle from './EcmaTitle'
 import EcmaTitles from './EcmaTitles'
 import Error404 from './Error404'
@@ -12,6 +16,10 @@ import VueMoment from './VueMoment'
 [
     AnimeToday,
     AllPosts,
+    EcmaMagazine,
+    EcmaMagazines,
+    EcmaPeople,
+    EcmaPerson,
     EcmaTitle,
     EcmaTitles,
     Error404,

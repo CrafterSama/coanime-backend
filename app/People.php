@@ -19,7 +19,11 @@ class People extends Model {
 	protected $fillable = ['name', 'japanese_name', 'areas_skills_hobbies', 'bio', 'city_id', 'country_code', 'slug', 'birthday', 'falldown', 'falldown_date', 'approved', 'image', 'user_id'];
 
 	public function scopeSearch($query, $name) {
-		return $query->where('name', 'like', '%' . $name . '%');
+        if (strlen($name) > 1):
+            return $query->where('name', 'like', '%' . $name . '%');
+        else:
+            return $query->where('name', 'like', $name . '%');
+        endif;
 	}
 
 	public static function name($id) {

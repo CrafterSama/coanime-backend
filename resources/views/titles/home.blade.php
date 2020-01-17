@@ -2,8 +2,8 @@
 
 @extends('layouts.app')
 
-@section('title', 'Coanime.net - Titulos')
-@section('description', 'Sección general de la enciclopedia, puedes encontrar tÃ­tulos de Tv, Manga, Ovas, Novelas ligeras, Live Action, Video juegos, Doramas y más.')
+@section('title', 'Enciclopedia - Titulos')
+@section('description', 'Sección general de la enciclopedia, puedes encontrar tí­tulos de Tv, Manga, Ovas, Novelas ligeras, Live Action, Video juegos, Doramas y mucho más.')
 @section('twitter-image', 'https://coanime.net/images/ecma-logo.png')
 
 

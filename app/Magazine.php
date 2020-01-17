@@ -17,8 +17,16 @@ class Magazine extends Model {
 	protected $fillable = ['name', 'user_id', 'about', 'foundation_date', 'slug', 'type_id', 'release_id', 'country_code', 'website'];
 
 	public function scopeSearch($query, $name) {
-		return $query->where('name', 'like', '%' . $name . '%');
+        if (strlen($name) > 1) :
+            return $query->where('name', 'like', '%' . $name . '%');
+        else:
+            return $query->where('name', 'like', $name . '%');
+        endif;
 	}
+
+	public function country() {
+        return $this->belongsTo('\App\Country', 'country_code', 'code');
+    }
 
 	public function type() {
 		return $this->belongsTo('\App\MagazineType');

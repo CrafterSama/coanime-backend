@@ -11,7 +11,11 @@ export default {
     props: ['timestamp', 'format'],
     computed: {
         date() {
-            return moment(this.timestamp).format(this.format)
+            if (moment(this.timestamp).isValid()) {
+                return moment(this.timestamp).format(this.format)
+            } else {
+                return 'Sin Información Precisa'
+            }
         }
     }
 }

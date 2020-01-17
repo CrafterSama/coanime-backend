@@ -4,16 +4,19 @@
 
 @extends('layouts.app')
 
-@section('title', 'Coanime.net - Revistas - ' . $mgz->name)
+@section('title', 'Enciclopedia - Revistas - ' . $mgz->name)
 @section('description', str_limit(strip_tags($mgz->about), 140))
-@if(empty($mgz->images->name))
+@if(empty($mgz->image->name))
     @section('twitter-image', 'https://coanime.net//images/no_image.jpg')
 @else
     @section('twitter-image', 'https://coanime.net/images/encyclopedia/magazine/' . $mgz->image->name)
 @endif
 
 @section('content')
-<div class="title-details">
+
+<ecma-magazine slug="{{ $mgz->slug }}"></ecma-magazine>
+
+{{-- <div class="title-details">
 	<h3 class="title-name text-center cyan-background col-sx-12 col-sm-12 col-md-12 col-lg-12"><a href="" onclick="history.back()" class="btn btn-warning btn-sm pull-left"><i class="fa fa-chevron-left"></i> Volver</a> {{$mgz->name}}</h3>
 	<div class="title-top-image hidden-md hidden-lg" @if(empty($mgz->image->name)) style="background-image: url(/images/no_image.jpg);" @else style="background-image: url(/images/encyclopedia/magazine/{{$mgz->image->name}});" @endif></div>
 
@@ -69,5 +72,5 @@
 			<img class="img-responsive" src="/images/encyclopedia/magazine/{{$mgz->image->name}}" alt="">
 		@endif
 	</div>
-</div>
+</div> --}}
 @endsection

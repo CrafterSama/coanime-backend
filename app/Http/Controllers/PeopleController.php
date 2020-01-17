@@ -5,24 +5,62 @@ namespace App\Http\Controllers;
 use App\City;
 use App\Country;
 use App\People;
+use App\Helper;
 use Illuminate\Http\Request;
 
 class PeopleController extends Controller {
-	/**
+
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index(Request $request) {
-		if (People::search($request->name)->with('country', 'city')->orderBy('id', 'desc')->paginate()->count() > 0):
-			$people = People::search($request->name)->with('country', 'city')->orderBy('id', 'desc')->paginate(10);
-
+        $people = People::search($request->name)->with('country', 'city')->orderBy('name', 'asc')->paginate(30);
+		if ($people->count() > 0):
 			return view('people.home', ['people' => $people]);
 		else:
 			return back()->with('errors', 'Error Trying to obtein the People Data');
 		endif;
 
 	}
+
+    /**
+	 * Display a listing of the resource in JSON format.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function apiIndex(Request $request) {
+        $people = People::search($request->name)->with('country', 'city')->orderBy('name', 'asc')->paginate(30);
+		if ($people->count() > 0):
+
+            return response()->json(array(
+                'message' => 'Resource found',
+                'people' => $people
+            ), 200);
+		else:
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'people' => []
+            ), 404);
+		endif;
+
+    }
+
+    public function apiSearchPeople(Request $request) {
+        $people = People::search($request->name)->with('country', 'city')->orderBy('name', 'asc')->paginate(30);
+        if ($people->count() > 0) :
+            return response()->json(array(
+                'message' => 'Resource found',
+                'people' => $people
+            ), 200);
+		else:
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'people' => []
+            ), 404);
+		endif;
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -126,16 +164,38 @@ class PeopleController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($slug) {
-		if ($id = People::where('slug', 'like', $slug)->count() > 0):
-			$id = People::where('slug', 'like', $slug)->pluck('id');
-			$people = People::with('country', 'city')->find($id);
+		if (People::where('slug', '=', $slug)->count() > 0):
+			$people = People::with('city', 'country')->whereSlug($slug)->firstOrFail();
 
 			//dd($people);
 			return view('people.details', ['people' => $people]);
 		else:
 			return view('errors.404');
 		endif;
-	}
+    }
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function apiShow($slug) {
+		if (People::where('slug', '=', $slug)->count() > 0):
+            $people = People::with('city', 'country')->whereSlug($slug)->firstOrFail();
+            $people->bio = Helper::parseBBCode($people->bio);
+
+            return response()->json(array(
+                'message' => 'Resource found',
+                'person' => $people
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'person' => null
+            ), 404);
+        endif;
+    }
 
 	/**
 	 * Show the form for editing the specified resource.

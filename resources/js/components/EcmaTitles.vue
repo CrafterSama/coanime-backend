@@ -2,40 +2,15 @@
     <div class="titles-box">
         <loading-articles v-if="loading" />
         <div v-else>
-            <ecma-navbar :section="section" />
             <div class="search-box">
                 <div class="container">
-                    <h3 class="titles-box-title d-flex justify-content-center">
-                        Busqueda de Titulos
-                    </h3>
                     <div class="boxed-container">
-                        <form
-                            id="serch-form"
-                            class="search-form"
-                            @submit.prevent="search"
-                        >
-                            <div
-                                class="form-group d-flex justify-content-center"
-                            >
-                                <input
-                                    class="form-control form-control-lg"
-                                    type="text"
-                                    name="search"
-                                    placeholder="hero mask..."
-                                    @keyup="realTimeSearch"
-                                    @blur="show = false"
-                                    @focus="show = true"
-                                >
+                        <form id="serch-form" class="search-form" autocomplete="off" @submit.prevent="search">
+                            <div class="form-group d-flex justify-content-center">
+                                <input class="form-control form-control-lg" autocomplete="off" type="text" name="search" placeholder="Busqueda de Titulos" @keyup="realTimeSearch" @blur="hide" @focus="show = true">
                             </div>
-                            <div
-                                v-if="results.length > 0 && show"
-                                class="searching-results"
-                            >
-                                <div
-                                    v-for="(item, index) in results"
-                                    :key="index"
-                                    class="result-item"
-                                >
+                            <div v-if="results.length > 0 && show" class="searching-results">
+                                <div v-for="(item, index) in results" :key="index" class="result-item">
                                     <a :href="routes('title', item.slug, item.type.slug)">
                                         <div class="result-item-url">
                                             <figure class="result-item-image">
@@ -58,48 +33,13 @@
                                 </button>
                             </div>
                         </form>
-                        <div
-                            v-if="section === 'titulos'"
-                            class="all-types-links"
-                        >
-                            <a
-                                :class="{
-                                    'title-type active': typeSlug === '',
-                                    'title-type': typeSlug !== ''
-                                }"
-                                href="/ecma/titulos"
-                            >Todos</a>
-                            <a
-                                v-for="type in types"
-                                :key="type.id"
-                                :class="{
-                                    'title-type active': type.slug === typeSlug,
-                                    'title-type': type.slug !== typeSlug
-                                }"
-                                :href="routes('type', type.slug)"
-                            >{{ type.name }}</a>
+                        <div v-if="section === 'titulos'" class="all-types-links">
+                            <a :class="{'title-type active': typeSlug === '', 'title-type': typeSlug !== ''}" href="/ecma/titulos">Todos</a>
+                            <a v-for="type in types" :key="type.id" :class="{'title-type active': type.slug === typeSlug, 'title-type': type.slug !== typeSlug}" :href="routes('type', type.slug)">{{ type.name }}</a>
                         </div>
-                        <div
-                            v-if="section === 'generos'"
-                            class="all-types-links"
-                        >
-                            <a
-                                :class="{
-                                    'title-type active': genreSlug === '',
-                                    'title-type': genreSlug !== ''
-                                }"
-                                href="/ecma/generos"
-                            >Todos</a>
-                            <a
-                                v-for="genre in themes"
-                                :key="genre.id"
-                                :class="{
-                                    'title-type active':
-                                        genre.slug === genreSlug,
-                                    'title-type': genre.slug !== genreSlug
-                                }"
-                                :href="routes('genre', genre.slug)"
-                            >{{ genre.name }}</a>
+                        <div v-if="section === 'generos'" class="all-types-links">
+                            <a :class="{'title-type active': genreSlug === '', 'title-type': genreSlug !== ''}" href="/ecma/generos">Todos</a>
+                            <a v-for="genre in themes" :key="genre.id" :class="{'title-type active': genre.slug === genreSlug, 'title-type': genre.slug !== genreSlug}" :href="routes('genre', genre.slug)">{{ genre.name }}</a>
                         </div>
                     </div>
                 </div>
@@ -115,87 +55,29 @@
                 </div>
                 <div v-else class="container">
                     <div class="grid-titles">
-                        <div
-                            v-for="(title, index) in titles.data"
-                            :key="index"
-                            class="title-item"
-                            @mouseover="hover = index"
-                            @mouseleave="hover = null"
-                        >
+                        <div v-for="(title, index) in titles.data" :key="index" class="title-item" @mouseover="hover = index" @mouseleave="hover = null">
                             <figure class="title-image">
-                                <img
-                                    v-if="title.images"
-                                    :src="title.images.name"
-                                    :alt="title.name"
-                                >
-                                <img
-                                    v-else
-                                    src="/assets/images/no_image.jpg"
-                                    :alt="title.name"
-                                >
-                                <div
-                                    :class="{
-                                        overlayer: hover !== index,
-                                        'overlayer hover': hover === index
-                                    }"
-                                >
-                                    <a
-                                        :href="
-                                            routes(
-                                                'title',
-                                                title.slug,
-                                                title.type.slug
-                                            )
-                                        "
-                                    />
+                                <img v-if="title.images" :src="title.images.name" :alt="title.name">
+                                <img v-else src="/assets/images/no_image.jpg" :alt="title.name">
+                                <div :class="{'overlayer': hover !== index, 'overlayer hover': hover === index}">
+                                    <a :href="routes('title', title.slug, title.type.slug)" />
                                 </div>
                             </figure>
                             <div class="title-info">
-                                <div
-                                    :class="{
-                                        'title-type': hover !== index,
-                                        'title-type hover': hover === index
-                                    }"
-                                >
+                                <div :class="{'title-type': hover !== index, 'title-type hover': hover === index}">
                                     <a :href="routes('type', title.type.slug)">
                                         {{ title.type.name }}
                                     </a>
                                 </div>
-                                <h3
-                                    :class="{
-                                        'title-name': hover !== index,
-                                        'title-name hover': hover === index
-                                    }"
-                                >
-                                    <a
-                                        :href="
-                                            routes(
-                                                'title',
-                                                title.slug,
-                                                title.type.slug
-                                            )
-                                        "
-                                    >{{ title.name }}</a>
+                                <h3 :class="{'title-name': hover !== index, 'title-name hover': hover === index}">
+                                    <a :href="routes('title', title.slug, title.type.slug)">{{ title.name }}</a>
                                 </h3>
                                 <div class="genres-list">
-                                    <a
-                                        v-for="genre in title.generes"
-                                        :key="genre.id"
-                                        class="title-type"
-                                        :href="routes('type', genre.slug)"
-                                    >{{ genre.name }}</a>
+                                    <a v-for="genre in title.generes" :key="genre.id" class="title-type" :href="routes('type', genre.slug)">{{ genre.name }}</a>
                                 </div>
                             </div>
                             <div class="more-info">
-                                <a
-                                    :href="
-                                        routes(
-                                            'title',
-                                            title.slug,
-                                            title.type.slug
-                                        )
-                                    "
-                                >
+                                <a :href="routes('title', title.slug, title.type.slug)">
                                     <i class="fas fa-search-plus" />
                                 </a>
                             </div>
@@ -204,21 +86,14 @@
                     <div class="paginator">
                         <div class="pages-info">
                             Pagina {{ titles.current_page }} de
-                            {{ titles.last_page }} Pagina(s)
+                            {{ titles.last_page }} {{ titles.last_page > 1 ? 'Paginas' : 'Pagina' }}
                         </div>
+                        <div class="space-between" />
                         <div class="pages-links">
-                            <span
-                                v-if="titles.prev_page_url !== null"
-                                class="page-prev"
-                                @click="loadPage(titles.prev_page_url)"
-                            >
+                            <span v-if="titles.prev_page_url !== null" class="page-prev" @click="loadPage(titles.prev_page_url)">
                                 <i class="fas fa-chevron-left" />
                             </span>
-                            <span
-                                v-if="titles.next_page_url !== null"
-                                class="page-next"
-                                @click="loadPage(titles.next_page_url)"
-                            >
+                            <span v-if="titles.next_page_url !== null" class="page-next" @click="loadPage(titles.next_page_url)">
                                 <i class="fas fa-chevron-right" />
                             </span>
                         </div>
@@ -258,10 +133,15 @@ export default {
             loading: false
         }
     },
-    mounted() {
+    created() {
         this.getTitles()
     },
     methods: {
+        hide() {
+            setTimeout(() => {
+                this.show = false
+            }, 1000)
+        },
         realTimeSearch(e) {
             if (e.target.value !== '') {
                 this.searching = e.target.value

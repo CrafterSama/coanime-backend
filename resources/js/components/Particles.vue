@@ -8,7 +8,7 @@
 import 'particles.js'
 export default {
     name: 'Particles',
-    mounted() {
+    created() {
         this.initParticles()
     },
     methods: {

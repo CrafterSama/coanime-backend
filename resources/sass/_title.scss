@@ -15,6 +15,10 @@
 
             .title-name {
                 color: var(--white);
+
+                > .stone-icon {
+                    height: 2rem;
+                }
             }
         }
     }
@@ -54,8 +58,8 @@
 }
 
 .title-top-box .title-image {
-	width: 300px;
-    height: 400px;
+	width: 280px;
+    height: 380px;
     margin: 0;
     overflow: hidden;
     border: 7px solid var(--white);
@@ -91,6 +95,8 @@
 
 .title-info-details > li > .svg-inline--fa {
     color: var(--orange);
+    position: relative;
+    top: 3px;
 }
 
 .title-top-box .title-info-box .title-info-details .title-status {

@@ -30,9 +30,17 @@ const routes = {
             if (type === 'magazine') {
                 return `/ecma/revistas/${slug}`
             }
+            /** A Magazine Image */
+            if (type === 'magazine-image') {
+                return `/images/encyclopedia/magazine/${slug}`
+            }
             /** A Person */
             if (type === 'people') {
                 return `/ecma/personas/${slug}`
+            }
+            /** A Person Image URL */
+            if (type === 'people-image') {
+                return `/images/encyclopedia/people/${slug}`
             }
             /** A Company */
             if (type === 'company') {

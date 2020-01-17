@@ -391,8 +391,10 @@ export default {
             windowWidth: window.innerWidth
         }
     },
-    mounted() {
+    created() {
         this.getPostInfo()
+    },
+    mounted() {
         window.onresize = () => {
             this.windowWidth = window.innerWidth
         }

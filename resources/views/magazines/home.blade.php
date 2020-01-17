@@ -2,15 +2,15 @@
 
 @extends('layouts.app')
 
-@section('title', 'Revistas')
+@section('title', 'Enciclopedia - Revistas')
 @section('description', 'Información sobre las revistas que publican sobre anime, manga y cultura del medio oriente asiático.' )
 @section('twitter-image', 'https://coanime.net/images/ecma-logo.png')
 
 @section('content')
 
-@include('partials.searchbox')
+<ecma-magazines section="{{ Request::segment(2) }}"></ecma-magazines>
 
-<div class="lists col-md-12">
+{{-- <div class="lists col-md-12">
 	<table class="table table-rounded table-striped table-condensed cf">
 		<thead>
 			<tr>
@@ -52,5 +52,5 @@
 		</tbody>
 	</table>
 	<div class="col-xs-12 col-sm-12 col-md-12 text-center">{{$magazine->appends(request()->all())->links()}}</div>
-</div>
+</div> --}}
 @endsection

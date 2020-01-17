@@ -24,23 +24,33 @@ class MagazineController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->input('name', '');
-        $magazine = Magazine::with('type', 'image', 'release')
-            ->orderBy('id', 'desc');
+        $magazine = Magazine::search($request->name)->with('type', 'image', 'release', 'country')->orderBy('name', 'asc')->paginate(30);
+        if ($magazine->count() > 0) :
+            return view('magazines.home', ['magazine' => $magazine]);
+        else :
+            return view('errors.404');
+        endif;
+    }
 
-        // TODO: Validate 'name'
-        if ($name) {
-            $magazine = $magazine->search($name);
-        }
-
-        try {
-            $magazine = $magazine->paginate(10);
-        } catch (Exception $e) {
-            Alert::message($e->getMessage(), 'Message');
-            return redirect()->back()->with('errors', 'Error Trying to obtein the Magazine Data');
-        }
-
-        return view('magazines.home', compact('magazine'));
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response|mixed
+     */
+    public function apiIndex(Request $request)
+    {
+        $magazine = Magazine::search($request->name)->with('type', 'image', 'release', 'country')->orderBy('name', 'asc')->paginate(30);
+        if ($magazine->count() > 0) :
+            return response()->json(array(
+                'message' => 'Resource found',
+                'magazine' => $magazine
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'magazine' => []
+            ), 404);
+        endif;
     }
 
     /**
@@ -138,7 +148,34 @@ class MagazineController extends Controller
             ->whereSlug($slug)
             ->firstOrFail();
 
-        return view('magazines.details', compact('mgz'));
+        if ($mgz->count() > 0) :
+            return view('magazines.details', compact('mgz'));
+        else :
+            return view('errors.404');
+        endif;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apiShow($slug)
+    {
+        $mgz = Magazine::with('image', 'type', 'release', 'country')
+            ->whereSlug($slug)
+            ->firstOrFail();
+        if($mgz->count() > 0):
+            return response()->json(array(
+                'message' => 'Resource found',
+                'magazine' => $mgz
+            ), 200);
+        else :
+            return response()->json(array(
+                'message' => 'Resource not found',
+                'magazine' => []
+            ), 404);
+        endif;
     }
 
     /**

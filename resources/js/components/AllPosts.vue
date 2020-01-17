@@ -76,7 +76,7 @@ export default {
             color: '#ED6A00'
         }
     },
-    mounted() {
+    created() {
         this.getPosts()
     },
     methods: {

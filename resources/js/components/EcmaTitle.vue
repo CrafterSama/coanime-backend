@@ -107,7 +107,7 @@ export default {
             loading: false
         }
     },
-    mounted() {
+    created() {
         this.getTitle()
         this.getRandomTitleImage()
         this.getTitlePosts()

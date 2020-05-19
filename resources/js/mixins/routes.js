@@ -1,57 +1,66 @@
 const routes = {
-    methods: {
-        /** Routes to navigate in the Web App */
-        routes: function (type, slug = null, titleType = null) {
-            /** An Article */
-            if (type === 'posts') {
-                return `/posts/${slug}`
-            }
-            /** Articles By Categories */
-            if (type === 'category') {
-                return `/categorias/${slug}`
-            }
-            /** Articles By Tags */
-            if (type === 'tag') {
-                return `/tags/${slug}`
-            }
-            /** A Title */
-            if (type === 'title') {
-                return `/ecma/titulos/${titleType}/${slug}`
-            }
-            /** Titles By Types */
-            if (type === 'type') {
-                return `/ecma/titulos/${slug}`
-            }
-            /** Titles By Genres */
-            if (type === 'genre') {
-                return `/ecma/generos/${slug}`
-            }
-            /** A Magazine */
-            if (type === 'magazine') {
-                return `/ecma/revistas/${slug}`
-            }
-            /** A Magazine Image */
-            if (type === 'magazine-image') {
-                return `/images/encyclopedia/magazine/${slug}`
-            }
-            /** A Person */
-            if (type === 'people') {
-                return `/ecma/personas/${slug}`
-            }
-            /** A Person Image URL */
-            if (type === 'people-image') {
-                return `/images/encyclopedia/people/${slug}`
-            }
-            /** A Company */
-            if (type === 'company') {
-                return `/ecma/empresas/${slug}`
-            }
-            /** User Profile */
-            if (type === 'user') {
-                return `/users/profile/${slug}`
-            }
-        }
+  methods: {
+    /**
+     * @method routes
+     * @description
+     * Routes to navigate in the Web App
+     *
+     * @param {string} type - is the type of resource you need to linked
+     * @param {string} slug - is the slug of the resource you need to linked
+     * @param {string} titleType - is the type of encyclopedia resource you need to linked
+     *
+     * */
+    routes: (type, slug = null, titleType = null) => {
+      /** An Article */
+      if (type === 'posts') {
+        return `/posts/${slug}`
+      }
+      /** Articles By Categories */
+      if (type === 'category') {
+        return `/categorias/${slug}`
+      }
+      /** Articles By Tags */
+      if (type === 'tag') {
+        return `/tags/${slug}`
+      }
+      /** A Title */
+      if (type === 'title') {
+        return `/ecma/titulos/${titleType}/${slug}`
+      }
+      /** Titles By Types */
+      if (type === 'type') {
+        return `/ecma/titulos/${slug}`
+      }
+      /** Titles By Genres */
+      if (type === 'genre') {
+        return `/ecma/generos/${slug}`
+      }
+      /** A Magazine */
+      if (type === 'magazine') {
+        return `/ecma/revistas/${slug}`
+      }
+      /** A Magazine Image */
+      if (type === 'magazine-image') {
+        return `/images/encyclopedia/magazine/${slug}`
+      }
+      /** A Person */
+      if (type === 'people') {
+        return `/ecma/personas/${slug}`
+      }
+      /** A Person Image URL */
+      if (type === 'people-image') {
+        return `/images/encyclopedia/people/${slug}`
+      }
+      /** A Company */
+      if (type === 'company') {
+        return `/ecma/empresas/${slug}`
+      }
+      /** User Profile */
+      if (type === 'user') {
+        return `/users/profile/${slug}`
+      }
     }
+  }
 }
 
 export default routes

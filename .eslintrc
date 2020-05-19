@@ -7,7 +7,7 @@
     },
     "extends": ["plugin:vue/recommended", "standard"],
     "rules": {
-        "indent": ["error", 4],
+        "indent": ["error", 2],
         "no-console": 1,
         "no-unused-vars": 1,
         "sort-imports": 1,
@@ -29,6 +29,6 @@
                 }
             }
         ],
-        "vue/html-indent": ["error", 4]
+        "vue/html-indent": ["error", 2]
     }
 }

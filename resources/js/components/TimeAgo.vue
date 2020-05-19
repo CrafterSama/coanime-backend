@@ -1,5 +1,5 @@
 <template>
-    <span class="post-date">{{ date }}</span>
+  <span class="post-date">{{ date }}</span>
 </template>
 
 <script>
@@ -7,11 +7,11 @@ import moment from 'moment'
 import 'moment/locale/es'
 
 export default {
-    name: 'TimeAgo',
-    computed: {
-        date() {
-            return moment(this.$slots.default[0].text).fromNow()
-        }
+  name: 'TimeAgo',
+  computed: {
+    date() {
+      return moment(this.$slots.default[0].text).fromNow()
     }
+  }
 }
 </script>

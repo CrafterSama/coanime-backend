@@ -14,19 +14,19 @@ import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
 
 [
-    AnimeToday,
-    AllPosts,
-    EcmaMagazine,
-    EcmaMagazines,
-    EcmaPeople,
-    EcmaPerson,
-    EcmaTitle,
-    EcmaTitles,
-    Error404,
-    Post,
-    Particles,
-    TimeAgo,
-    VueMoment
+  AnimeToday,
+  AllPosts,
+  EcmaMagazine,
+  EcmaMagazines,
+  EcmaPeople,
+  EcmaPerson,
+  EcmaTitle,
+  EcmaTitles,
+  Error404,
+  Post,
+  Particles,
+  TimeAgo,
+  VueMoment
 ].forEach(c => {
-    Vue.component(c.name, c)
+  Vue.component(c.name, c)
 })

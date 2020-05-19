@@ -1,7 +1,7 @@
-import './plugins'
-// import './mixins'
 import './bootstrap'
 import './components' // Componentes globales
+// import './mixins'
+import './plugins'
 
 import Vue from 'vue'
 
@@ -13,5 +13,5 @@ import Vue from 'vue'
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
-    el: '#app'
+  el: '#app'
 })

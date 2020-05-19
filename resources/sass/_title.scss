@@ -91,6 +91,12 @@
     line-height: 20px;
     display: grid;
     grid-template-columns: 32px auto;
+    a {
+        color: var(--orange);
+    }
+    a:hover {
+        color: var(--orange);
+    }
 }
 
 .title-info-details > li > .svg-inline--fa {
@@ -146,4 +152,10 @@
 
 .title-sinopsis > p {
     line-height: 25px;
+    a {
+        color: var(--orange);
+    }
+    a:hover {
+        color: var(--orange);
+    }
 }

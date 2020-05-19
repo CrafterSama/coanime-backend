@@ -1,6 +1,6 @@
 @inject('helper', 'App\Helper')
 
-@section('title', 'Coanime.net - Personas - ' . $people->name )
+@section('title', 'Enciclopedia - Personas - ' . $people->name )
 @section('description', str_limit(strip_tags($people->bio), 140))
 @if(empty($people->image))
     @section('twitter-image', 'https://coanime.net//images/no_image.jpg')

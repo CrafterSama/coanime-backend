@@ -23,7 +23,7 @@ class TitleController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of titles serie.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,6 +46,13 @@ class TitleController extends Controller
         }
     }
 
+
+    /**
+     * Display a listing of Titles Series with JSON Response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function apiSearchTitles(Request $request)
     {
         $types = TitleType::orderBy('name', 'asc')->get();
@@ -181,7 +188,7 @@ class TitleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display a single encyclopedia title.
      *
      * @param  string  $type
      * @param  string  $slug
@@ -191,10 +198,9 @@ class TitleController extends Controller
     {
         if (!empty($type) || !empty($slug)):
             // TODO: Agregar/comprobar unicidad del campo slug
-            $title = Title::with('images', 'rating', 'type', 'generes')
-                ->whereSlug($slug)
+            $type_id = TitleType::whereSlug($type)->pluck('id');
+            $title = Title::whereSlug($slug)->where('type_id', $type_id)
                 ->firstOrFail();
-
             return view('titles.details', compact('title'));
         else:
             return view('errors.404');
@@ -202,7 +208,7 @@ class TitleController extends Controller
     }
 
     /**
-     * Get all items of the resource by type.
+     * Get all items of the titles by type.
      *
      * @param  str  $type
      * @return \Illuminate\Http\Response
@@ -224,7 +230,7 @@ class TitleController extends Controller
     }
 
     /**
-     * Get all the genre.
+     * Get all items of the genre.
      *
      */
     public function showAllGenre()
@@ -238,7 +244,7 @@ class TitleController extends Controller
 
 
     /**
-     * Get all items of the resource by genre.
+     * Get all items of the titles by genre.
      *
      * @param  str  $genre
      * @return \Illuminate\Http\Response

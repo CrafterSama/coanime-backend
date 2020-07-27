@@ -36,7 +36,7 @@ class PostController extends Controller
             ->where('draft', '0')
             ->whereNotIn('category_id', [10])
             ->where('view_counter', '>', 5)
-            ->whereBetween('postponed_to', [Carbon::now()->subMonths(6), Carbon::now()])
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)
@@ -79,11 +79,13 @@ class PostController extends Controller
 
         $carbon = new Carbon;
 
-        //return $posts;
-
         return view('web.home', compact('relevants', 'news', 'videos', 'events', 'keywords', 'carbon'));
     }
 
+    /**
+     * All the Articles
+     *
+     */
     public function posts(Request $request)
     {
         $carbon = new Carbon;
@@ -114,7 +116,7 @@ class PostController extends Controller
             ->where('draft', '0')
             ->where('category_id', '!=', 10)
             ->where('view_counter', '>', 5)
-            ->whereBetween('postponed_to', [Carbon::now()->subMonths(6), Carbon::now()])
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)

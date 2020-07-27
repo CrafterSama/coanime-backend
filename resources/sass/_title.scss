@@ -54,7 +54,11 @@
 	position: relative;
 	align-items: start;
 	padding-bottom: 20px;
-	margin-bottom: 25px;
+    margin-bottom: 25px;
+
+    .title-name-box {
+        margin-top: 15px;
+    }
 }
 
 .title-top-box .title-image {
@@ -89,13 +93,25 @@
 .title-top-box .title-info-box .title-info-details > li {
 	margin-top: 3px;
     line-height: 20px;
-    display: grid;
-    grid-template-columns: 32px auto;
+    display: flex;
+    align-items: center;
+    span {
+        margin-right: 5px;
+    }
     a {
         color: var(--orange);
     }
     a:hover {
         color: var(--orange);
+    }
+    .post-date {
+        padding: 0;
+    }
+    .text-square {
+        color: #fff;
+        padding: 5px 10px;
+        background: #ccc;
+        min-width: 120px;
     }
 }
 

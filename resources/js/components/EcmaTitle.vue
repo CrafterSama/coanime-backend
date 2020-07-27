@@ -10,16 +10,6 @@
           <img v-else :src="randomImage" :alt="title.name">
         </figure>
         <div class="overlayer" />
-        <div class="boxed-header-info">
-          <div class="boxed-container">
-            <div class="title-name-box">
-              <div class="before-title-box" />
-              <h1 class="title-name">
-                {{ title.name }}
-              </h1>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="title-content">
         <div class="title-info container">
@@ -29,48 +19,47 @@
               <img v-else src="/assets/images/no_image.jpg" :alt="title.name">
             </figure>
             <div class="title-info-box">
+              <div class="title-name-box">
+                <h1 class="title-name">
+                  {{ title.name }}
+                </h1>
+              </div>
               <ul class="title-info-details overlap-banner">
                 <li>
-                  <i class="fas fa-shapes" />
-                  <span>
-                    <span class="text-strong">Tipo:</span>
-                    <span class="info-details-type">
-                      <a :href="routes('type', title.type.slug)">{{ title.type.name }}</a>
-                    </span>
+                  <span class="text-strong">Tipo:</span>
+                  <span class="info-details-type">
+                    <a :href="routes('type', title.type.slug)">{{ title.type.name }}</a>
                   </span>
                 </li>
                 <li>
-                  <i class="fas fa-language" /> <span><span class="text-strong">Otros Títulos:</span> {{ title.other_titles }}</span>
+                  <span class="text-strong">Otros Títulos:</span><span>{{ title.other_titles }}</span>
                 </li>
                 <li>
-                  <i class="fas fa-calendar" />
-                  <span>
-                    <span class="text-strong">Emitida desde:</span>&nbsp;
-                    <vue-moment :timestamp="title.broad_time" :format="'LL'" />&nbsp;-&nbsp;
-                    <span class="text-strong">Hasta el:</span>&nbsp;
-                    <span v-if="title.broad_finish === null">Sin Información precisa</span>
-                    <vue-moment v-else :timestamp="title.broad_finish" :format="'LL'" />
+                  <span v-if="title.type.name !== 'Juegos'" class="text-strong">Desde:</span>
+                  <span v-else class="text-strong">Salida:</span>
+                  <vue-moment :timestamp="title.broad_time" :format="'LL'" />
+                </li>
+                <li v-if="title.type.name !== 'Juegos'">
+                  <span class="text-strong">Hasta:</span>
+                  <span v-if="title.broad_finish === null">Sin Información precisa</span>
+                  <vue-moment v-else :timestamp="title.broad_finish" :format="'LL'" />
+                </li>
+                <li>
+                  <span class="text-strong">Generos:</span>
+                  <span v-for="genre in title.generes" :key="genre.id" class="genre-tag">
+                    <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
                   </span>
                 </li>
-                <li>
-                  <i class="fas fa-tags" />
-                  <span>
-                    <span class="text-strong">Generos:</span>
-                    <span v-for="genre in title.generes" :key="genre.id" class="genre-tag">
-                      <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
-                    </span>
-                  </span>
+                <li v-if="title.type.name !== 'Juegos'">
+                  <span class="text-strong">Episodios:</span>
+                  <span v-if="title.episodies === '' || title.episodies === '0'">Sin Información precisa</span>
+                  <span v-else>{{ title.episodies }}</span>
                 </li>
                 <li>
-                  <i class="fas fa-list" />
-                  <span>
-                    <span class="text-strong">Episodios / Tomos / Capitulos:</span>
-                    <span v-if="title.episodies === ''">Sin Información precisa <span class="title-status">{{ title.status }}</span></span>
-                    <span v-else>{{ title.episodies }} <span class="title-status">{{ title.status }}</span></span>
-                  </span>
+                  <span class="text-strong">Clasificación:</span><span>{{ title.rating.name }} ({{ title.rating.description }})</span>
                 </li>
                 <li>
-                  <i class="fas fa-users" /> <span><span class="text-strong">Clasificación:</span> {{ title.rating.name }} ({{ title.rating.description }})</span>
+                  <span class="text-strong">Estatus:</span><span class="title-status">{{ title.status }}</span>
                 </li>
               </ul>
             </div>
@@ -97,7 +86,16 @@ export default {
     [LoadingArticles.name]: LoadingArticles
   },
   mixins: [routes],
-  props: ['type', 'slug'],
+  props: {
+    type: {
+      type: String,
+      required: true
+    },
+    slug: {
+      type: String,
+      required: true
+    }
+  },
   data: function () {
     return {
       title: 'Without Info',
@@ -107,46 +105,47 @@ export default {
       loading: false
     }
   },
-  created() {
-    this.getTitle()
-    this.getRandomTitleImage()
-    this.getTitlePosts()
+  async mounted() {
+    await this.getData()
   },
   methods: {
     postImage(str) {
       return str.replace('1920', '480')
     },
-    getTitle() {
+    async getData() {
       this.loading = true
-      fetch(`/api/v1/titles/${this.type}/${this.slug}`)
-        .then(res => res.json())
-        .then(response => {
-          this.title = response.data
-          this.loading = false
-        })
-        .catch(error => console.log(error))
-    },
-    getRandomTitleImage() {
-      fetch(`/api/v1/random-image-title/${this.slug}`)
-        .then(res => res.json())
-        .then(response => {
-          if (response.message === 'OK') {
-            this.randomImage = response.image
-          } else {
-            this.randomImage = false
-          }
-          this.loading = false
-        })
-        .catch(error => console.log(error))
-    },
-    getTitlePosts() {
-      this.loading = true
-      fetch(`/api/v1/titles/${this.type}/${this.slug}/posts`)
-        .then(res => res.json())
-        .then(response => {
-          this.posts = response
-        })
-        .catch(error => console.log(error))
+      try {
+        // Title
+        const responseTitle = await fetch(
+          `/api/v1/titles/${this.type}/${this.slug}`
+        )
+        const jsonTitle = await responseTitle.json()
+
+        // Image
+        const responseImage = await fetch(
+          `/api/v1/random-image-title/${this.slug}`
+        )
+        const jsonImage = await responseImage.json()
+
+        // Posts
+        const responsePosts = await fetch(
+          `/api/v1/titles/${this.type}/${this.slug}/posts`
+        )
+        const jsonPosts = await responsePosts.json()
+
+        // Data assign
+        this.posts = jsonPosts
+        this.title = jsonTitle.data
+        if (jsonImage.message === 'OK') {
+          this.randomImage = jsonImage.image
+        } else {
+          this.randomImage = false
+        }
+      } catch (error) {
+        console.log(error)
+      } finally {
+        this.loading = false
+      }
     },
     changeGrid() {
       this.boxes = !this.boxes

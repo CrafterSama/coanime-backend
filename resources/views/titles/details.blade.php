@@ -1,7 +1,7 @@
 @inject('helper', 'App\Helper')
 @inject('carbon', 'Carbon\carbon')
 
-@section('title', 'Enciclopedia - ' . $title->type->name . ' - ' . $title->name )
+@section('title', $title->name . ' - ' . $title->type->name . ' - Enciclopedia | Coanime.net')
 @section('description', str_limit(strip_tags($title->sinopsis), 170))
 @if(empty($title->images->name))
     @section('twitter-image', 'https://coanime.net/images/no_image.jpg')

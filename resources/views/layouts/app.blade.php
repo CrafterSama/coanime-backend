@@ -36,7 +36,7 @@
 
 	<title>
 	    {{-- config('app.name', 'ECMA - ') --}}
-	    Coanime - @yield('title')
+	    @yield('title')
 	</title>
 	@if(Request::segment(1) != 'dashboard')
 		{{-- Facebook Pixel Code --}}

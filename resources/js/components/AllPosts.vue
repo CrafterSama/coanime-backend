@@ -13,8 +13,8 @@
       </span>
     </h3>
     <div class="posts-box">
-      <div :class="{ 'card-columns': boxes, lists: !boxes }">
-        <article v-for="article in articles.data" :key="article.id" class="card">
+      <div :class="{ 'cards-columns': boxes, lists: !boxes }">
+        <article v-for="article in articles.data" :key="article.id" class="card-item">
           <figure class="card-img-top">
             <a :href="url('posts', article.slug)">
               <img :src="postImage(article.image)" :alt="article.title">

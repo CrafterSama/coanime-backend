@@ -1,6 +1,6 @@
 @inject('helper', 'App\Helper')
 
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @if(Request::segment(4) == '')
 	@section('title', 'Crear Evento')

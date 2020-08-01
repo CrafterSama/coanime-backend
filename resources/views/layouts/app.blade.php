@@ -98,9 +98,8 @@
 	--------------------------------------------------------------------
 	--}}
 
-	{{-- Vendor --}}
-
-	<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    {{-- Vendor --}}
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 
 	{{-- App --}}
 	<link href="{{ mix('assets/css/coanime.css') }}" rel="stylesheet">

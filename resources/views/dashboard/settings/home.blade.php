@@ -1,7 +1,7 @@
 @inject('helper', 'App\Helper')
 @inject('carbon', 'Carbon\Carbon')
 
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title', 'Lista de Posts')
 
@@ -10,7 +10,7 @@
 @include('dashboard.partials.top-title')
 
 @include('dashboard.partials.leftbar')
-	
+
 <div class="lists col-md-10">
 	<div class="col-md-12">
 		<table class="table table-rounded table-striped table-condensed cf">

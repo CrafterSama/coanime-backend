@@ -1,6 +1,6 @@
 @inject('helper', 'App\Helper')
 
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title', 'Lista de Revistas')
 

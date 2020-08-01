@@ -1,5 +1,5 @@
 @inject('helper', 'App\Helper')
-@extends('layouts.app') @if(Request::segment(4) == '')
+@extends('layouts.dashboard') @if(Request::segment(4) == '')
 @section('title', 'Crear Post') @else
 
 @section('title', 'Editar Post') @endif
@@ -18,7 +18,8 @@
             @endforeach
         </ul>
     </div>
-    @endif @if(Request::segment(4) == '') {!! Form::open(['route'=>'posts.store', 'method'=>'POST', 'id'=>'form', 'file' => 'true',
+    @endif
+    @if(Request::segment(4) == '') {!! Form::open(['route'=>'posts.store', 'method'=>'POST', 'id'=>'form', 'file' => 'true',
     'data-toggle' => 'validator', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!} @else {!! Form::model($post,
     ['route' => ['posts.update', $post->id], 'data-id'=> $post->id, 'id'=>'form', 'file' => 'true', 'data-toggle' => 'validator',
     'role' => 'form', 'enctype' => 'multipart/form-data']) !!} {{ method_field('PUT') }} @endif
@@ -38,7 +39,7 @@
         <div class="form-group hidden-md hidden-lg">
             {!! Form::label('category_id', 'Categorias') !!} @if(Request::segment(4) == '') {!! Form::select('category_id', $categories,
             null, ['class'=>'form-control input-lg'], 'required') !!} @else {!! Form::select('category_id', $categories,
-            $post->category_id, ['class'=>'form-control input-lg'], 'required') !!} @endif
+            $post->category_id, ['class' => 'form-control input-lg', 'required' => 'required']) !!} @endif
         </div>
         <div class='form-group'>
             {!! Form::label('content', 'Contenido') !!} @if(Request::segment(4) == '') {!! Form::textarea('content', null, ['id'=>'froala-editor','class'=>'form-control',
@@ -50,18 +51,18 @@
         <div class="form-group hidden-sm hidden-xs">
             {!! Form::label('category_id', 'Categorias') !!}
             @if(Request::segment(4) == '')
-                {!! Form::select('category_id', $categories, null, ['class'=>'select select-categories'], 'required') !!}
+                {!! Form::select('category_id', $categories, null, ['class'=>'select select-categories', 'required' => 'required']) !!}
             @else
-                {!! Form::select('category_id', $categories, $post->category_id, ['class'=>'select select-categories'], 'required') !!}
+                {!! Form::select('category_id', $categories, $post->category_id, ['class'=>'select select-categories', 'required' => 'required']) !!}
             @endif
         </div>
         <div class='form-group'>
             {!! Form::label('tag_id', 'Tags') !!}
             <br>
             @if(Request::segment(4) == '')
-            {!! Form::select('tag_id[]', $tags, null, ['class'=>'select', 'multiple' => 'multiple'], 'required') !!}
+            {!! Form::select('tag_id[]', $tags, null, ['class'=>'select', 'multiple' => 'multiple', 'required' => 'required']) !!}
             @else
-            {!! Form::select('tag_id[]', $tags, $selected, ['class'=>'select', 'multiple' => 'multiple'], 'required') !!}
+            {!! Form::select('tag_id[]', $tags, $selected, ['class'=>'select', 'multiple' => 'multiple', 'required' => 'required']) !!}
             @endif
         </div>
         <div class='form-group hidden-sm hidden-xs'>

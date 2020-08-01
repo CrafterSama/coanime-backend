@@ -1,7 +1,7 @@
 @inject('helper', ' \App\Helper')
 @inject('carbon', 'Carbon\Carbon')
 
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
 @section('title', 'Dashboard')
 

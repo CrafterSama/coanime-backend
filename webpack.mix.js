@@ -22,6 +22,9 @@ mix.copy('resources/flat/js/*.js', 'public/assets/js')
 mix.copy('resources/images/*.jpg', 'public/assets/images')
 mix.copy('resources/images/*.gif', 'public/assets/images')
 mix.copy('resources/images/*.svg', 'public/assets/images')
+mix.copy('resources/vendor', 'public/assets/vendor')
+mix.copy('resources/dashboard_temp/*.css', 'public/assets/old')
+mix.copy('resources/dashboard_temp/*.js', 'public/assets/old')
 
 // Usar .extract al corregir el bug que lo impide y dejar de usar los js en distAssets
 

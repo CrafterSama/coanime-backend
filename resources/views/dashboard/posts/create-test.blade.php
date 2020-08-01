@@ -1,5 +1,5 @@
 @inject('helper', 'App\Helper')
-@extends('layouts.app') @if(Request::segment(4) == '')
+@extends('layouts.dashboard') @if(Request::segment(4) == '')
 @section('title', 'Crear Post') @else
 
 @section('title', 'Editar Post') @endif
@@ -110,7 +110,7 @@
                     {!! Form::select('approved', ['yes' => 'yes','no' => 'no'], $post->approved, ['class'=>'select']) !!}
                 @endif
             </div>
-        @endif 
+        @endif
         @if(Request::segment(4) == '')
         <div class="form-group">
             {!! Form::label('image-client', 'Imagen Destacada') !!}

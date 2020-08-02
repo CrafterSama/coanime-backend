@@ -19,6 +19,7 @@
         "laravel/ui": "^1.1",
         "laravelcollective/html": "^6.0",
         "laravelium/feed": "^6.0",
+        "spatie/laravel-analytics": "^3.10",
         "uxweb/sweet-alert": "dev-master"
     },
     "require-dev": {

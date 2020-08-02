@@ -179,7 +179,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('check-tags', 'PostController@checkTags');
 
-/** All Feeds Routes */
+Route::get('google-analytics-summary',array('as'=>'google-analytics-summary','uses'=>'HomeController@getAnalyticsSummary'));
+
+/** All Feeds Routes **/
+
 
 Route::get('feed', function () {
 

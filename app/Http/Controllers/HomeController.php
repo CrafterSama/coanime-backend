@@ -106,7 +106,7 @@ class HomeController extends Controller
 
     //to get the summary of google analytics.
 
-    private function gASummary($date_from,$date_to) {
+    private function gASummary($date_from, $date_to) {
 
         $service_account_email = 'analytics-api@coanime.iam.gserviceaccount.com';
 

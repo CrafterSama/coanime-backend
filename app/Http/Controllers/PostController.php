@@ -488,7 +488,7 @@ class PostController extends Controller
             ->whereNotIn('category_id', [10])
             ->where('view_counter', '>', 50)
             ->where('category_id', $category_id)
-            ->whereRaw('TIMESTAMP(postponed_to) <= NOW() AND TIMESTAMP(postponed_to) >= DATE_SUB(NOW(), INTERVAL 180 DAY)')
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)
@@ -505,7 +505,7 @@ class PostController extends Controller
             ->orderBy('postponed_to', 'desc')
             ->take(4)->get();
 
-        $category = Category::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')->get();
 
         $tags = Tag::orderBy('name', 'asc')->get();
 

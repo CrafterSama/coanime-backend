@@ -1,16 +1,16 @@
 #news {
-	margin: 0px auto;
+    margin: 0px auto;
     padding: 10px 0px;
 }
 
 #news h3.section-title {
-	display: grid;
-	grid-template-columns: 30px auto 24px;
-	align-items: center;
+    display: grid;
+    grid-template-columns: 30px auto 24px;
+    align-items: center;
 }
 
 #news h3.section-title .material-icons {
-	position: relative;
+    position: relative;
     top: 3px;
     margin-right: 5px;
 }
@@ -22,7 +22,7 @@
     gap: 12px;
     overflow: hidden;
     justify-content: flex-start;
-    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 #news h3.section-title > .put-to-right.boxes {
@@ -45,10 +45,9 @@
     justify-content: center;
 
     .svg-inline--fa {
-        color: var(--orange)
+        color: var(--orange);
     }
 }
-
 
 .lds-facebook > div {
     border-radius: 15px;
@@ -64,10 +63,9 @@
 .more-section > button {
     display: block;
     width: 100%;
-    background:
-    transparent;
+    background: transparent;
     cursor: pointer;
-	color: var(--orange);
+    color: var(--orange);
     line-height: 32px;
     border: none;
 }
@@ -82,17 +80,17 @@ article > header {
 }
 
 .lists {
-	display: grid;
-	grid-template-columns: 1fr;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 .lists .card-item {
-	display: grid;
-	grid-template-columns: 320px auto;
-	height: 180px;
-	margin: 10px 0 0;
-	box-shadow: 0px 1px 3px var(--light);
-	border-radius: 3px;
+    display: grid;
+    grid-template-columns: 320px auto;
+    height: 180px;
+    margin: 10px 0 0;
+    box-shadow: 0px 1px 3px var(--light);
+    border-radius: 3px;
 }
 
 .cards-columns {
@@ -151,7 +149,7 @@ article > header {
 
     > a {
         color: var(--primary);
-        transition: all .2s linear;
+        transition: all 0.2s linear;
     }
     > a:hover {
         color: var(--orange);
@@ -169,16 +167,25 @@ article > header {
 
 .card-author > a {
     color: var(--dark);
-    transition: all .2s linear;
+    transition: all 0.2s linear;
 }
 
 .card-author > a:hover {
     color: var(--orange);
 }
 
+.v-lazy-image {
+    filter: blur(10px);
+    transition: filter 0.7s;
+}
+
+.v-lazy-image-loaded {
+    filter: blur(0);
+}
+
 @media (max-width: 992px) {
-	#news h3.section-title > .put-to-right {
-		display: none;
+    #news h3.section-title > .put-to-right {
+        display: none;
     }
 
     .lists {

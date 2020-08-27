@@ -4,7 +4,7 @@
     right: 10px;
     width: 100%;
     display: grid;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .go-to-posts > a {
@@ -13,7 +13,7 @@
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     display: block;
-    height: 65px;
+    height: 40px;
     width: 26px;
     color: var(--light);
     z-index: 11;
@@ -21,7 +21,7 @@
 
 .go-to-posts > a > svg.svg-inline--fa {
     position: relative;
-    top: 17px;
+    top: 5px;
     left: -2px;
     display: flex;
     justify-items: center;

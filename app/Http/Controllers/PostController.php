@@ -75,6 +75,7 @@ class PostController extends Controller
                 $keywords[] = $tag->name;
             }
         }
+
         $keywords = implode(', ', $keywords);
 
         $carbon = new Carbon;
@@ -108,48 +109,53 @@ class PostController extends Controller
      */
     public function apiPosts(Request $request)
     {
+        try {
+            $relevants = Post::search($request->name)
+                ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+                ->with('categories', 'tags', 'users')
+                ->where('approved', 'yes')
+                ->where('draft', '0')
+                ->where('category_id', '!=', 10)
+                ->where('view_counter', '>', 5)
+                ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
+                ->orWhere('postponed_to', null)
+                ->orderBy('view_counter', 'desc')
+                ->take(3)
+                ->get();
 
-        $relevants = Post::search($request->name)
-            ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
-            ->with('categories', 'tags', 'users')
-            ->where('approved', 'yes')
-            ->where('draft', '0')
-            ->where('category_id', '!=', 10)
-            ->where('view_counter', '>', 5)
-            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
-            ->orWhere('postponed_to', null)
-            ->orderBy('view_counter', 'desc')
-            ->take(3)
-            ->get();
+            $posts = Post::search($request->name)
+                ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+                ->with('users', 'categories', 'titles', 'tags')
+                ->where('approved', 'yes')
+                ->where('draft', '0')
+                ->where('category_id', '!=', 10)
+                ->where('postponed_to', '<=', Carbon::now())
+                ->orWhere('postponed_to', null)
+                ->orderBy('postponed_to', 'desc')
+                ->paginate(4);
 
-        $posts = Post::search($request->name)
-            ->select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
-            ->with('users', 'categories', 'titles', 'tags')
-            ->where('approved', 'yes')
-            ->where('draft', '0')
-            ->where('category_id', '!=', 10)
-            ->where('postponed_to', '<=', Carbon::now())
-            ->orWhere('postponed_to', null)
-            ->orderBy('postponed_to', 'desc')
-            ->paginate(4);
+            $events = Event::select('city_id', 'country_code', 'created_at', 'date_start', 'id', 'slug', 'image', 'name', 'user_id')->with('users', 'city', 'country')
+                ->where('date_start', '>',  Carbon::now())
+                ->orderBy('date_start', 'asc')
+                ->take(20)
+                ->get();
 
-        $events = Event::select('city_id', 'country_code', 'created_at', 'date_start', 'id', 'slug', 'image', 'name', 'user_id')->with('users', 'city', 'country')
-            ->where('date_start', '>',  Carbon::now())
-            ->orderBy('date_start', 'asc')
-            ->take(20)
-            ->get();
-
-        return response()->json(array(
-            'title' => 'Coanime.net - Noticias y Enciclopedia de Cultura Japonesa, Manga y Anime',
-            'description' => 'Tu Fuente de Información sobre Manga, Anime, Cultura Otaku con noticias mas relevantes y actuales del Medio y en tu idioma, subscribete.',
-            'path_posts' => 'https://coanime.net/posts/',
-            'path_events' => 'https://coanime.net/eventos/',
-            'path_image_posts' => 'https://coanime.net/images/posts/',
-            'path_image_events' => 'https://coanime.net/images/events/',
-            'events' => $events,
-            'relevants' => $relevants,
-            'result' => $posts
-        ), 200);
+            return response()->json(array(
+                'code' => 200,
+                'message' => 'Success',
+                'title' => 'Coanime.net - Noticias y Enciclopedia de Cultura Japonesa, Manga y Anime',
+                'description' => 'Tu Fuente de Información sobre Manga, Anime, Cultura Otaku con noticias mas relevantes y actuales del Medio y en tu idioma, subscribete.',
+                'path_posts' => 'https://coanime.net/posts/',
+                'path_events' => 'https://coanime.net/eventos/',
+                'path_image_posts' => 'https://coanime.net/images/posts/',
+                'path_image_events' => 'https://coanime.net/images/events/',
+                'events' => $events,
+                'relevants' => $relevants,
+                'result' => $posts
+            ), 200);
+        } catch (error) {
+            return response()->json(array('code' => 404, 'message' => 'Error, Not Found'), 404);
+        }
     }
 
     public function getRandomPostImage(Request $request, $width = 1920)
@@ -745,6 +751,8 @@ class PostController extends Controller
             }
 
             return response()->json(array(
+                'code' => 200,
+                'message' => 'Success',
                 'title' => 'Coanime.net - ' . $post->categories->name . ' - ' . $post->title,
                 'description' => $post->excerpt,
                 'path_posts' => 'https://coanime.net/posts/',
@@ -757,7 +765,7 @@ class PostController extends Controller
                 'relateds' => $relateds
             ), 200);
         } else {
-            return response()->json(array('error' => 'Error 404'), 404);
+            return response()->json(array('code' => 404, 'message' => 'Error, Not Found'), 404);
         }
     }
 

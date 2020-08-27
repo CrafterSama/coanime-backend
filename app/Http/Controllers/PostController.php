@@ -154,7 +154,7 @@ class PostController extends Controller
                 'result' => $posts
             ), 200);
         } catch (Exception $e) {
-            return response()->json(array('code' => 404, 'message' => 'Error, Not Found'), 404);
+            return response()->json(array('code' => 404, 'message' => 'Error, Not Found', 'error' => $e->getMessage()), 404);
         }
     }
 

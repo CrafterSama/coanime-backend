@@ -509,7 +509,8 @@ class PostController extends Controller
             ->where('postponed_to', '<=', Carbon::now())
             ->orWhere('postponed_to', null)
             ->orderBy('postponed_to', 'desc')
-            ->take(4)->get();
+            ->take(4)
+            ->get();
 
         $categories = Category::orderBy('name', 'asc')->get();
 
@@ -530,15 +531,44 @@ class PostController extends Controller
 
         $tag_id = Tag::where('slug', '=', $tag)->pluck('id');
 
-        $posts = Post::whereHas('tags', function ($q) use ($tag_id) {
+        /* $posts = Post::whereHas('tags', function ($q) use ($tag_id) {
             $q->where('tag_id', $tag_id);
-        })->with('users', 'categories', 'tags')->orderBy('postponed_to', 'desc')->simplePaginate();
+        })->with('users', 'categories', 'tags')->orderBy('postponed_to', 'desc')->simplePaginate(); */
 
-        //$tags = Tag::orderBy('name', 'asc')->get();
+        $relevants = Post::select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->whereHas('tags', function ($q) use ($tag_id) {
+                $q->where('tag_id', $tag_id);
+            })
+            ->with('categories', 'tags', 'users')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('view_counter', '>', 50)
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
+            ->orWhere('postponed_to', null)
+            ->orderBy('view_counter', 'desc')
+            ->take(3)
+            ->get();
 
-        //$categories = Category::orderBy('name', 'asc')->get();
+        $news = Post::select('id', 'title', 'excerpt', 'slug', 'category_id', 'image', 'view_counter', 'user_id', 'postponed_to')
+            ->whereHas('tags', function ($q) use ($tag_id) {
+                $q->where('tag_id', $tag_id);
+            })
+            ->with('users', 'categories', 'titles', 'tags')
+            ->where('approved', 'yes')
+            ->where('draft', '0')
+            ->whereNotIn('category_id', [10])
+            ->where('postponed_to', '<=', Carbon::now())
+            ->orWhere('postponed_to', null)
+            ->orderBy('postponed_to', 'desc')
+            ->take(4)
+            ->get();
 
-        return view('web.home', compact('posts', 'carbon'));
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        $tags = Tag::orderBy('name', 'asc')->get();
+
+        return view('web.home', compact('relevants', 'news', 'tags', 'categories', 'carbon'));
     }
 
     /**

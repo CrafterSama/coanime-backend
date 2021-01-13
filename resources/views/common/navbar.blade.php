@@ -10,9 +10,9 @@
                 <li class="nav-item pr-4 mr-5 active">
                     <a class="nav-link" href="/posts">Articulos</a>
                 </li>
-                <li class="nav-item pr-4 mr-5">
+                {{-- <li class="nav-item pr-4 mr-5">
                     <a class="nav-link" href="/eventos">Eventos</a>
-                </li>
+                </li> --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="/ecma/titulos">Enciclopedia</a>
                 </li>
@@ -80,11 +80,11 @@
                         Revistas
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="{{ Request::segment(2) === 'empresas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/empresas">
                         Empresas
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

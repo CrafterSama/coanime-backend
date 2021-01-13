@@ -13,5 +13,8 @@
 
 @section('content')
 
-<ecma-title slug="{{ $title->slug }}" type="{{ $title->type->slug }}"></ecma-title>
+<ecma-title
+    slug="{{ $title->slug }}"
+    type="{{ $title->type->slug }}"
+></ecma-title>
 @endsection

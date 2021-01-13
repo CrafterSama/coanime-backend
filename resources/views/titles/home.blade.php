@@ -9,6 +9,10 @@
 
 @section('content')
 
-<ecma-titles section="{{ Request::segment(2) }}" type-slug="{{  Request::segment(2) === 'titulos' ? Request::segment(3) : '' }}" genre-slug="{{ Request::segment(2) === 'generos' ? Request::segment(3) : '' }}" ></ecma-titles>
+<ecma-titles
+    section="{{ Request::segment(2) }}"
+    type-slug="{{  Request::segment(2) === 'titulos' ? Request::segment(3) : '' }}"
+    genre-slug="{{ Request::segment(2) === 'generos' ? Request::segment(3) : '' }}"
+></ecma-titles>
 
 @endsection

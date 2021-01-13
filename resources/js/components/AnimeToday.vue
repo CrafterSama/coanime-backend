@@ -113,10 +113,7 @@ export default {
     },
     url(type, title) {
       return (
-        '/ecma/titulos/' +
-        this.strToSlug(String(type)) +
-        '/' +
-        this.strToSlug(String(title))
+        `/ecma/titulos/${this.strToSlug(String(type))}/${this.strToSlug(String(title))}`
       )
     },
     getTodaySchedule() {

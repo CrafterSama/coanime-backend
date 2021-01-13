@@ -16,7 +16,7 @@
 <script>
 export default {
   name: 'Error404',
-  data: function () {
+  data: () => {
     return {
       opps: '/assets/images/error-404.svg'
     }

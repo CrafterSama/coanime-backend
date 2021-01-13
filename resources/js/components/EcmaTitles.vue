@@ -155,6 +155,16 @@ export default {
         this.show = false
       }, 1000)
     },
+    fetcData (url) {
+        fetch(url)
+          .then(res => res.json())
+          .then(response => {
+            this.titles = response.result
+            this.types = response.types
+            this.themes = response.genres
+            this.loading = false
+          })
+    },
     realTimeSearch(e) {
       if (e.target.value !== '') {
         this.searching = e.target.value
@@ -192,34 +202,13 @@ export default {
       this.loading = true
 
       if (this.typeSlug === '' && this.genreSlug === '') {
-        fetch(`/api/v1/titles`)
-          .then(res => res.json())
-          .then(response => {
-            this.titles = response.result
-            this.types = response.types
-            this.themes = response.genres
-            this.loading = false
-          })
+        fetchData(`/api/v1/titles`)
       }
       if (this.typeSlug !== '' && this.genreSlug === '') {
-        fetch(`/api/v1/titles/${this.typeSlug}`)
-          .then(res => res.json())
-          .then(response => {
-            this.titles = response.result
-            this.types = response.types
-            this.themes = response.genres
-            this.loading = false
-          })
+        fetchData(`/api/v1/titles/${this.typeSlug}`)
       }
       if (this.typeSlug === '' && this.genreSlug !== '') {
-        fetch(`/api/v1/genres/${this.genreSlug}`)
-          .then(res => res.json())
-          .then(response => {
-            this.titles = response.result
-            this.types = response.types
-            this.themes = response.genres
-            this.loading = false
-          })
+        fetchData(`/api/v1/genres/${this.genreSlug}`)
       }
     }
   }

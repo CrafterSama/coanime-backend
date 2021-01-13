@@ -7,10 +7,10 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav m-auto d-flex justify-content-around">
-                <li class="nav-item pr-4 mr-5 active">
+                {{-- <li class="nav-item pr-4 mr-5 active">
                     <a class="nav-link" href="/posts">Articulos</a>
                 </li>
-                {{-- <li class="nav-item pr-4 mr-5">
+                <li class="nav-item pr-4 mr-5">
                     <a class="nav-link" href="/eventos">Eventos</a>
                 </li> --}}
                 <li class="nav-item dropdown">

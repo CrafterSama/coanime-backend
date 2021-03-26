@@ -11,7 +11,7 @@
             </div>
             <div class="items__copyright col-12">
                 <p>&copy; <script>new Date().getFullYear()</script> Coanime. Todos los derechos reservados</p>
-                <p class="footer-links"><a href="/page/terminos-de-uso-y-aviso-legal">Términos de uso y Aviso Legal</a> | <a href="/page/politica-de-privacidad">Politica de Privacidad</a></p>
+                {{-- <p class="footer-links"><a href="/page/terminos-de-uso-y-aviso-legal">Términos de uso y Aviso Legal</a> | <a href="/page/politica-de-privacidad">Politica de Privacidad</a></p> --}}
             </div>
         </div>
     </div>

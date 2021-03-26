@@ -95,7 +95,7 @@
                             </h2>
                             <h4 class="info__news-sub-title">{{ $new->excerpt }}</h4>
                             <p>
-                            <i class="fas fa-user"></i> <span class="info__person"><a href="/users/profile/{{ $new->users->slug }}">{{ $new->users->name }}</a></span>
+                            <i class="fas fa-user"></i> <span class="info__person">{{-- <a href="/users/profile/{{ $new->users->slug }}"> --}}{{ $new->users->name }}{{-- </a> --}}</span>
                                 <i class="fas fa-clock"></i> <time-ago>{{ $new->postponed_to }}</time-ago>
                             </p>
                         </div>

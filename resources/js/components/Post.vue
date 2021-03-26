@@ -24,11 +24,11 @@
               {{ article.excerpt }}
             </h2>
             <p>
-              <time-ago>{{ article.postponed_to }}</time-ago>por
-              <a v-if="article.users"
+              <time-ago>{{ article.postponed_to }}</time-ago>por <span class="user-author">{{ article.users.name }}</span>
+              <!-- <a v-if="article.users"
                  class="user-author"
                  :href="routes('user', article.users.slug)"
-              >{{ article.users.name }}</a>
+              >{{ article.users.name }}</a> -->
             </p>
           </div>
         </div>
@@ -37,10 +37,7 @@
         <div class="container-lg">
           <div class="article">
             <div class="article-wrapper">
-              <main
-                class="info__article-content"
-                v-html="article.content"
-              />
+              <main class="info__article-content" v-html="article.content" />
             </div>
             <div
               :class="{
@@ -59,34 +56,16 @@
                     >
                       <div class="info__relatedTitle-image">
                         <img
-                          :src="
-                            getTitleImage(
-                              String(
-                                title.images.name
-                              )
-                            )
-                          "
+                          :src="getTitleImage(String(title.images.name))"
                           :alt="title.name"
                         >
                       </div>
                       <div class="info__related">
-                        <p
-                          class="info__relatedTitle-category"
-                        >
+                        <p class="info__relatedTitle-category">
                           {{ title.type.name }}
                         </p>
-                        <a
-                          :href="
-                            routes(
-                              'title',
-                              title.slug,
-                              title.type.slug
-                            )
-                          "
-                        >
-                          <h3
-                            class="info__relatedTitle-title"
-                          >
+                        <a :href="routes('title', title.slug, title.type.slug)">
+                          <h3 class="info__relatedTitle-title">
                             {{ title.name }}
                           </h3>
                         </a>
@@ -124,13 +103,7 @@
                       <a :href="routes('posts', feature.slug)">
                         <div class="info__relateds-image">
                           <img
-                            :src="
-                              getPostImageThumb(
-                                String(
-                                  feature.image
-                                )
-                              )
-                            "
+                            :src="getPostImageThumb(String(feature.image))"
                             :alt="feature.title"
                           >
                         </div>
@@ -148,10 +121,9 @@
                 <ul class="info__article-tags">
                   <i class="fas fa-hashtag" />
                   <li v-for="tag in article.tags" :key="tag.id">
-                    <a
-                      :href="routes('tag', tag.slug)"
-                      class="tag"
-                    >{{ tag.name }}</a>
+                    <a :href="routes('tag', tag.slug)" class="tag">{{
+                      tag.name
+                    }}</a>
                   </li>
                 </ul>
               </div>
@@ -160,15 +132,13 @@
           <div v-if="article.users" id="author" class>
             <div class="author">
               <div class="info__article-author">
-                <img
-                  :src="article.users.image"
-                  :alt="article.users.nick"
-                >
+                <img :src="article.users.image" :alt="article.users.nick">
                 <div class="info__author">
                   <p class="info__author-name">
-                    <a
-                      :href="routes('user', article.users.slug)"
-                    >{{ article.users.name }}</a>
+                    <span class="user-author">{{ article.users.name }}</span>
+                    <!-- <a :href="routes('user', article.users.slug)">{{
+                      article.users.name
+                    }}</a> -->
                   </p>
                   <p class="info__author-ocupation">
                     <span v-html="article.users.bio" />
@@ -194,11 +164,7 @@
                   >
                     <div class="info__relatedTitle-image">
                       <img
-                        :src="
-                          getTitleImage(
-                            String(title.images.name)
-                          )
-                        "
+                        :src="getTitleImage(String(title.images.name))"
                         :alt="title.name"
                       >
                     </div>
@@ -206,18 +172,8 @@
                       <p class="info__relatedTitle-category">
                         {{ title.type.name }}
                       </p>
-                      <a
-                        :href="
-                          routes(
-                            'title',
-                            title.slug,
-                            title.type.slug
-                          )
-                        "
-                      >
-                        <h3
-                          class="info__relatedTitle-title"
-                        >
+                      <a :href="routes('title', title.slug, title.type.slug)">
+                        <h3 class="info__relatedTitle-title">
                           {{ title.name }}
                         </h3>
                       </a>
@@ -255,11 +211,7 @@
                     <a :href="routes('posts', feature.slug)">
                       <div class="info__relateds-image">
                         <img
-                          :src="
-                            getPostImageThumb(
-                              String(feature.image)
-                            )
-                          "
+                          :src="getPostImageThumb(String(feature.image))"
                           :alt="feature.title"
                         >
                       </div>
@@ -288,17 +240,15 @@
                   <div class="info__features-image">
                     <a :href="routes('posts', related.slug)">
                       <img
-                        :src="
-                          getPostImageThumb(
-                            String(related.image)
-                          )
-                        "
+                        :src="getPostImageThumb(String(related.image))"
                         :alt="related.title"
                       >
                     </a>
                   </div>
                   <p class="info__features-category">
-                    <a :href="routes('category', related.categories.slug)">{{ related.categories.name }}</a>
+                    <a :href="routes('category', related.categories.slug)">{{
+                      related.categories.name
+                    }}</a>
                   </p>
                   <h3 class="info__features-title">
                     <a :href="routes('posts', related.slug)">
@@ -418,12 +368,8 @@ export default {
         })
         .catch(error => console.log(error))
     },
-    onError() {
-
-    },
-    onSuccess() {
-
-    }
+    onError() {},
+    onSuccess() {}
   }
 }
 </script>

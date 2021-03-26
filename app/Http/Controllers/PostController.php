@@ -38,7 +38,7 @@ class PostController extends Controller
             ->where('draft', '0')
             ->whereNotIn('category_id', [10])
             ->where('view_counter', '>', 5)
-            ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
+            ->whereBetween('postponed_to', [Carbon::now()->subMonths(18), Carbon::now()])
             ->orWhere('postponed_to', null)
             ->orderBy('view_counter', 'desc')
             ->take(3)
@@ -119,7 +119,7 @@ class PostController extends Controller
                 ->where('draft', '0')
                 ->where('category_id', '!=', 10)
                 ->where('view_counter', '>', 5)
-                ->whereBetween('postponed_to', [Carbon::now()->subMonths(12), Carbon::now()])
+                ->whereBetween('postponed_to', [Carbon::now()->subMonths(18), Carbon::now()])
                 ->orWhere('postponed_to', null)
                 ->orderBy('view_counter', 'desc')
                 ->take(3)
@@ -587,14 +587,17 @@ class PostController extends Controller
      */
     public function page($slug)
     {
-        $id = Post::where('slug', 'like', $slug)->pluck('id');
-        if ($id->count() > 0) :
+        $id = Post::where('slug', $slug)->pluck('id');
+        if ($id->count() > 0) {
             $post = Post::with('users', 'categories', 'titles')->find($id);
-        $post->increment('view_counter');
+            $post = collect($post);
+            $post->increment('view_counter');
+            dd($post);
 
-        return view('pages.details', compact('post')); else :
+            return view('pages.details', compact('post'));
+        } else {
             return view('errors.404');
-        endif;
+        }
     }
 
     /**

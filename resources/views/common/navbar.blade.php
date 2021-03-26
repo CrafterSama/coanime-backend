@@ -18,7 +18,7 @@
                 </li>
             </ul>
             @if(Request::segment(1) == '')
-            <div class="navbar-right d-flex">
+            {{-- <div class="navbar-right d-flex">
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
@@ -57,9 +57,9 @@
                                 </form>
                             </ul>
                         </li>
-                    @endif
-                </ul>
-            </div>
+                    </ul>
+                </div> --}}
+            @endif
         </div>
     </div>
 </nav>

@@ -1,4 +1,3 @@
-
 <template>
   <div id="news" class="boxed-container">
     <h3 class="section-title orange-border-bottom">
@@ -14,15 +13,21 @@
     </h3>
     <div class="posts-box">
       <div :class="{ 'cards-columns': boxes, lists: !boxes }">
-        <article v-for="article in articles.data" :key="article.id" class="card-item">
+        <article
+          v-for="article in articles.data"
+          :key="article.id"
+          class="card-item"
+        >
           <figure class="card-img-top">
             <a :href="url('posts', article.slug)">
-              <img :src="postImage(article.image)" :alt="article.title" />
+              <img :src="postImage(article.image)" :alt="article.title">
             </a>
           </figure>
           <header class="card-body">
             <div class="card-category">
-              <a :href="url('category', article.categories.slug)">{{ article.categories.name }}</a>
+              <a :href="url('category', article.categories.slug)">{{
+                article.categories.name
+              }}</a>
             </div>
             <h3 class="card-title">
               <a :href="url('posts', article.slug)">{{ article.title }}</a>
@@ -33,7 +38,8 @@
             <small class="card-text">
               <i class="fas fa-user" />
               <span class="card-author">
-                <a :href="url('user', article.users.slug)">{{ article.users.name }}</a>
+                <!-- <a :href="url('user', article.users.slug)">{{ article.users.name }}</a> -->
+                <span>{{ article.users.name }}</span>
               </span>
               <i class="fas fa-clock" />
               <time-ago>{{ article.postponed_to }}</time-ago>
@@ -51,7 +57,11 @@
         </div>
         <div v-else>
           <div class="more-section">
-            <button type="button" class="btn-block" @click="getMorePosts(articles.next_page_url)">
+            <button
+              type="button"
+              class="btn-block"
+              @click="getMorePosts(articles.next_page_url)"
+            >
               <i class="fas fa-sync-alt" /> Mas Posts
             </button>
           </div>
@@ -61,8 +71,8 @@
   </div>
 </template>
 <script>
-import TimeAgo from './TimeAgo';
-import VueLazyImage from "vue-lazy-image";
+import TimeAgo from './TimeAgo'
+import VueLazyImage from 'vue-lazy-image'
 
 export default {
   name: 'AllPosts',

@@ -113,17 +113,17 @@
 
 </head>
 <body>
-    @include('common.navbar')
+    <div id="app">
+        @include('common.navbar')
 
-    <div class="content-box">
-		<div id="app">
+        <div class="content-box">
             <main class="wrapper">
                 @yield('content')
             </main>
-		</div>
-    </div>
+        </div>
 
-    @include('common.footer')
+        @include('common.footer')
+    </div>
 
 	{{--
 	====================================================================

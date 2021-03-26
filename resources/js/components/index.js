@@ -8,6 +8,7 @@ import EcmaPerson from './EcmaPerson'
 import EcmaTitle from './EcmaTitle'
 import EcmaTitles from './EcmaTitles'
 import Error404 from './Error404'
+import Error503 from './Error503'
 import Particles from './Particles'
 import Post from './Post'
 import TimeAgo from './TimeAgo'
@@ -23,6 +24,7 @@ import VueMoment from './VueMoment'
   EcmaTitle,
   EcmaTitles,
   Error404,
+  Error503,
   Post,
   Particles,
   TimeAgo,

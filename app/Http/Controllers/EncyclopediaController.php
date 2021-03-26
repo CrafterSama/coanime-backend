@@ -23,7 +23,7 @@ class EncyclopediaController extends Controller
     public function index()
     {
         $carbon     = new Carbon;
-        $titles     = Title::with('images', 'rating', 'type', 'generes')->orderBy('id', 'desc')->paginate(3);
+        $titles     = Title::with('images', 'rating', 'type', 'genres')->orderBy('id', 'desc')->paginate(3);
         $people     = People::orderBy('id', 'desc')->paginate(3);
         $magazine     = Magazine::with('type', 'image', 'release')->orderBy('id', 'desc')->paginate(3);
         $companies  = Company::orderBy('id', 'desc')->paginate(4);
@@ -34,7 +34,7 @@ class EncyclopediaController extends Controller
 
     public function api()
     {
-        $titles     = Title::with('images', 'rating', 'type', 'generes')->orderBy('id', 'desc')->paginate(3);
+        $titles     = Title::with('images', 'rating', 'type', 'genres')->orderBy('id', 'desc')->paginate(3);
         $people     = People::orderBy('id', 'desc')->paginate(3);
         $magazine     = Magazine::with('type', 'image', 'release')->orderBy('id', 'desc')->paginate(3);
         $companies  = Company::orderBy('id', 'desc')->paginate(4);

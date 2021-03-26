@@ -88,7 +88,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach($generes as $g)
+			@foreach($genres as $g)
 				<tr>
 					<td>
 						<div class="col-md-2">

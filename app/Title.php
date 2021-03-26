@@ -37,11 +37,11 @@ class Title extends Model
             ->orWhere('other_titles', 'like', $name . '%');
     }
 
-    /*public function scopeByGenre($genere, $query) {
-		return $query->whereHas('Genere', function ($q) use ($genere) {
-			$q->where('genere_id', $genere->id);
-		});
-	}*/
+    /*public function scopeByGenre($genre, $query) {
+        return $query->whereHas('Genre', function ($q) use ($genre) {
+            $q->where('genre_id', $genre->id);
+        });
+    }*/
 
     public function images()
     {
@@ -63,9 +63,9 @@ class Title extends Model
         return $this->belongsTo('App\TitleType');
     }
 
-    public function generes()
+    public function genres()
     {
-        return $this->belongsToMany('App\Genere');
+        return $this->belongsToMany('App\Genre');
     }
 
     public function posts()

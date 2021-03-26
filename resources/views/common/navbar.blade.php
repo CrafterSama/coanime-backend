@@ -63,7 +63,7 @@
         </div>
     </div>
 </nav>
-@if(Request::segment(2) === 'titulos' || Request::segment(2) === 'personas' || Request::segment(2) === 'revistas' || Request::segment(2) === 'empresas')
+@if(Request::segment(1) === 'ecma')
     <div class="ecma-navigation">
         <div class="container">
             <ul class="nav nav-tabs">

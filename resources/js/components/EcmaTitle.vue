@@ -46,7 +46,7 @@
                 </li>
                 <li>
                   <span class="text-strong">Generos:</span>
-                  <span v-for="genre in title.generes" :key="genre.id" class="genre-tag">
+                  <span v-for="genre in title.genres" :key="genre.id" class="genre-tag">
                     <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
                   </span>
                 </li>

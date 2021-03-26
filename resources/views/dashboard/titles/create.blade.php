@@ -45,12 +45,12 @@
 			  @endif
 			</div>
 			<div class='form-group'>
-				{!! Form::label('genere_id', 'Generos') !!}
+				{!! Form::label('genre_id', 'Generos') !!}
 				<br>
 				@if(Request::segment(4) == '')
-				{!! Form::select('genere_id[]', $generes, null, ['class'=>'select-genres', 'multiple' => 'multiple'], 'required') !!}
+				{!! Form::select('genre_id[]', $genres, null, ['class'=>'select-genres', 'multiple' => 'multiple'], 'required') !!}
 				@else
-				{!! Form::select('genere_id[]', $generes, $selected, ['class'=>'select-genres', 'multiple' => 'multiple'], 'required') !!}
+				{!! Form::select('genre_id[]', $genres, $selected, ['class'=>'select-genres', 'multiple' => 'multiple'], 'required') !!}
 				@endif
 			</div>
 			<div class="form-group hidden-md hidden-lg">

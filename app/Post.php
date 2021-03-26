@@ -60,7 +60,7 @@ class Post extends Model
 
     public function titles()
     {
-        return $this->belongsToMany('App\Title')->with('images', 'type', 'users', 'generes', 'posts');
+        return $this->belongsToMany('App\Title')->with('images', 'type', 'users', 'genres', 'posts');
     }
 
     public function votes()

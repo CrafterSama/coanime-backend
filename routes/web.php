@@ -46,7 +46,6 @@ Route::get('/users/profile/{id}', 'UserController@profile')->name('profile');
 Route::get('/users/update-image', 'UserController@updateImage');
 
 Route::group(['prefix' => 'ecma'], function () {
-
     Route::get('titulos', 'TitleController@index')->name('titles');
     Route::get('titulos/actualizar', 'TitleController@updateTitles')->name('update.titles');
     //Route::get('titulos/{slug}', 'TitleController@show');
@@ -124,15 +123,12 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
-
     Route::post('/posts/vote', 'PostVoteController@vote');
 
     Route::get('dashboard', 'HomeController@index')->name('admin');
 
     Route::group(['prefix' => 'dashboard'], function () {
-
         Route::group(['middleware' => 'admin'], function () {
-
             Route::get('settings', 'HomeController@settings')->name('config');
 
             Route::get('posts', 'HomeController@posts')->name('db.posts');
@@ -179,7 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::get('check-tags', 'PostController@checkTags');
 
-Route::get('google-analytics-summary',array('as'=>'google-analytics-summary','uses'=>'HomeController@getAnalyticsSummary'));
+Route::get('google-analytics-summary', array('as'=>'google-analytics-summary','uses'=>'HomeController@getAnalyticsSummary'));
 
 /** All Feeds Routes **/
 

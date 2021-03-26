@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Alert;
 use App\Category;
 use App\Event;
 use App\Company;
@@ -19,6 +18,9 @@ use App\Helper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Alert;
+use Exception;
+use Auth;
 
 class PostController extends Controller
 {
@@ -135,7 +137,7 @@ class PostController extends Controller
                 ->paginate(4);
 
             $events = Event::select('city_id', 'country_code', 'created_at', 'date_start', 'id', 'slug', 'image', 'name', 'user_id')->with('users', 'city', 'country')
-                ->where('date_start', '>',  Carbon::now())
+                ->where('date_start', '>', Carbon::now())
                 ->orderBy('date_start', 'asc')
                 ->take(20)
                 ->get();
@@ -177,25 +179,23 @@ class PostController extends Controller
 
         if ($tag_id->count() > 0) :
             $query = Post::getByTitle($tag_id);
-            if ($query->count() > 0) :
+        if ($query->count() > 0) :
                 $posts = $query->get();
 
-                foreach ($posts as $post) :
+        foreach ($posts as $post) :
                     array_push($arrayImages, $post->image);
-                endforeach;
+        endforeach;
 
-                $randomImage = basename($arrayImages[array_rand($arrayImages)]);
+        $randomImage = basename($arrayImages[array_rand($arrayImages)]);
 
-                return response()->json(array(
+        return response()->json(array(
                     'message' => 'OK',
                     'image' => 'https://coanime.net/images/posts/' . $randomImage
-                ), 200);
-            else :
+                ), 200); else :
                 return response()->json(array(
                     'message' => 'Not Found!'
                 ), 404);
-            endif;
-        else :
+        endif; else :
             return response()->json(array(
                 'message' => 'Not Found!'
             ), 404);
@@ -252,7 +252,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'title' => 'required|max:255',
             'excerpt' => 'required|max:255',
@@ -280,96 +279,93 @@ class PostController extends Controller
         if ($request->file('image-client')) :
             $file = $request->file('image-client');
 
-            // Make the Library Instance
-            $image = \Image::make($request->file('image-client')->getRealPath());
+        // Make the Library Instance
+        $image = \Image::make($request->file('image-client')->getRealPath());
 
-            // Path to save the original image size
-            $originalPath = public_path() . '/images/posts/';
+        // Path to save the original image size
+        $originalPath = public_path() . '/images/posts/';
 
-            // Path to save the thumbnails
-            $thumbnailPath = public_path() . '/images/posts/thumbnails/';
+        // Path to save the thumbnails
+        $thumbnailPath = public_path() . '/images/posts/thumbnails/';
 
-            // Making the Original Name
-            $fileName = hash('sha256', $data['slug'] . strval(time()));
+        // Making the Original Name
+        $fileName = hash('sha256', $data['slug'] . strval(time()));
 
-            $watermark = \Image::make(public_path() . '/images/logo_homepage.png');
+        $watermark = \Image::make(public_path() . '/images/logo_homepage.png');
 
-            $watermark->opacity(30);
+        $watermark->opacity(30);
 
-            $image->insert($watermark, 'bottom-right', 10, 10);
+        $image->insert($watermark, 'bottom-right', 10, 10);
 
-            $image->encode('jpg', 100);
+        $image->encode('jpg', 100);
 
-            if ($image->width() > 1920) {
-                $image->resize(1920, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                });
-            }
-
-            $image->save($originalPath . $fileName . '-1920w.jpg');
-
-            $image->resize(1600, null, function ($constraint) {
+        if ($image->width() > 1920) {
+            $image->resize(1920, null, function ($constraint) {
                 $constraint->aspectRatio();
             });
+        }
 
-            $image->save($originalPath . $fileName . '-1600w.jpg');
+        $image->save($originalPath . $fileName . '-1920w.jpg');
 
-            $image->resize(1200, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+        $image->resize(1600, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-            $image->save($originalPath . $fileName . '-1200w.jpg');
+        $image->save($originalPath . $fileName . '-1600w.jpg');
 
-            $image->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+        $image->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-            $image->save($originalPath . $fileName . '-800w.jpg');
+        $image->save($originalPath . $fileName . '-1200w.jpg');
 
-            $image->resize(640, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+        $image->resize(800, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-            $image->save($originalPath . $fileName . '-640w.jpg');
+        $image->save($originalPath . $fileName . '-800w.jpg');
 
-            $image->resize(480, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
+        $image->resize(640, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-            $image->save($originalPath . $fileName . '-480w.jpg');
+        $image->save($originalPath . $fileName . '-640w.jpg');
 
-            // Cambiar de tamaño Tomando en cuenta el radio para hacer un thumbnail
-            $image->resize(320, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            // Guardar
-            $image->save($thumbnailPath . 'thumb-' . $fileName . '-320w.jpg');
+        $image->resize(480, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-            $data['image'] = $fileName . '-1920w.jpg';
-        else :
+        $image->save($originalPath . $fileName . '-480w.jpg');
+
+        // Cambiar de tamaño Tomando en cuenta el radio para hacer un thumbnail
+        $image->resize(320, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        // Guardar
+        $image->save($thumbnailPath . 'thumb-' . $fileName . '-320w.jpg');
+
+        $data['image'] = $fileName . '-1920w.jpg'; else :
             $data['image'] = null;
         endif;
 
         if ($data = Post::create($data)) :
             if (!empty($request['title_id'])) :
                 $data->titles()->sync([$request['title_id']]);
-            endif;
+        endif;
 
-            if (!empty($request['tag_id'])) :
+        if (!empty($request['tag_id'])) :
                 $data->tags()->sync($request['tag_id']);
-            endif;
+        endif;
 
-            \Alert::success('Post Agregado o Programado');
-            return redirect()->to('dashboard/posts');
-        else :
+        \Alert::success('Post Agregado o Programado');
+        return redirect()->to('dashboard/posts'); else :
             \Alert::error('No se ha podido guardar la Informacion Suministrada');
-            return back();
+        return back();
         endif;
     }
 
     public function checkTags()
     {
-
         $posts = Post::all();
 
         foreach ($posts as $post) {
@@ -406,7 +402,6 @@ class PostController extends Controller
      */
     public function imageUpload(Request $request)
     {
-
         $postImage = '';
 
         if ($request->file('file')) :
@@ -592,14 +587,12 @@ class PostController extends Controller
      */
     public function page($slug)
     {
-
         $id = Post::where('slug', 'like', $slug)->pluck('id');
         if ($id->count() > 0) :
             $post = Post::with('users', 'categories', 'titles')->find($id);
-            $post->increment('view_counter');
+        $post->increment('view_counter');
 
-            return view('pages.details', compact('post'));
-        else :
+        return view('pages.details', compact('post')); else :
             return view('errors.404');
         endif;
     }
@@ -723,15 +716,14 @@ class PostController extends Controller
             if ($post->tags->count() > 0) :
                 foreach ($post->tags as $t) :
                     $keywords[] = $t->name;
-                endforeach;
+            endforeach;
 
-                $keywords = implode(',', $keywords);
-            else :
+            $keywords = implode(',', $keywords); else :
                 $string = $post->slug;
-                $postTags = explode("-", $string);
-                $excludedWords = array('la', 'el', 'lo', 'un', 'los', 'las', 'una', 'sus', 'su', 'de', 'del', 'a', 'ha', 'con', 'unos', 'unas', 'y', 'para', 'pero', 'le', 'cual', 'ellos', 'ellas', 'por', 'este', 'esta', 'han', 'ah', 'se', 'al', 'mas', 'nos', 'como', 'que', 'es', 'esto', 'asi', 'te', 'ya', 'en');
-                $keywords = array_diff($postTags, $excludedWords);
-                $keywords = implode(',', $keywords);
+            $postTags = explode("-", $string);
+            $excludedWords = array('la', 'el', 'lo', 'un', 'los', 'las', 'una', 'sus', 'su', 'de', 'del', 'a', 'ha', 'con', 'unos', 'unas', 'y', 'para', 'pero', 'le', 'cual', 'ellos', 'ellas', 'por', 'este', 'esta', 'han', 'ah', 'se', 'al', 'mas', 'nos', 'como', 'que', 'es', 'esto', 'asi', 'te', 'ya', 'en');
+            $keywords = array_diff($postTags, $excludedWords);
+            $keywords = implode(',', $keywords);
             endif;
 
 
@@ -748,7 +740,7 @@ class PostController extends Controller
                 if ($otherArticles->count() > 0) :
                     foreach ($otherArticles as $index) :
                         array_push($newArticles, $index);
-                    endforeach;
+                endforeach;
                 endif;
             }
 
@@ -985,15 +977,13 @@ class PostController extends Controller
      */
     public function destroy($id, Request $request)
     {
-
         $post = Post::find($id);
 
         if ($post->delete()) :
             \Alert::success('El Post se ha Eliminado satisfactoriamente');
-            return back();
-        else :
+        return back(); else :
             \Alert::error('El Post no se ha podido Eliminar');
-            return back();
+        return back();
         endif;
     }
 

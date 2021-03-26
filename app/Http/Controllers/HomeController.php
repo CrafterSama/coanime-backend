@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Title;
 use App\TitleType;
-use App\Genere;
+use App\Genre;
 use App\Ratings;
 use App\Settings;
 use App\Category;
@@ -37,7 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         $events = Event::with('users')->orderBy('id', 'desc')->paginate(9);
-        $titles = Title::with('images', 'rating', 'type', 'generes')->orderBy('id', 'desc')->paginate(6);
+        $titles = Title::with('images', 'rating', 'type', 'genres')->orderBy('id', 'desc')->paginate(6);
         $people = People::with('users')->orderBy('id', 'desc')->paginate(8);
         $magazine = Magazine::with('type', 'image', 'release', 'users')->orderBy('id', 'desc')->paginate(6);
         $companies = Company::with('users')->orderBy('id', 'desc')->paginate(8);
@@ -53,7 +53,7 @@ class HomeController extends Controller
 
     public function titles(Request $request)
     {
-        $titles = Title::search($request->name)->with('images', 'rating', 'type', 'generes', 'users')->orderBy('id', 'desc')->paginate(20);
+        $titles = Title::search($request->name)->with('images', 'rating', 'type', 'genres', 'users')->orderBy('id', 'desc')->paginate(20);
         return view('dashboard.titles.home', compact('titles'));
     }
 
@@ -84,11 +84,11 @@ class HomeController extends Controller
     {
         $settings = Settings::all();
         $types = TitleType::all();
-        $generes = Genere::all();
+        $genres = Genre::all();
         $roles = Role::all();
         $ratings = Ratings::all();
         $categories = Category::all();
-        return view('dashboard.settings.home', compact('types', 'generes', 'settings', 'roles', 'ratings', 'categories'));
+        return view('dashboard.settings.home', compact('types', 'genres', 'settings', 'roles', 'ratings', 'categories'));
     }
 
     // Google Analytics

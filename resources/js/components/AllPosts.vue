@@ -17,7 +17,7 @@
         <article v-for="article in articles.data" :key="article.id" class="card-item">
           <figure class="card-img-top">
             <a :href="url('posts', article.slug)">
-              <v-lazy-image :src="postImage(article.image)" :alt="article.title" />
+              <img :src="postImage(article.image)" :alt="article.title" />
             </a>
           </figure>
           <header class="card-body">
@@ -61,14 +61,14 @@
   </div>
 </template>
 <script>
-import TimeAgo from './TimeAgo'
-import VLazyImage from 'v-lazy-image'
+import TimeAgo from './TimeAgo';
+import VueLazyImage from "vue-lazy-image";
 
 export default {
   name: 'AllPosts',
   components: {
     [TimeAgo.name]: TimeAgo,
-    [VLazyImage.name]: VLazyImage
+    [VueLazyImage.name]: VueLazyImage
   },
   data: function () {
     return {

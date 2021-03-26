@@ -73,7 +73,7 @@
                   <a :href="routes('title', title.slug, title.type.slug)">{{ title.name }}</a>
                 </h3>
                 <div class="genres-list">
-                  <a v-for="genre in title.generes" :key="genre.id" class="title-type" :href="routes('type', genre.slug)">{{ genre.name }}</a>
+                  <a v-for="genre in title.genres" :key="genre.id" class="title-type" :href="routes('type', genre.slug)">{{ genre.name }}</a>
                 </div>
               </div>
               <div class="more-info">
@@ -155,16 +155,6 @@ export default {
         this.show = false
       }, 1000)
     },
-    fetcData (url) {
-        fetch(url)
-          .then(res => res.json())
-          .then(response => {
-            this.titles = response.result
-            this.types = response.types
-            this.themes = response.genres
-            this.loading = false
-          })
-    },
     realTimeSearch(e) {
       if (e.target.value !== '') {
         this.searching = e.target.value
@@ -201,14 +191,46 @@ export default {
     getTitles() {
       this.loading = true
 
+      const fetchData = (url) => {
+        fetch(`${url}`)
+          .then(res => res.json())
+          .then(response => {
+            this.titles = response.result;
+            this.types = response.types;
+            this.themes = response.genres;
+            this.loading = false;
+          });
+      };
+
       if (this.typeSlug === '' && this.genreSlug === '') {
-        fetchData(`/api/v1/titles`)
+        fetchData(`/api/v1/titles`);
+          /* .then(res => res.json())
+          .then(response => {
+            this.titles = response.result
+            this.types = response.types
+            this.themes = response.genres
+            this.loading = false
+          }) */
       }
       if (this.typeSlug !== '' && this.genreSlug === '') {
-        fetchData(`/api/v1/titles/${this.typeSlug}`)
+        fetchData(`/api/v1/titles/${this.typeSlug}`);
+          /* .then(res => res.json())
+          .then(response => {
+            this.titles = response.result
+            this.types = response.types
+            this.themes = response.genres
+            this.loading = false
+          }) */
       }
       if (this.typeSlug === '' && this.genreSlug !== '') {
-        fetchData(`/api/v1/genres/${this.genreSlug}`)
+        fetchData(`/api/v1/genres/${this.genreSlug}`);
+          /* .then(res => res.json())
+          .then(response => {
+            this.titles = response.result
+            this.types = response.types
+            this.themes = response.genres
+            this.loading = false
+          }) */
       }
     }
   }

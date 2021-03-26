@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
 
 use App\Settings;
-use App\Genere;
+use App\Genre;
 use App\Ratings;
 use App\Title;
 use App\TitleImage;
@@ -12,6 +12,6 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SettingsController extends Controller {
-	
+class SettingsController extends Controller
+{
 }

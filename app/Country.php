@@ -11,20 +11,20 @@ class Country extends Model
      *
      * @var string
      */
-    protected $table = 'country';
+    protected $table = 'countries';
 
     public function event()
     {
-        return $this->hasOne('\App\Event', 'code', 'country_code');
+        return $this->hasOne('\App\Event', 'iso3', 'country_code');
     }
 
     public function person()
     {
-        return $this->hasOne('\App\People', 'code', 'country_code');
+        return $this->hasOne('\App\People', 'iso3', 'country_code');
     }
 
     public function company()
     {
-        return $this->hasOne('\App\Company', 'code', 'country_code');
+        return $this->hasOne('\App\Company', 'iso3', 'country_code');
     }
 }

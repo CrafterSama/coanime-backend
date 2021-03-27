@@ -5,31 +5,56 @@
       <div class="search-box">
         <div class="container">
           <div class="boxed-container">
-            <form id="serch-form" class="search-form" autocomplete="off" @submit.prevent="search">
+            <form
+              id="serch-form"
+              class="search-form"
+              autocomplete="off"
+              @submit.prevent="search"
+            >
               <div class="form-group d-flex justify-content-center">
-                <input class="form-control form-control-lg" autocomplete="off" type="text" name="search" placeholder="Busqueda de Personas" @keyup="realTimeSearch" @blur="hide" @focus="show = true">
+                <input
+                  class="form-control form-control-lg"
+                  autocomplete="off"
+                  type="text"
+                  name="search"
+                  placeholder="Busqueda de Personas"
+                  @keyup="realTimeSearch"
+                  @blur="hide"
+                  @focus="show = true"
+                >
               </div>
               <div v-if="results.length > 0 && show" class="searching-results">
-                <div v-for="(item, index) in results" :key="index" class="result-item">
+                <div
+                  v-for="(item, index) in results"
+                  :key="index"
+                  class="result-item"
+                >
                   <a :href="routes('people', item.slug)">
                     <div class="result-item-url">
                       <figure class="result-item-image">
-                        <img v-if="item.image" :src="routes('people-image', item.image)" :alt="`${item.name} (${item.japanese_name})`">
-                        <img v-else src="/assets/images/no_image.jpg" :alt="`${item.name} (${item.japanese_name})`">
+                        <img
+                          v-if="item.image"
+                          :src="routes('people-image', item.image)"
+                          :alt="`${item.name} (${item.japanese_name})`"
+                        >
+                        <img
+                          v-else
+                          src="/assets/images/no_image.jpg"
+                          :alt="`${item.name} (${item.japanese_name})`"
+                        >
                       </figure>
                       <div class="result-item-info">
                         <h4 class="result-item-name">
                           {{ item.name }} ({{ item.japanese_name }})
                         </h4>
-                        <p>
-                          ({{ item.areas_skills_hobbies }})
-                        </p>
+                        <p>({{ item.areas_skills_hobbies }})</p>
                       </div>
                     </div>
                   </a>
                 </div>
                 <button class="submit-search" type="submit">
-                  Ver todos los resultados para <span class="enfasis-underline">{{ searching }}</span>
+                  Ver todos los resultados para
+                  <span class="enfasis-underline">{{ searching }}</span>
                 </button>
               </div>
             </form>
@@ -47,18 +72,41 @@
         </div>
         <div v-else class="container">
           <div class="grid-titles">
-            <div v-for="(person, index) in people.data" :key="index" class="title-item" @mouseover="hover = index" @mouseleave="hover = null">
+            <div
+              v-for="(person, index) in people.data"
+              :key="index"
+              class="title-item"
+              @mouseover="hover = index"
+              @mouseleave="hover = null"
+            >
               <figure class="title-image">
-                <img v-if="person.image !== null" :src="routes('people-image', person.image)" :alt="`${person.name} (${person.japanese_name})`">
-                <img v-else src="/assets/images/no_image.jpg" :alt="person.name">
-                <div :class="{'overlayer': hover !== index, 'overlayer hover': hover === index}">
+                <img
+                  v-if="person.image !== null"
+                  :src="routes('people-image', person.image)"
+                  :alt="`${person.name} (${person.japanese_name})`"
+                >
+                <img
+                  v-else
+                  src="/assets/images/no_image.jpg"
+                  :alt="person.name"
+                >
+                <div
+                  :class="{
+                    overlayer: hover !== index,
+                    'overlayer hover': hover === index
+                  }"
+                >
                   <a :href="routes('people', person.slug)" />
                 </div>
               </figure>
               <div class="title-info">
                 <div class="title-type">
                   <p>
-                    {{ person.country ? person.country.name : '' }}
+                    {{
+                      person.country
+                        ? `${person.country.emoji} ${person.country.name}`
+                        : ''
+                    }}
                   </p>
                 </div>
                 <h3 class="title-name person">
@@ -82,15 +130,23 @@
           </div>
           <div class="paginator">
             <div class="pages-info">
-              Pagina {{ people.current_page }} de
-              {{ people.last_page }} {{ people.last_page > 1 ? 'Paginas' : 'Pagina' }}
+              Pagina {{ people.current_page }} de {{ people.last_page }}
+              {{ people.last_page > 1 ? 'Paginas' : 'Pagina' }}
             </div>
             <div class="space-between" />
             <div class="pages-links">
-              <span v-if="people.prev_page_url !== null" class="page-prev" @click="loadPage(people.prev_page_url)">
+              <span
+                v-if="people.prev_page_url !== null"
+                class="page-prev"
+                @click="loadPage(people.prev_page_url)"
+              >
                 <i class="fas fa-chevron-left" />
               </span>
-              <span v-if="people.next_page_url !== null" class="page-next" @click="loadPage(people.next_page_url)">
+              <span
+                v-if="people.next_page_url !== null"
+                class="page-next"
+                @click="loadPage(people.next_page_url)"
+              >
                 <i class="fas fa-chevron-right" />
               </span>
             </div>

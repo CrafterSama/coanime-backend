@@ -11,7 +11,7 @@ class City extends Model
      *
      * @var string
      */
-    protected $table = 'city';
+    protected $table = 'cities';
 
     public function event()
     {
@@ -20,7 +20,7 @@ class City extends Model
 
     public function country()
     {
-        return $this->belongsTo('\App\Country', 'country_code', 'code');
+        return $this->belongsTo('\App\Country', 'country_id', 'id');
     }
 
     public function person()

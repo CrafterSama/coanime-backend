@@ -1,6 +1,7 @@
 <template>
   <div class="particles">
     <div id="particles-js" />
+    test
   </div>
 </template>
 

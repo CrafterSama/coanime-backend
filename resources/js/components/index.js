@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import AllPosts from './AllPosts'
 import AnimeToday from './AnimeToday'
+import CommonFooter from './Common/Footer/CommonFooter'
 import EcmaMagazine from './EcmaMagazine'
 import EcmaMagazines from './EcmaMagazines'
 import EcmaPeople from './EcmaPeople'
@@ -13,8 +14,7 @@ import Particles from './Particles'
 import Post from './Post'
 import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
-
-[
+;[
   AnimeToday,
   AllPosts,
   EcmaMagazine,
@@ -28,7 +28,8 @@ import VueMoment from './VueMoment'
   Post,
   Particles,
   TimeAgo,
-  VueMoment
+  VueMoment,
+  CommonFooter
 ].forEach(c => {
   Vue.component(c.name, c)
 })

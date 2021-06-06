@@ -1,4 +1,4 @@
-const routes = {
+const helpers = {
   methods: {
     /**
      * @method routes
@@ -10,7 +10,7 @@ const routes = {
      * @param {string} titleType - is the type of encyclopedia resource you need to linked
      *
      * */
-    routes: (type, slug = null, titleType = null) => {
+    routes: (type, slug = null, titleType = null, image = false) => {
       /** An Article */
       if (type === 'posts') {
         return `/posts/${slug}`
@@ -41,6 +41,9 @@ const routes = {
       }
       /** A Magazine Image */
       if (type === 'magazine-image') {
+        if (image) {
+          return `https://coanime.net/images/encyclopedia/magazine/${slug}`
+        }
         return `/images/encyclopedia/magazine/${slug}`
       }
       /** A Person */
@@ -49,6 +52,9 @@ const routes = {
       }
       /** A Person Image URL */
       if (type === 'people-image') {
+        if (image) {
+          return `https://coanime.net/images/encyclopedia/people/${slug}`
+        }
         return `/images/encyclopedia/people/${slug}`
       }
       /** A Company */
@@ -59,8 +65,11 @@ const routes = {
       if (type === 'user') {
         return `/users/profile/${slug}`
       }
+    },
+    asset: resource => {
+      return `${window.location.origin}/assets/${resource}`
     }
   }
 }
 
-export default routes
+export default helpers

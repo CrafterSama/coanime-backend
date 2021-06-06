@@ -161,7 +161,7 @@
 import EcmaNavbar from './Common/Ecma/EcmaNavbar'
 import LoadingArticles from './Common/Loading/LoadingArticles'
 import _ from 'lodash'
-import { routes } from '../mixins'
+import { helpers } from '../mixins'
 
 export default {
   name: 'EcmaPeople',
@@ -169,7 +169,7 @@ export default {
     [LoadingArticles.name]: LoadingArticles,
     [EcmaNavbar.name]: EcmaNavbar
   },
-  mixins: [routes],
+  mixins: [helpers],
   props: ['section'],
   data: function () {
     return {

@@ -90,7 +90,7 @@
 import LoadingArticles from './Common/Loading/LoadingArticles'
 import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
-import { routes } from '../mixins'
+import { helpers } from '../mixins'
 
 export default {
   name: 'EcmaMagazine',
@@ -99,7 +99,7 @@ export default {
     [VueMoment.name]: VueMoment,
     [LoadingArticles.name]: LoadingArticles
   },
-  mixins: [routes],
+  mixins: [helpers],
   props: ['slug'],
   data: function () {
     return {

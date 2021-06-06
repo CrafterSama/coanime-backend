@@ -315,7 +315,7 @@ import MailchimpSubscribe from 'vue-mailchimp-subscribe'
 import LoadingArticles from './Common/Loading/LoadingArticles'
 import Parallax from 'vue-parallaxy'
 import { ResponsiveDirective } from 'vue-responsive-components'
-import { routes } from '../mixins'
+import { helpers } from '../mixins'
 import TimeAgo from './TimeAgo'
 
 export default {
@@ -329,7 +329,7 @@ export default {
   directives: {
     responsive: ResponsiveDirective
   },
-  mixins: [routes],
+  mixins: [helpers],
   props: ['postSlug'],
   data: function () {
     return {

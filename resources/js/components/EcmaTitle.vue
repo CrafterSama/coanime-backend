@@ -1,12 +1,19 @@
-
 <template>
   <div class="content-wrapper">
     <loading-articles v-if="loading" />
     <div v-else id="title">
       <div class="title-header">
         <figure class="title-header-image">
-          <img v-if="!randomImage && title.images" :src="title.images.name" :alt="title.name">
-          <img v-if="!randomImage && !title.images" src="/assets/images/no_post_image.jpg" :alt="title.name">
+          <img
+            v-if="!randomImage && title.images"
+            :src="title.images.name"
+            :alt="title.name"
+          >
+          <img
+            v-if="!randomImage && !title.images"
+            src="/assets/images/no_post_image.jpg"
+            :alt="title.name"
+          >
           <img v-else :src="randomImage" :alt="title.name">
         </figure>
         <div class="overlayer" />
@@ -15,7 +22,11 @@
         <div class="title-info container">
           <div class="title-top-box overlap-banner">
             <figure class="title-image overlap-banner">
-              <img v-if="title.images" :src="title.images.name" :alt="title.name">
+              <img
+                v-if="title.images"
+                :src="title.images.name"
+                :alt="title.name"
+              >
               <img v-else src="/assets/images/no_image.jpg" :alt="title.name">
             </figure>
             <div class="title-info-box">
@@ -28,7 +39,9 @@
                 <li>
                   <span class="text-strong">Tipo:</span>
                   <span class="info-details-type">
-                    <a :href="routes('type', title.type.slug)">{{ title.type.name }}</a>
+                    <a :href="routes('type', title.type.slug)">{{
+                      title.type.name
+                    }}</a>
                   </span>
                 </li>
                 <li>
@@ -42,11 +55,19 @@
                 <li v-if="title.type.name !== 'Juegos'">
                   <span class="text-strong">Hasta:</span>
                   <span v-if="title.broad_finish === null">Sin Información precisa</span>
-                  <vue-moment v-else :timestamp="title.broad_finish" :format="'LL'" />
+                  <vue-moment
+                    v-else
+                    :timestamp="title.broad_finish"
+                    :format="'LL'"
+                  />
                 </li>
                 <li>
                   <span class="text-strong">Generos:</span>
-                  <span v-for="genre in title.genres" :key="genre.id" class="genre-tag">
+                  <span
+                    v-for="genre in title.genres"
+                    :key="genre.id"
+                    class="genre-tag"
+                  >
                     <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
                   </span>
                 </li>
@@ -56,7 +77,9 @@
                   <span v-else>{{ title.episodies }}</span>
                 </li>
                 <li>
-                  <span class="text-strong">Clasificación:</span><span>{{ title.rating.name }} ({{ title.rating.description }})</span>
+                  <span class="text-strong">Clasificación:</span><span>{{ title.rating.name }} ({{
+                    title.rating.description
+                  }})</span>
                 </li>
                 <li>
                   <span class="text-strong">Estatus:</span><span class="title-status">{{ title.status }}</span>
@@ -64,9 +87,7 @@
               </ul>
             </div>
           </div>
-          <div class="title-sinopsis"
-               v-html="title.sinopsis"
-          />
+          <div class="title-sinopsis" v-html="title.sinopsis" />
         </div>
       </div>
     </div>
@@ -76,7 +97,7 @@
 import LoadingArticles from './Common/Loading/LoadingArticles'
 import TimeAgo from './TimeAgo'
 import VueMoment from './VueMoment'
-import { routes } from '../mixins'
+import { helpers } from '../mixins'
 
 export default {
   name: 'EcmaTitle',
@@ -85,7 +106,7 @@ export default {
     [VueMoment.name]: VueMoment,
     [LoadingArticles.name]: LoadingArticles
   },
-  mixins: [routes],
+  mixins: [helpers],
   props: {
     type: {
       type: String,

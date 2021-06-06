@@ -5,7 +5,12 @@
       <div class="search-box">
         <div class="container">
           <div class="boxed-container">
-            <form id="serch-form" class="search-form" autocomplete="off" @submit.prevent="search">
+            <form
+              id="serch-form"
+              class="search-form"
+              autocomplete="off"
+              @submit.prevent="search"
+            >
               <div class="form-group d-flex justify-content-center">
                 <input
                   class="form-control form-control-lg"
@@ -19,26 +24,37 @@
                 >
               </div>
               <div v-if="results.length > 0 && show" class="searching-results">
-                <div v-for="(item, index) in results" :key="index" class="result-item">
+                <div
+                  v-for="(item, index) in results"
+                  :key="index"
+                  class="result-item"
+                >
                   <a :href="routes('magazine', item.slug)">
                     <div class="result-item-url">
                       <figure class="result-item-image">
-                        <img v-if="item.image.name" :src="routes('magazine-image', item.image.name)" :alt="`${item.name}`">
-                        <img v-else src="/assets/images/no_image.jpg" :alt="`${item.name}`">
+                        <img
+                          v-if="item.image.name"
+                          :src="routes('magazine-image', item.image.name)"
+                          :alt="`${item.name}`"
+                        >
+                        <img
+                          v-else
+                          src="/assets/images/no_image.jpg"
+                          :alt="`${item.name}`"
+                        >
                       </figure>
                       <div class="result-item-info">
                         <h4 class="result-item-name">
                           {{ item.name }} ({{ item.type.name }})
                         </h4>
-                        <p>
-                          ({{ item.release.name }})
-                        </p>
+                        <p>({{ item.release.name }})</p>
                       </div>
                     </div>
                   </a>
                 </div>
                 <button class="submit-search" type="submit">
-                  Ver todos los resultados para <span class="enfasis-underline">{{ searching }}</span>
+                  Ver todos los resultados para
+                  <span class="enfasis-underline">{{ searching }}</span>
                 </button>
               </div>
             </form>
@@ -58,7 +74,8 @@
           <div class="grid-titles">
             <div
               v-for="(magazine, index) in magazines.data"
-              :key="index" class="title-item"
+              :key="index"
+              class="title-item"
               @mouseover="hover = index"
               @mouseleave="hover = null"
             >
@@ -68,8 +85,17 @@
                   :src="routes('magazine-image', magazine.image.name)"
                   :alt="`${magazine.name}`"
                 >
-                <img v-else src="/assets/images/no_image.jpg" :alt="magazine.name">
-                <div :class="{'overlayer': hover !== index, 'overlayer hover': hover === index}">
+                <img
+                  v-else
+                  src="/assets/images/no_image.jpg"
+                  :alt="magazine.name"
+                >
+                <div
+                  :class="{
+                    overlayer: hover !== index,
+                    'overlayer hover': hover === index
+                  }"
+                >
                   <a :href="routes('magazine', magazine.slug)" />
                 </div>
               </figure>
@@ -99,15 +125,23 @@
           </div>
           <div class="paginator">
             <div class="pages-info">
-              Pagina {{ magazines.current_page }} de
-              {{ magazines.last_page }} {{ magazines.last_page > 1 ? 'Paginas' : 'Pagina' }}
+              Pagina {{ magazines.current_page }} de {{ magazines.last_page }}
+              {{ magazines.last_page > 1 ? 'Paginas' : 'Pagina' }}
             </div>
             <div class="space-between" />
             <div class="pages-links">
-              <span v-if="magazines.prev_page_url !== null" class="page-prev" @click="loadPage(magazines.prev_page_url)">
+              <span
+                v-if="magazines.prev_page_url !== null"
+                class="page-prev"
+                @click="loadPage(magazines.prev_page_url)"
+              >
                 <i class="fas fa-chevron-left" />
               </span>
-              <span v-if="magazines.next_page_url !== null" class="page-next" @click="loadPage(magazines.next_page_url)">
+              <span
+                v-if="magazines.next_page_url !== null"
+                class="page-next"
+                @click="loadPage(magazines.next_page_url)"
+              >
                 <i class="fas fa-chevron-right" />
               </span>
             </div>
@@ -122,7 +156,7 @@
 import EcmaNavbar from './Common/Ecma/EcmaNavbar'
 import LoadingArticles from './Common/Loading/LoadingArticles'
 import _ from 'lodash'
-import { routes } from '../mixins'
+import { helpers } from '../mixins'
 
 export default {
   name: 'EcmaMagazines',
@@ -130,7 +164,7 @@ export default {
     [LoadingArticles.name]: LoadingArticles,
     [EcmaNavbar.name]: EcmaNavbar
   },
-  mixins: [routes],
+  mixins: [helpers],
   props: ['section'],
   data: function () {
     return {

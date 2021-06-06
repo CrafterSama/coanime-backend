@@ -6,7 +6,7 @@
         <figure class="title-header-image">
           <img
             v-if="person.image !== null"
-            :src="routes('people-image', person.image)"
+            :src="routes('people-image', person.image, null, true)"
             :alt="`${person.name} (${person.japanese_name})`"
           >
           <img

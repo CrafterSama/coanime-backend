@@ -34,7 +34,7 @@
                       <figure class="result-item-image">
                         <img
                           v-if="item.image"
-                          :src="routes('people-image', item.image)"
+                          :src="routes('people-image', item.image, null, true)"
                           :alt="`${item.name} (${item.japanese_name})`"
                         >
                         <img

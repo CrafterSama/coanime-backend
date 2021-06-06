@@ -16,24 +16,6 @@
           >
         </figure>
         <div class="overlayer" />
-        <div class="boxed-header-info">
-          <div class="boxed-container">
-            <div class="title-name-box">
-              <div class="before-title-box" />
-              <h1 class="title-name">
-                {{ person.name }}
-                <span class="text-italic">{{
-                  `(${person.japanese_name})`
-                }}</span>
-                <img
-                  v-if="person.falldown === 'si'"
-                  class="stone-icon"
-                  src="/assets/images/stone-icon.svg"
-                >
-              </h1>
-            </div>
-          </div>
-        </div>
       </div>
       <div class="title-content">
         <div class="title-info container">
@@ -51,16 +33,31 @@
               >
             </figure>
             <div class="title-info-box">
+              <div class="boxed-header-info">
+                <div class="boxed-container">
+                  <div class="title-name-box">
+                    <h1 class="title-name">
+                      {{ person.name }}
+                      <span class="text-italic">{{
+                        `(${person.japanese_name})`
+                      }}</span>
+                      <img
+                        v-if="person.falldown === 'si'"
+                        class="stone-icon"
+                        src="/assets/images/stone-icon.svg"
+                      >
+                    </h1>
+                  </div>
+                </div>
+              </div>
               <ul class="title-info-details overlap-banner">
                 <li>
-                  <i class="fas fa-language" />
                   <span><span class="text-strong">Nombre de Nacimiento:</span>
                     <span class="text-italic">{{
                       person.japanese_name
                     }}</span></span>
                 </li>
                 <li>
-                  <i class="fas fa-city" />
                   <span>
                     <span class="text-strong">Ciudad y País de Origen:</span>
                     {{
@@ -74,14 +71,12 @@
                   </span>
                 </li>
                 <li>
-                  <i class="fas fa-calendar" />
                   <span>
                     <span class="text-strong">Fecha de Nacimiento:</span>
                     <vue-moment :timestamp="person.birthday" :format="'LL'" />
                   </span>
                 </li>
                 <li v-if="person.falldown_date !== null">
-                  <i class="fas fa-calendar" />
                   <span>
                     <span class="text-strong">Fercha de Desceso:</span>
                     <vue-moment
@@ -91,7 +86,6 @@
                   </span>
                 </li>
                 <li>
-                  <i class="fas fa-tags" />
                   <span>
                     <span class="text-strong">Areas / Habilidades / Hobbies:</span>
                     {{ person.areas_skills_hobbies }}

@@ -39,7 +39,7 @@
                         >
                         <img
                           v-else
-                          src="/assets/images/no_image.jpg"
+                          :src="asset('images/no_image.jpg')"
                           :alt="`${item.name} (${item.japanese_name})`"
                         >
                       </figure>
@@ -82,12 +82,12 @@
               <figure class="title-image">
                 <img
                   v-if="person.image !== null"
-                  :src="routes('people-image', person.image)"
+                  :src="routes('people-image', person.image, null, true)"
                   :alt="`${person.name} (${person.japanese_name})`"
                 >
                 <img
                   v-else
-                  src="/assets/images/no_image.jpg"
+                  :src="asset('images/no_image.jpg')"
                   :alt="person.name"
                 >
                 <div

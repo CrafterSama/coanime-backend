@@ -52,14 +52,18 @@
               </div>
               <ul class="title-info-details overlap-banner">
                 <li>
-                  <span><span class="text-strong">Nombre de Nacimiento:</span>
-                    <span class="text-italic">{{
-                      person.japanese_name
-                    }}</span></span>
+                  <div class="first-child">
+                    <span class="text-strong">Nombre de Nacimiento:</span>
+                  </div>
+                  <div class="text-italic">
+                    {{ person.japanese_name }}
+                  </div>
                 </li>
                 <li>
-                  <span>
+                  <div class="first-child">
                     <span class="text-strong">Ciudad y País de Origen:</span>
+                  </div>
+                  <div>
                     {{
                       person.city !== null
                         ? `${person.city.name}, `
@@ -68,28 +72,34 @@
                     {{
                       person.country !== null ? `${person.country.name}` : ''
                     }}
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span>
+                  <div class="first-child">
                     <span class="text-strong">Fecha de Nacimiento:</span>
+                  </div>
+                  <div>
                     <vue-moment :timestamp="person.birthday" :format="'LL'" />
-                  </span>
+                  </div>
                 </li>
                 <li v-if="person.falldown_date !== null">
-                  <span>
+                  <div class="first-child">
                     <span class="text-strong">Fercha de Desceso:</span>
+                  </div>
+                  <div>
                     <vue-moment
                       :timestamp="person.falldown_date"
                       :format="'LL'"
                     />
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span>
+                  <div class="first-child">
                     <span class="text-strong">Areas / Habilidades / Hobbies:</span>
+                  </div>
+                  <div>
                     {{ person.areas_skills_hobbies }}
-                  </span>
+                  </div>
                 </li>
               </ul>
             </div>

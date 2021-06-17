@@ -45,37 +45,47 @@
             <div class="title-info-box">
               <ul class="title-info-details overlap-banner">
                 <li>
-                  <span>
-                    <span class="text-strong">Tipo:</span>
-                    <span class="text-italic">{{ magazine.type.name }}</span>
-                  </span>
+                  <div class="text-strong first-child">
+                    Tipo:
+                  </div>
+                  <div class="text-italic">
+                    {{ magazine.type.name }}
+                  </div>
                 </li>
                 <li>
-                  <span>
-                    <span class="text-strong">Frecuencia de Salida:</span>
+                  <div class="text-strong first-child">
+                    Frecuencia de Salida:
+                  </div>
+                  <div>
                     {{ magazine.release.name }}
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span>
-                    <span class="text-strong">Fecha de Fundación:</span>
+                  <div class="text-strong first-child">
+                    Fecha de Fundación:
+                  </div>
+                  <div>
                     <vue-moment
                       :timestamp="magazine.foundation_date"
                       :format="'LL'"
                     />
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span>
-                    <span class="text-strong">País de Orígen:</span>
+                  <div class="text-strong first-child">
+                    País de Orígen:
+                  </div>
+                  <div>
                     {{ `${magazine.country.emoji} ${magazine.country.name}` }}
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span>
-                    <span class="text-strong">Website:</span>
+                  <div class="text-strong first-child">
+                    Website:
+                  </div>
+                  <div>
                     <a :href="magazine.website">{{ magazine.website }}</a>
-                  </span>
+                  </div>
                 </li>
               </ul>
             </div>

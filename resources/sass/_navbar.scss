@@ -1,89 +1,92 @@
 a.navbar-brand {
-    font-weight: 500;
-    font-size: 2em;
-    font-style: italic;
-    padding: 0px !important;
+  font-weight: 500;
+  font-size: 2em;
+  font-style: italic;
+  padding: 0px !important;
 }
 
 .navbar-brand {
-    position: relative;
-    top: 0px;
-    display: inline-block;
-    margin: 7px 0 5px;
-    margin-right: 10px;
-    width: 200px;
-    height: 45px;
-    -webkit-mask: url(/assets/images/logo-horizontal-white.svg) no-repeat 50% 50%;
-    mask: url(/assets/images/logo-horizontal-white.svg) no-repeat 50% 50%;
-    mask-size: auto;
-    -webkit-mask-size: auto;
-    background-color: var(--orange);
-    transition: all .5s ease;
+  position: relative;
+  top: 0px;
+  display: inline-block;
+  margin: 7px 0 5px;
+  margin-right: 10px;
+  width: 180px;
+  min-height: 45px;
+  -webkit-mask: url(/assets/images/logo-horizontal-white.svg) no-repeat 50% 50%;
+  mask: url(/assets/images/logo-horizontal-white.svg) no-repeat 50% 50%;
+  mask-size: auto;
+  -webkit-mask-size: auto;
+  background-color: var(--orange);
+  transition: all 0.5s ease;
 }
 
 .navbar-default {
-    .navbar-brand {
-        &:hover, &:focus {
-        background-color: var(--orange);
-        }
+  .navbar-brand {
+    &:hover,
+    &:focus {
+      background-color: var(--orange);
+    }
+  }
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 60px;
+  padding: 0px 25px;
+  z-index: 500;
+  background-color: rgba(255, 255, 255, 0);
+  transition: all 0.5s ease-in-out;
+  border-bottom: 1px solid var(--light-gray-90);
+  box-shadow: 0 1px 4px #ccc;
+
+  .navbar-nav {
+    li.nav-item > a.nav-link {
+      color: var(--background);
+      font-size: 17px;
+      font-weight: 500;
+
+      &:hover,
+      &:focus {
+        color: var(--background);
+      }
     }
 
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 60px;
-    padding: 0px 25px;
-    z-index: 500;
-    background-color: rgba(255, 255, 255, 0);
-    transition: all .5s ease-in-out;
-    border-bottom: 1px solid var(--light-gray-90);
-    box-shadow: 0 1px 4px #ccc;
+    .open > a {
+      background-color: var(--light-gray);
+      color: var(--background);
 
-    .navbar-nav {
-
-        li.nav-item > a.nav-link {
-            color: var(--background);
-            font-size: 17px;
-            font-weight: 500;
-
-            &:hover, &:focus {
-                color: var(--background);
-            }
-        }
-
-        .open > a {
-            background-color: var(--light-gray);
-            color: var(--background);
-
-            &:hover, &:focus {
-                background-color: var(--light-gray);
-                color: var(--background);
-            }
-        }
+      &:hover,
+      &:focus {
+        background-color: var(--light-gray);
+        color: var(--background);
+      }
     }
+  }
 }
 
 .navbar.navbar-default.navbar-fixed-top ~ div {
-    margin-top: 60px;
+  margin-top: 60px;
 }
 
 .navbar-nav > li > a {
-    padding-top: 16px;
-    padding-bottom: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .dropdown-menu {
-    background-color: var(--white);
-    border: none;
-    border-radius: 7px;
+  background-color: var(--white);
+  border: none;
+  border-radius: 7px;
 
-    > li > a {
-        color: var(--background);
+  > li > a {
+    color: var(--background);
 
-        &:hover, &:focus {
-            background-color: var(--light-gray);
-            color: var(--text);
-        }
+    &:hover,
+    &:focus {
+      background-color: var(--light-gray);
+      color: var(--text);
     }
+  }
 }

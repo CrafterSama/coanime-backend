@@ -37,52 +37,89 @@
               </div>
               <ul class="title-info-details overlap-banner">
                 <li>
-                  <span class="text-strong">Tipo:</span>
-                  <span class="info-details-type">
+                  <div class="text-strong first-child">
+                    Tipo:
+                  </div>
+                  <div class="info-details-type">
                     <a :href="routes('type', title.type.slug)">{{
                       title.type.name
                     }}</a>
-                  </span>
+                  </div>
                 </li>
                 <li>
-                  <span class="text-strong">Otros Títulos:</span><span>{{ title.other_titles }}</span>
+                  <div class="text-strong first-child">
+                    Otros Títulos:
+                  </div>
+                  <div>{{ title.other_titles }}</div>
                 </li>
                 <li>
-                  <span v-if="title.type.name !== 'Juegos'" class="text-strong">Desde:</span>
-                  <span v-else class="text-strong">Salida:</span>
-                  <vue-moment :timestamp="title.broad_time" :format="'LL'" />
+                  <div
+                    v-if="title.type.name !== 'Juegos'"
+                    class="text-strong first-child"
+                  >
+                    Desde:
+                  </div>
+                  <div v-else class="text-strong">
+                    Salida:
+                  </div>
+                  <div>
+                    <vue-moment :timestamp="title.broad_time" :format="'LL'" />
+                  </div>
                 </li>
                 <li v-if="title.type.name !== 'Juegos'">
-                  <span class="text-strong">Hasta:</span>
-                  <span v-if="title.broad_finish === null">Sin Información precisa</span>
-                  <vue-moment
-                    v-else
-                    :timestamp="title.broad_finish"
-                    :format="'LL'"
-                  />
+                  <div class="text-strong first-child">
+                    Hasta:
+                  </div>
+                  <div>
+                    <span v-if="title.broad_finish === null">Sin Información precisa</span>
+                    <vue-moment
+                      v-else
+                      :timestamp="title.broad_finish"
+                      :format="'LL'"
+                    />
+                  </div>
                 </li>
                 <li>
-                  <span class="text-strong">Generos:</span>
-                  <span
+                  <div class="text-strong first-child">
+                    Generos:
+                  </div>
+                  <div
                     v-for="genre in title.genres"
                     :key="genre.id"
                     class="genre-tag"
                   >
                     <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
-                  </span>
+                  </div>
                 </li>
                 <li v-if="title.type.name !== 'Juegos'">
-                  <span class="text-strong">Episodios:</span>
-                  <span v-if="title.episodies === '' || title.episodies === '0'">Sin Información precisa</span>
-                  <span v-else>{{ title.episodies }}</span>
+                  <div class="text-strong first-child">
+                    Episodios:
+                  </div>
+                  <div>
+                    {{
+                      title.episodes ||
+                        title.episodes !== '' ||
+                        title.episodes !== '0'
+                        ? title.episodes
+                        : 'Sin Información precisa'
+                    }}
+                  </div>
                 </li>
                 <li>
-                  <span class="text-strong">Clasificación:</span><span>{{ title.rating.name }} ({{
-                    title.rating.description
-                  }})</span>
+                  <div class="text-strong first-child">
+                    Clasificación:
+                  </div>
+                  <div>
+                    {{ title.rating.name }} ({{ title.rating.description }})
+                  </div>
                 </li>
                 <li>
-                  <span class="text-strong">Estatus:</span><span class="title-status">{{ title.status }}</span>
+                  <div class="text-strong first-child">
+                    Estatus:
+                  </div>
+                  <div class="title-status">
+                    {{ title.status }}
+                  </div>
                 </li>
               </ul>
             </div>

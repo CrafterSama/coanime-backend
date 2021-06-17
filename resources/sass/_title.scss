@@ -73,6 +73,8 @@
 
 .title-top-box .title-image.overlap-banner {
   margin-top: -125px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .title-top-box .title-image > img {
@@ -92,7 +94,7 @@
   margin-top: 3px;
   line-height: 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   span {
     margin-right: 5px;
   }
@@ -125,10 +127,21 @@
   border-radius: 4px;
   padding: 0px 5px;
   color: var(--orange);
+  max-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .title-top-box .title-info-details.overlap-banner {
   margin-top: 20px;
+  > li {
+    display: flex;
+    > div.first-child {
+      min-width: 150px;
+      margin-right: 1rem;
+    }
+  }
 }
 
 .title-top-box .title-info-details .info-details-type {
@@ -174,8 +187,22 @@
   }
 }
 
+@media (max-width: 992px) {
+  .title-name {
+    font-size: 2.1rem;
+  }
+}
 @media (max-width: 600px) {
   .title-top-box {
     grid-template-columns: 1fr;
+  }
+  .title-top-box .title-image.overlap-banner {
+    margin-top: -250px;
+  }
+  .title-top-box .title-info-details.overlap-banner > li {
+    display: grid;
+  }
+  .title-name {
+    font-size: 1.8rem;
   }
 }

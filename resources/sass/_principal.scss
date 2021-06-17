@@ -188,6 +188,10 @@ input {
   max-width: 993px;
 }
 
+.flex {
+  display: flex;
+}
+
 @media (min-width: 768px) {
   .container {
     max-width: 750px;

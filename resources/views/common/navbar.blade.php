@@ -69,17 +69,20 @@
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="{{ Request::segment(2) === 'titulos' ? 'nav-link active' : 'nav-link' }}" href="/ecma/titulos">
-                        Titulos
+                        <span title="Titulos" class="mobile"><i class="fa fa-film"></i></span>
+                        <span class="desktop-and-tablet">Titulos</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="{{ Request::segment(2) === 'personas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/personas">
-                        Personas
+                        <span title="Personas" class="mobile"><i class="fa fa-users"></i></span>
+                        <span class="desktop-and-tablet">Personas</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="{{ Request::segment(2) === 'revistas' ? 'nav-link active' : 'nav-link' }}" href="/ecma/revistas">
-                        Revistas
+                        <span title="Revistas" class="mobile"><i class="fa fa-book"></i></span>
+                        <span class="desktop-and-tablet">Revistas</span>
                     </a>
                 </li>
                 {{-- <li class="nav-item">

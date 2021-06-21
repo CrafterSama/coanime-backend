@@ -26,9 +26,18 @@
     border-width: 0px 0px 4px;
     text-align: center;
 }
+.mobile {
+    display: none;
+}
 
 @media (min-width: 320px) and (max-width: 480px) {
     .nav-tabs .nav-item {
-        min-width: 140px;
+        min-width: 80px;
+    }
+    .mobile {
+        display: block;
+    }
+    .desktop-and-tablet {
+        display: none;
     }
 }

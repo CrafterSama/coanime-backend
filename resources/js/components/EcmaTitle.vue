@@ -36,7 +36,7 @@
                 </h1>
               </div>
               <ul class="title-info-details overlap-banner">
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Tipo:
                   </div>
@@ -46,13 +46,13 @@
                     }}</a>
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Otros Títulos:
                   </div>
                   <div>{{ title.other_titles }}</div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div
                     v-if="title.type.name !== 'Juegos'"
                     class="text-strong first-child"
@@ -79,7 +79,7 @@
                     />
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Generos:
                   </div>
@@ -105,7 +105,7 @@
                     }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Clasificación:
                   </div>
@@ -113,7 +113,7 @@
                     {{ title.rating.name }} ({{ title.rating.description }})
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Estatus:
                   </div>

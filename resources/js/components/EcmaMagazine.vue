@@ -44,7 +44,7 @@
             </figure>
             <div class="title-info-box">
               <ul class="title-info-details overlap-banner">
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Tipo:
                   </div>
@@ -52,7 +52,7 @@
                     {{ magazine.type.name }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Frecuencia de Salida:
                   </div>
@@ -60,7 +60,7 @@
                     {{ magazine.release.name }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Fecha de Fundación:
                   </div>
@@ -71,7 +71,7 @@
                     />
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     País de Orígen:
                   </div>
@@ -79,7 +79,7 @@
                     {{ `${magazine.country.emoji} ${magazine.country.name}` }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="text-strong first-child">
                     Website:
                   </div>

@@ -51,7 +51,7 @@
                 </div>
               </div>
               <ul class="title-info-details overlap-banner">
-                <li>
+                <li class="mb-2">
                   <div class="first-child">
                     <span class="text-strong">Nombre de Nacimiento:</span>
                   </div>
@@ -59,7 +59,7 @@
                     {{ person.japanese_name }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="first-child">
                     <span class="text-strong">Ciudad y País de Origen:</span>
                   </div>
@@ -74,7 +74,7 @@
                     }}
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="first-child">
                     <span class="text-strong">Fecha de Nacimiento:</span>
                   </div>
@@ -93,7 +93,7 @@
                     />
                   </div>
                 </li>
-                <li>
+                <li class="mb-2">
                   <div class="first-child">
                     <span class="text-strong">Areas / Habilidades / Hobbies:</span>
                   </div>

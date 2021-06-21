@@ -6,7 +6,7 @@
         <figure class="title-header-image">
           <img
             v-if="magazine.image.name"
-            :src="routes('magazine-image', magazine.image.name)"
+            :src="routes('magazine-image', magazine.image.name, null, true)"
             :alt="`${magazine.name}`"
           >
           <img
@@ -33,7 +33,7 @@
             <figure class="title-image overlap-banner">
               <img
                 v-if="magazine.image.name"
-                :src="routes('magazine-image', magazine.image.name)"
+                :src="routes('magazine-image', magazine.image.name, null, true)"
                 :alt="`${magazine.name}`"
               >
               <img

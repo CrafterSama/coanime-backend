@@ -34,7 +34,7 @@
                       <figure class="result-item-image">
                         <img
                           v-if="item.image.name"
-                          :src="routes('magazine-image', item.image.name)"
+                          :src="routes('magazine-image', item.image.name, null, true)"
                           :alt="`${item.name}`"
                         >
                         <img
@@ -82,7 +82,7 @@
               <figure class="title-image">
                 <img
                   v-if="magazine.image.name"
-                  :src="routes('magazine-image', magazine.image.name)"
+                  :src="routes('magazine-image', magazine.image.name, null, true)"
                   :alt="`${magazine.name}`"
                 >
                 <img

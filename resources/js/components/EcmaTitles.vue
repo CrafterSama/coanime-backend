@@ -152,23 +152,25 @@
                     {{ title.type.name }}
                   </a>
                 </div>
-                <h3
-                  :class="{
-                    'title-name': hover !== index,
-                    'title-name hover': hover === index
-                  }"
-                >
-                  <a :href="routes('title', title.slug, title.type.slug)">{{
-                    title.name
-                  }}</a>
-                </h3>
-                <div class="genres-list">
-                  <a
-                    v-for="genre in title.genres"
-                    :key="genre.id"
-                    class="title-type"
-                    :href="routes('type', genre.slug)"
-                  >{{ genre.name }}</a>
+                <div class="two-items">
+                  <h3
+                    :class="{
+                      'title-name': hover !== index,
+                      'title-name hover': hover === index
+                    }"
+                  >
+                    <a :href="routes('title', title.slug, title.type.slug)">{{
+                      title.name
+                    }}</a>
+                  </h3>
+                  <div class="genres-list">
+                    <a
+                      v-for="genre in title.genres"
+                      :key="genre.id"
+                      class="title-type"
+                      :href="routes('type', genre.slug)"
+                    >{{ genre.name }}</a>
+                  </div>
                 </div>
               </div>
               <div class="more-info">

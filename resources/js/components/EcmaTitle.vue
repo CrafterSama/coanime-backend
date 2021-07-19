@@ -83,12 +83,14 @@
                   <div class="text-strong first-child">
                     Generos:
                   </div>
-                  <div
-                    v-for="genre in title.genres"
-                    :key="genre.id"
-                    class="genre-tag"
-                  >
-                    <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
+                  <div>
+                    <span
+                      v-for="genre in title.genres"
+                      :key="genre.id"
+                      class="genre-tag"
+                    >
+                      <a :href="routes('genre', genre.slug)">{{ genre.name }}</a>
+                    </span>
                   </div>
                 </li>
                 <li v-if="title.type.name !== 'Juegos'">

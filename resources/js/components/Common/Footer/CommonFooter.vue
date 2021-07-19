@@ -2,8 +2,8 @@
   <footer class="footer">
     <div class="footer__content">
       <div class="content__items">
-        <div class="items__others-links col-6">
-          <p class="d-flex justify-content-around">
+        <div class="items__others-links col-12 py-2">
+          <p class="d-flex justify-content-between max-width-300">
             <span>Síguenos</span>
             <a href="https://www.facebook.com/Coanime/"><img :src="asset('images/facebook-white.svg')" class="" alt=""></a>
 
@@ -12,7 +12,8 @@
             <a href="https://www.instagram.com/coanimenet/"><img :src="asset('images/instagram-white.svg')" class="" alt=""></a>
           </p>
         </div>
-        <div class="items__copyright col-12">
+        <hr class="bg-gray">
+        <div class="items__copyright col-12 py-2">
           <p>
             &copy; 2007{{ ' - ' }}
             {{ thisYear }}

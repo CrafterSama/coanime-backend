@@ -70,21 +70,7 @@
                           </h3>
                         </a>
                         <ul class="info__relatedTitle-rate">
-                          <li class="selected">
-                            <i class="fas fa-star" />
-                          </li>
-                          <li class="selected">
-                            <i class="fas fa-star" />
-                          </li>
-                          <li class="selected">
-                            <i class="fas fa-star" />
-                          </li>
-                          <li>
-                            <i class="fas fa-star" />
-                          </li>
-                          <li>
-                            <i class="fas fa-star" />
-                          </li>
+                          <title-star-rating :title-name="title.name" />
                         </ul>
                       </div>
                     </div>
@@ -132,7 +118,7 @@
           <div v-if="article.users" id="author" class>
             <div class="author">
               <div class="info__article-author">
-                <img :src="article.users.image" :alt="article.users.nick">
+                <img :src="article.users.profile_photo_path" :alt="article.users.nick">
                 <div class="info__author">
                   <p class="info__author-name">
                     <span class="user-author">{{ article.users.name }}</span>
@@ -178,21 +164,7 @@
                         </h3>
                       </a>
                       <ul class="info__relatedTitle-rate">
-                        <li class="selected">
-                          <i class="fas fa-star" />
-                        </li>
-                        <li class="selected">
-                          <i class="fas fa-star" />
-                        </li>
-                        <li class="selected">
-                          <i class="fas fa-star" />
-                        </li>
-                        <li>
-                          <i class="fas fa-star" />
-                        </li>
-                        <li>
-                          <i class="fas fa-star" />
-                        </li>
+                        <title-star-rating :title-name="title.name" />
                       </ul>
                     </div>
                   </div>
@@ -289,7 +261,7 @@
                     @input="setEmail($event.target.value)"
                   >
                   <button type="submit">
-                    Suscribirse
+                    Suscribete
                   </button>
                   <div v-if="error">
                     {{ error }}
@@ -312,10 +284,13 @@
 
 <script>
 import MailchimpSubscribe from 'vue-mailchimp-subscribe'
-import LoadingArticles from './Common/Loading/LoadingArticles'
 import Parallax from 'vue-parallaxy'
 import { ResponsiveDirective } from 'vue-responsive-components'
 import { helpers } from '../mixins'
+
+import LoadingArticles from './Common/Loading/LoadingArticles'
+import TitleStarRating from './Common/TitleStarRating/TitleStarRating'
+
 import TimeAgo from './TimeAgo'
 
 export default {
@@ -323,6 +298,7 @@ export default {
   components: {
     [TimeAgo.name]: TimeAgo,
     [LoadingArticles.name]: LoadingArticles,
+    [TitleStarRating.name]: TitleStarRating,
     Parallax,
     MailchimpSubscribe
   },
@@ -365,6 +341,7 @@ export default {
           this.features = response.relateds
           this.relateds = response.other_articles
           this.loading = false
+          console.log(this.article)
         })
         .catch(error => console.log(error))
     },

@@ -462,7 +462,6 @@ ul.info__relatedTitle-rate {
   margin: 15px auto;
   max-width: 200px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
   list-style: none;
 }
 
@@ -527,14 +526,16 @@ ul.info__article-tags .svg-inline--fa {
 ul.info__article-tags a {
   padding: 3px 5px;
   font-size: 14px;
-  color: var(--dark-gray);
-  border: 2px solid var(--gray);
-  border-radius: 3px;
+  color: var(--white);
+  border: 1px solid var(--orange);
+  border-radius: 4px;
+  background: var(--orange);
+  box-shadow: 0 0px 2px #999;
   transition: all 0.1s linear;
 }
 
 ul.info__article-tags a:hover {
-  border: 2px solid var(--orange);
+  box-shadow: 0 0px 3px #999;
 }
 
 #subscribe {

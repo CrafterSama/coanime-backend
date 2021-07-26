@@ -132,8 +132,8 @@
 	--------------------------------------------------------------------
 	--}}
 	<!-- Vendor -->
-	<script src="{{ asset('assets/vendor/jquery/js/jquery.js') }}"></script>
-	<script src="{{ asset('assets/vendor/popper.js/js/popper.js') }}"></script>
+	  <script src="{{ asset('assets/vendor/jquery/js/jquery.js') }}"></script>
+	  <script src="{{ asset('assets/vendor/popper.js/js/popper.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.js') }}"></script>
     <script src="https://kit.fontawesome.com/ec6f045846.js" crossorigin="anonymous"></script>
 
@@ -149,8 +149,7 @@
 	<script defer>
 		window.ECMA =  {!! json_encode(['csrfToken' => csrf_token()]) !!}
     </script>
-	<script defer src="/vendor/es6-promise/es6-promise.min.js"></script>
-	<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
+		<script src="https://cdn.plyr.io/3.5.2/plyr.polyfilled.js"></script>
 	<script defer>
 		//const player = new Plyr('#player');
 	</script>

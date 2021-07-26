@@ -734,17 +734,18 @@ class PostController extends Controller
 
             $otherArticles = Post::select('id', 'title', 'category_id', 'slug', 'image')->with('categories')
                 ->where('category_id', '=', $post->category_id)
-                ->whereNotIn('id', [$post->id])
                 ->where('view_counter', '>', '100')
+                ->whereNotIn('id', [$post->id])
+                ->whereNotIn('image', ['https://coanime.net/images/posts/'])
                 ->orderBy('postponed_to', 'desc')
                 ->get();
             if ($otherArticles->count() > 2) {
                 $otherArticles = $otherArticles->random(3);
-                if ($otherArticles->count() > 0) :
-                    foreach ($otherArticles as $index) :
+                if ($otherArticles->count() > 0) {
+                    foreach ($otherArticles as $index) {
                         array_push($newArticles, $index);
-                endforeach;
-                endif;
+                    }
+                }
             }
 
             if ($post->titles->count() > 0) {

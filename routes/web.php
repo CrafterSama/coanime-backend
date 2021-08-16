@@ -117,6 +117,9 @@ Route::group(['prefix' => 'api/v1/', 'middleware' => 'cors'], function () {
     /** Posts Endpoints */
     Route::post('post-image-upload', 'PostController@imageUpload');
     Route::post('vote', 'PostVoteController@vote');
+
+    /** Others API links */
+    Route::get('pvu', 'PVUController@index');
 });
 
 

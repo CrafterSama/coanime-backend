@@ -652,8 +652,9 @@ class PostController extends Controller
 
             $otherArticles = Post::select('id', 'title', 'category_id', 'slug', 'image')->with('categories')
                 ->where('category_id', '=', $post->category_id)
-                ->whereNotIn('id', [$post->id])
                 ->where('view_counter', '>', '100')
+                ->whereNotIn('id', [$post->id])
+                ->whereNotIn('image', ['https://coanime.net/images/posts/'])
                 ->orderBy('postponed_to', 'desc')
                 ->get();
 
@@ -716,18 +717,18 @@ class PostController extends Controller
         if (Post::where('slug', '=', $slug)->pluck('id')->count() > 0) {
             $post = Post::with('users', 'categories', 'titles', 'tags')->whereSlug($slug)->firstOrFail();
 
-            if ($post->tags->count() > 0) :
-                foreach ($post->tags as $t) :
+            if ($post->tags->count() > 0) {
+                foreach ($post->tags as $t) {
                     $keywords[] = $t->name;
-            endforeach;
-
-            $keywords = implode(',', $keywords); else :
-                $string = $post->slug;
-            $postTags = explode("-", $string);
-            $excludedWords = array('la', 'el', 'lo', 'un', 'los', 'las', 'una', 'sus', 'su', 'de', 'del', 'a', 'ha', 'con', 'unos', 'unas', 'y', 'para', 'pero', 'le', 'cual', 'ellos', 'ellas', 'por', 'este', 'esta', 'han', 'ah', 'se', 'al', 'mas', 'nos', 'como', 'que', 'es', 'esto', 'asi', 'te', 'ya', 'en');
-            $keywords = array_diff($postTags, $excludedWords);
-            $keywords = implode(',', $keywords);
-            endif;
+                }
+                $keywords = implode(',', $keywords);
+            } else {
+              $string = $post->slug;
+              $postTags = explode("-", $string);
+              $excludedWords = array('la', 'el', 'lo', 'un', 'los', 'las', 'una', 'sus', 'su', 'de', 'del', 'a', 'ha', 'con', 'unos', 'unas', 'y', 'para', 'pero', 'le', 'cual', 'ellos', 'ellas', 'por', 'este', 'esta', 'han', 'ah', 'se', 'al', 'mas', 'nos', 'como', 'que', 'es', 'esto', 'asi', 'te', 'ya', 'en');
+              $keywords = array_diff($postTags, $excludedWords);
+              $keywords = implode(',', $keywords);
+            }
 
 
             $post->increment('view_counter');
@@ -782,8 +783,8 @@ class PostController extends Controller
                 'title' => 'Coanime.net - ' . $post->categories->name . ' - ' . $post->title,
                 'description' => $post->excerpt,
                 'path_posts' => 'https://coanime.net/posts/',
-                'path_image' => 'https://coanime.net/images/posts/' . $post->image,
-                'thumbnail' => 'https://coanime.net/images/posts/thumbnails/thumb-' . str_replace('1920', '320', $post->image),
+                'path_image' => $post->image,
+                'thumbnail' => '/thumb-' . str_replace('1920', '320', $post->image),
                 'tags' => $keywords,
                 'result' => $post,
                 'article_video_links' => $videoLinks,

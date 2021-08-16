@@ -65,6 +65,10 @@ const helpers = {
       if (type === 'user') {
         return `/users/profile/${slug}`
       }
+      /** User Profile Image */
+      if (type === 'user-image') {
+        return `/images/profiles/${slug}`
+      }
     },
     asset: resource => {
       return `${window.location.origin}/assets/${resource}`

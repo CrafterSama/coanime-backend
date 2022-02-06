@@ -123,7 +123,7 @@ export default {
       fetch(`https://api.jikan.moe/v4/schedules/${this.getDay()}`)
         .then(res => res.json())
         .then(response => {
-          this.titles = response[this.getDay()]
+          this.series = response.data
           this.loading = false
         })
         .catch(error => error)

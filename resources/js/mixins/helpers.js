@@ -90,7 +90,7 @@ const helpers = {
      *
      * */
     defaultImage: string => {
-      if (string === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') return `${window.location.origin}/assets/images/logo-horizontal-white.svg`
+      if (string === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') return `${window.location.origin}/assets/images/coanime-logo-default.svg`
       return string
     }
   }

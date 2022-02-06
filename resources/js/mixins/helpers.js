@@ -70,8 +70,28 @@ const helpers = {
         return `/images/profiles/${slug}`
       }
     },
+    /**
+     * @method asset
+     * @description
+     * return a path to the asset
+     *
+     * @param {string} resource - is the resource you need to linked
+     *
+     * */
     asset: resource => {
       return `${window.location.origin}/assets/${resource}`
+    },
+    /**
+     * @method defaultImage
+     * @description
+     * Routes to navigate in the Web App
+     *
+     * @param {string} string - is the type of resource you need to linked
+     *
+     * */
+    defaultImage: string => {
+      if (string === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png') return `${window.location.origin}/assets/images/logo-horizontal-white.svg`
+      return string
     }
   }
 }

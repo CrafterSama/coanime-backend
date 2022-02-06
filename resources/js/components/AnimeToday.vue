@@ -13,18 +13,18 @@
         Series en emisión hoy
       </h3>
       <div class="broadcastTitles">
-        <div v-if="titles && titles.length">
+        <div v-if="series && series.length">
           <vue-glide :per-view="5" :gap="5" :bound="true" :swipe-threshold="200" :breakpoints="breakpoints">
-            <vue-glide-slide v-for="title in titles" :key="title.mal_id" :style="{width: '200px'}">
+            <vue-glide-slide v-for="serie in series" :key="serie.mal_id" :style="{width: '200px'}">
               <div class="box">
                 <figure class="item__title-box-image">
-                  <a class="title-link" :href="url(title.type, title.title)">
-                    <img class="item__title-image" :src="title.image_url" :alt="title.title">
+                  <a class="title-link" :href="url(serie.type, serie.title)">
+                    <img class="item__title-image" :src="defaultImage(serie.images.webp.large_image_url)" :alt="serie.title">
                   </a>
                 </figure>
                 <div class="item__title-info">
                   <h2 class="info__title-name">
-                    <a class="title-link" :href="url(title.type, title.title)">{{ title.title }}</a>
+                    <a class="title-link" :href="url(serie.type, serie.title)">{{ serie.title }}</a>
                   </h2>
                 </div>
               </div>
@@ -45,6 +45,7 @@
 </template>
 <script>
 import { Glide, GlideSlide } from 'vue-glide-js'
+import { helpers } from '../mixins'
 
 export default {
   name: 'AnimeToday',
@@ -52,9 +53,10 @@ export default {
     [Glide.name]: Glide,
     [GlideSlide.name]: GlideSlide
   },
+  mixins: [helpers],
   data: function () {
     return {
-      titles: 'not updated',
+      series: 'not updated',
       loading: false,
       breakpoints: {
         768: {
@@ -118,7 +120,7 @@ export default {
     },
     getTodaySchedule() {
       this.loading = true
-      fetch(`https://api.jikan.moe/v3/schedule/${this.getDay()}`)
+      fetch(`https://api.jikan.moe/v4/schedules/${this.getDay()}`)
         .then(res => res.json())
         .then(response => {
           this.titles = response[this.getDay()]

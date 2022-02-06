@@ -34,7 +34,6 @@
             <div class="carousel-item @if ($loop->first) active @endif">
                     <figure class="carousel-image-box">
                         <img src="{{ $relevant->image }}" class="d-block" alt="{{ $relevant->title }}">
-                        <particles></particles>
                     </figure>
                     <div class="overlayer"></div>
 

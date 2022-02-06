@@ -18,13 +18,13 @@
             <vue-glide-slide v-for="serie in series" :key="serie.mal_id" :style="{width: '200px'}">
               <div class="box">
                 <figure class="item__title-box-image">
-                  <a class="title-link" :href="url(serie.type, serie.title)">
+                  <a class="title-link" :href="routes('fromSchedule', serie.title, serie.type)">
                     <img class="item__title-image" :src="defaultImage(serie.images.webp.large_image_url)" :alt="serie.title">
                   </a>
                 </figure>
                 <div class="item__title-info">
                   <h2 class="info__title-name">
-                    <a class="title-link" :href="url(serie.type, serie.title)">{{ serie.title }}</a>
+                    <a class="title-link" :href="routes('fromSchedule', serie.title, serie.type)">{{ serie.title }}</a>
                   </h2>
                 </div>
               </div>

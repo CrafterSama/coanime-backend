@@ -62,7 +62,7 @@
 .item__title-image {
     width: 200px;
     border-radius: 3px;
-    object-fit: cover;
+    object-fit: content;
     object-position: center;
 }
 
@@ -88,15 +88,17 @@
     background-color: var(--light-gray);
     display: flex !important;
     justify-content: center;
-	align-items: center;
-	cursor: pointer;
+	  align-items: center;
+	  cursor: pointer;
 }
 
 .title-link {
     color: var(--primary);
-    display: block;
+    display: flex;
     position: relative;
     transition: all .2s linear;
+    align-content: center;
+    justify-content: center;
 }
 
 .title-link:hover {

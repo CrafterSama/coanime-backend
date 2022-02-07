@@ -90,7 +90,16 @@ const helpers = {
      * @param {string} string - is the type of resource you need to linked
      *
      * */
-    defaultImage: string => string === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' ? `${window.location.origin}/assets/images/coanime-logo-default.svg` : string
+    defaultImage: string => string === 'https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png' ? `${window.location.origin}/assets/images/coanime-logo-default.svg` : string,
+    /**
+     * @method getSrcSetString
+     * @description
+     * Routes to navigate in the Web App
+     *
+     * @param {string} string - is the type of resource you need to linked
+     *
+     */
+    getSrcSetString: string => `${string.replace('1920', '480')} 480w, ${string.replace('1920', '640')} 640w, ${string.replace('1920', '960')} 960w, ${string.replace('1920', '1280')} 1280w, ${string.replace('1920', '1920')} 1920w`
   }
 }
 
